@@ -9,10 +9,6 @@ class CategoryView {
         $this->smarty->assign('titulo', 'Carga de productos');     
     }
 
-    function getCategories(){
-
-    }
-
     function viewCategories($categories) {        
         $this->smarty->assign('categories', $categories);
         $this->smarty->display('template/body-categories.tpl');

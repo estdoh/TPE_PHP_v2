@@ -113,7 +113,7 @@
                             <td>{$product->price_a}</td>
                             <td>{$product->price_b}</td>
                             <td> <a href='delProducts/{$product->id}' class='w-100 btn btn-sm btn-danger' data-id='buttonSupr'><i class='fa fa-trash fa-sm' aria-hidden='true'></i> </a> </td> 
-                            <td> <a href='editProduct/{$product->id}' class='w-100 btn btn-sm btn-primary edicionproducto' data-id='buttonEdit'><i class='fa fa-pencil fa-sm' aria-hidden='true'></i> </button> </td>                         
+                            <td> <a href='viewProduct/{$product->id}' class='w-100 btn btn-sm btn-primary edicionproducto' data-id='buttonEdit'><i class='fa fa-pencil fa-sm' aria-hidden='true'></i> </button> </td>                         
                         </tr>
                     {/foreach}
                 {else}

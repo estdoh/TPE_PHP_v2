@@ -37,8 +37,8 @@ class ProductsController {
     function searchProducts($params = null) {
         // $this->authHelper->checkLoggedIn();
         $products = $this->model->getProducts();
-        $productsByCategory = $this->model->getProductsByCategory($params);
-        $this->view->viewProducts($productsByCategory);
+        $ProductsByCategory = $this->model->getProductsByCategory($params);
+        $this->view->viewProducts( $ProductsByCategory);
     }
 
     function orderBy($params = null){
@@ -59,26 +59,36 @@ class ProductsController {
         $price_a = $_POST['input_price_a'];
         $price_b = $_POST['input_price_b'];
 
-        $products = $this->model->addProduct($category,$name,$description,$price_a,$price_b);        
-        $this->view->viewProducts($products);
+        $this->model->addProduct($category,$name,$description,$price_a,$price_b);        
+        $products = $this->model->getProducts();
+        $categories = $this->modelCategories->getCategories();
+        $this->view->viewProducts($products, $categories);
     }
 
     function presupuestar() {  
         // $this->authHelper->checkLoggedIn();
-        $categories = $this->modelCategories->getProductsByCategory();      
+        $categories = $this->modelCategories->getCategories();      
         $products= $this->model->getProducts();
-        // $products = $this->model->getProducts();
         $this->view->viewPresu($products, $categories);
     }
 
-    // function editProduct($params = null){
-    //     $id = $params;
-    //     // for ($i = 1; $i <= 10; $i++) {
-    //     //     echo $i;
-    //     // }
-    //     $products = $this->model->getProduct($id);
-    //     $this->view->showEditProduct($products);
-    // }
+    function viewProduct($params = null){
+        $id = $params;        
+        $product = $this->model->getProductById($id);
+        $categories = $this->modelCategories->getCategories($id);
+        $this->view->viewPageProduct($product, $categories);
+    }
+
+    function editProduct($params){
+        $name = $_POST['input_name'];
+        $category = $_POST['input_category'];
+        $description = $_POST['input_description'];
+        $price_a = $_POST['input_price_a'];
+        $price_b = $_POST['input_price_b'];
+        $id = $params;        
+        $product = $this->model->updateProductById($id,$category,$name,$description,$price_a,$price_b);
+        $this->view->viewProducts($product);
+    }
     
 }
 

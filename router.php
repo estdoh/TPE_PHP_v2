@@ -64,9 +64,12 @@ switch ($params[0]) {
     case 'Presupuestar':        
         $ProductsController->presupuestar();
         break;    
-    // case 'Edit':        
-    //     $controller->editProduct($params[1]);
-    //     break;
+    case 'viewProduct':        
+        $ProductsController->viewProduct($params[1]);
+        break;
+    case 'editProduct':        
+        $ProductsController->editProduct($params[1]);
+        break;
     default: 
         echo('404 Page not found aca estoy?'); 
         break;
