@@ -37,7 +37,7 @@ class ProductsController {
     function searchProducts($params = null) {
         // $this->authHelper->checkLoggedIn();
         $products = $this->model->getProducts();
-        $productsByCategory = $this->modelCategories->getProductsByCategory($params);
+        $productsByCategory = $this->model->getProductsByCategory($params);
         $this->view->viewProducts($productsByCategory);
     }
 

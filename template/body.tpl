@@ -15,7 +15,7 @@
         </div>        
     
         <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light agregarcliente"> 
-            <form id="form-products" action="Insert" method="POST" autocomplete="on">                
+            <form id="form-products" action="InsertProduct" method="POST" autocomplete="on">                
                 <div class="form-group  mb-3">
                     <div class="form-floating col">
                         <input name="input_name" id="input_name" type="text" class="form-control" placeholder="Nombre">
@@ -104,7 +104,7 @@
                                 
                 <tbody id="listadoTD">
                 
-                {if session_status() === PHP_SESSION_NONE }
+                {if session_status() === PHP_SESSION_NONE}
                     {foreach from=$products item=$product}
                         <tr>
                             <td>  {$product->name}</td>

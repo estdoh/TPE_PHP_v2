@@ -5,7 +5,8 @@
             </div>
             <nav class="menu">
                 <ul class="navigation">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="showProducts">Productos</a></li>
+                    <li><a href="showCategories">Categorias</a></li>
                     <li><a href="login">Login</a></li>
                     <li><a href="logout">Logout</a></li>
                     <li><a href="Search">Busqueda</a></li>

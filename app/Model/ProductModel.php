@@ -39,6 +39,13 @@ class ProductsModel {
         return $products;
     }
 
+    function getProductsByCategory($category) {
+        $query = $this->db->prepare('SELECT * FROM products WHERE category = ?');
+        $query->execute([$category]); // array($category)
+        $products = $query->fetchAll(PDO::FETCH_OBJ);
+        return $products;
+    }
+
     function presupuestarTrabajo(){
         
     }
