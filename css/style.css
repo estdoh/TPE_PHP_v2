@@ -1,0 +1,349 @@
+html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: block;
+    margin: 0%;
+}
+
+header {
+    
+    background-color: rgb(0, 0, 0);    
+    padding: 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form {  
+    display:contents;
+    text-transform: uppercase;
+    font-size: 10px;    
+}
+
+.login{
+    display: block;
+}
+
+.log{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+	background: linear-gradient(to bottom,#a30303 40%, #1e0f24);
+    /* background: -moz-linear-gradient((to bottom,#6b397d 40%, #f33131));
+	background: -webkit-linear-gradient((to bottom,#6b397d 40%, #f33131)); */
+}
+
+.form-group {      
+    display: block;
+}
+
+select {
+    width: 100%;
+    padding: 10px 20px;    
+} 
+
+.contacto {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center; 
+    position: fixed;
+    bottom: 0%;   
+    margin-bottom: 20px;    
+}
+
+footer {
+    width: 100%;
+    height: 20px;
+    background-color: black;
+    position: fixed;
+    bottom: 0%;
+}
+
+.logo {    
+    
+    width: 30%;   
+}
+
+.logo h1 {    
+    min-width: 300px;
+    color: #ffffff;   
+}
+
+.btn_menu {
+    color: white;
+    /* padding: 15px;
+    width: 10%;
+    height: 10%; */
+}
+
+.btn_menu a {
+    color: white;
+    text-decoration: none;  
+    width: 10%;
+    height: 10%;  
+}
+
+/* .row{
+    --bs-gutter-x: 0;
+} */
+ul.navigation {    
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: none;
+    flex-direction: column;
+}
+
+ul.navigation.show {
+    display: contents;
+}
+
+ul.navigation.show li {
+    display: contents;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    padding: 15px 20px;
+}
+
+ul.navigation li {
+    list-style: none;
+    margin: 0px 0px;
+    padding: 15px 20px;
+}
+
+ul.navigation li a {
+    padding: 5px;
+    text-decoration: none;
+    color: white;
+    color: rgb(255, 0, 0);
+    font-weight: bolder;
+}
+
+ul.navigation li:hover {
+    background-color: white;
+}
+
+.banner {
+    box-shadow: 0px 10px 10px -6px black;    
+    width: 100%;
+}
+
+.banner-central {
+    box-shadow: 0px 10px 10px -6px black;    
+    width: 100%;
+    height: 200px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.inicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+}
+
+.imgservicios {
+    border-radius: 15px;
+    box-shadow: 0px 0px 0px 0px #333 inset;
+}
+.imgservicios:hover {
+    color: lightcoral;
+    box-shadow: 0px 0px 10px 0px #333 inset;
+    transform : scale(1.01);
+    -moz-transform : scale(1.01); /* Firefox */
+    -webkit-transform : scale(1.01); /* Chrome - Safari */
+    -o-transform : scale(1.01); /* Opera */
+    -ms-transform : scale(1.01); /* IE9 */
+}
+
+.columnas-2, .columnas-3, .columnas-4 {
+    justify-content: center;
+    padding: 5%;     
+}
+
+p {
+    color:#1b1b1b; 
+    font-size: 12px;   
+}
+
+.resaltar {
+    color: crimson;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-size: 18px;
+}
+
+a {
+    color: #1b1b1b;
+    text-decoration: none;
+}
+
+a:hover {
+    color: crimson;
+}
+
+h1 {
+    color: rgb(255, 0, 0);
+    text-transform: uppercase;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: auto;
+    margin: 1%;
+    text-align: left;
+}
+
+h2, h3 {
+    color: grey;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+h3 {    
+    font-size: 14px; 
+    letter-spacing: 2px;
+}
+
+h3 .centrado{
+    text-align: center;
+}
+
+h4, a{
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    text-align: center;
+}
+
+
+
+.resaltada{
+    color: blanchedalmond;
+    background-color: red;
+}
+.contacto {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;    
+    margin-bottom: 20px;    
+}
+
+.infocontacto {
+    width: 100%;
+    padding: 3%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;    
+}
+
+.infocontacto ul li {
+    font-size: 18px;
+    text-decoration: none;    
+}
+
+.fa-ul i {
+    margin: 40px;
+}
+
+i:hover {
+    color: rgb(255, 0, 0);
+}
+
+iframe{
+    width: 100%;
+    height: 250px;
+    border: 0;
+}
+
+.fa-li {
+    left: -5em;
+    top: -2.5em;
+}
+.agregarcliente{
+    display: none;
+}
+
+.inputFilter {
+    display: none;
+}
+
+element.style {
+    display: none;
+}
+
+@media only screen and (min-width: 660px) {
+
+    .menu {        
+        border-bottom: 4px solid gray;
+        display: flex; 
+    }
+
+    .btn_menu {
+       display: none;
+    }
+    
+    .container {    
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;   
+    }
+
+   /* cambiamos la direccion del flex */
+    ul.navigation {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;        
+    }    
+
+    .columnas-2 {
+        width: 45%;
+        flex: 0 0 auto;
+        padding: 5px; 
+        display: block;   
+    }
+    
+    .columnas-3 {
+        width: 30%;
+        flex: 0 0 auto;
+        padding: 5px;       
+    }
+
+    .columnas-4 {
+        width: 45%;
+        flex: 0 0 auto;
+        padding: 5px;    
+    }
+
+    .contacto {
+        width: 100%;              
+    }
+
+    .infocontacto {
+        width: 40%;    
+    }
+
+    .form-group {  
+        display: flex;
+    }
+    
+    form {  
+        display:flex;
+        text-transform: uppercase;
+        font-size: 10px;    
+    }
+}

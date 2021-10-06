@@ -1,0 +1,150 @@
+
+<body>
+<!-- 
+    <header>
+        <div class="logo">
+            <h1>ALL SYSTEM</h1>
+        </div>
+        <nav class="menu">
+            <ul class="navigation">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="#">Clientes</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>            
+        </nav>
+       <i class="btn_menu fa fa-bars fa-lg" aria-hidden="true"></i>       
+    </header>     -->
+    
+    <div class="inicio">
+        <h2 class="resaltar">Agregar cliente</h2>
+        <h3>Carga de datos para <b>administrador</b></h3>
+    </div>    
+
+    <div class="container">        
+        <div class="col-1  m-1">
+            <button class=" w-100 btn btn-sm btn-success" id="addClienteFilter" ><i class="fas fa-plus fa-xs" ></i></button>
+        </div>
+        <div class="col-1 m-1">
+            <button class=" w-100 btn btn-sm btn-success" id="serchFilter" ><i class="fas fa-search fa-xs" ></i></button>
+        </div>        
+    
+        <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light agregarcliente"> 
+            <form autocomplete="on">                
+                <div class="form-group  mb-3">
+                    <div class="form-floating col">
+                        <input name="empresa" id="empresa" type="text" class="form-control" placeholder="Empresa">
+                        <label for="empresa"><p>Empresa</p></label>
+                    </div>
+                    <div class="form-floating col">
+                        <input name="nombre" id="nombreyapellido" type="text" class="form-control" placeholder="Ingrese Cliente">
+                        <label for="nombreyapellido"><p>Nombre y Apellido</p></label>
+                    </div>
+                
+                    <div class="form-floating col">
+                        <input name="telefono" id="telefonocliente" type="text" class="form-control" placeholder="Telefono">
+                        <label for="telefonocliente"><p>Telefono</p></label>
+                    </div>
+                
+
+                    <div class="form-floating col">
+                        <input  name="email" id="mailCliente" type="email" class="form-control" placeholder="e-mail">
+                        <label for="mailCliente"><p>E-mail</p></label>
+                    </div>
+                    <div class="form-floating col ">
+                        <input id="sitiowebCliente" id="sitiowebCliente" type="text" class="form-control" placeholder="web">
+                        <label for="sitiowebCliente"><p>Web</p></label>
+                    </div>
+                </div>  
+                <!-- <div class="form-floating mb-3">
+                    <input id="otrosCliente" id="otrosCliente" type="text" class="form-control" placeholder="otros">
+                    <label for="otrosCliente"><p>Otros</p></label>
+                </div> -->
+            </form>
+
+            <div class="form-floating mb-2">
+                <div class="form-floating col ">
+                    <button class="w-100 btn btn-lg btn-success" id="btn-agregar">AGREGAR </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light m-1 inputFilter">
+            <div class="form-group  mb-3">
+                <div class="form-floating col ">
+                    <input class="form-control" type="text" id="filterEmpresa" placeholder="Busqueda por Empresa">
+                    <label ><p>Busqueda por Empresa</p></label>
+                </div>
+                <div class="form-floating col ">
+                    <input class="form-control" type="text" id="filterCliente" placeholder="Busqueda por Cliente"> 
+                    <label><p>Busqueda por Cliente</p></label>   
+                </div>
+                <div class="form-floating col ">
+                    <input class="form-control" type="text" id="filterMail" placeholder="Busqueda por E-mail">
+                    <label><p>Busqueda por E-mail</p></label> 
+                </div>
+            </div>
+        </div> 
+               
+    </div>
+
+
+    <div class="container">
+        <div class="col-md-12 mt-sm-5 table-responsive">                   
+            <table class="table table-sm table-hover" id="listadoClientes">
+                <caption>Doble click para editar</caption>
+                <thead>
+                    <tr>
+                        <th data-set="empresa">Nombre <i class="fas fa-filter fa-xs" id="orderEmpresa"></i></th>
+                        <th data-set="empresa">Descripcion <i class="fas fa-filter fa-xs" id="orderNombre"></i></th>
+                        <th>Categoria </th>
+                        <th>precio A <i class="fas fa-filter-sm" id="orderMail"></i></th>
+                        <th>Precio B</th>
+                        
+                    </tr>
+                </thead>                
+                <tbody class="listado">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        
+                    </tr>
+                </tbody>
+            </table>          
+
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="col-sm-12 col-md-6 p-4 ">
+            <h2>Busqueda por Empresa</h2>
+            <select class="mb-sm-2" id="selectClientes">
+                <option selected disabled>Seleccionar cliente</option>
+            </select>
+            <div>
+                <p id="cliente-name">Nombre:</p>
+                <p id="empresa-name">Empresa:</p>
+                <p id="cliente-Telefono">Telefono: 54 6629 5</p>
+                <p id="cliente-Mail">E-mail: tuemail@domingio.com.ar</p>
+                <p id="cliente-Web">Web: www.tuweb.com.ar</p>
+            </div>            
+        </div>
+    </div>
+
+    <!-- <div class="contacto">
+        <a href="https://instagram.com/allsystemtandil"><i class="fa fa-facebook-official fa-3x" aria-hidden="true"></i></a>
+        <a href="https://facebook.com/Allsystemtandil"><i class="fa fa-instagram fa-3x" aria-hidden="true"></i></a>
+    </div>
+
+    <footer>
+        <h4>ALL SYSTEM 2021® | Copyright Todos los derechos Reservados</h4>
+    </footer> -->
+
+    <script src="js/menu.js"></script>
+    <script src="js/desplegarAdd.js"></script>     
+    <!-- <script src="js/async.js"></script>  --> 
+</body>
+</html>
