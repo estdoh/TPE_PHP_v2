@@ -10,7 +10,7 @@
         <div class="col-12 mt-sm-5 table-responsive">                   
             <form class="" action="editProduct/{$product->id}" method="POST">
                 <div class="form-floating col-12">
-                    <input value="{$product->name}" id="input_name" type="text" class="form-control" placeholder="{$product->name}">   
+                    <input value="{$product->name}" name="input_name" type="text" class="form-control" placeholder="{$product->name}">   
                     {* <input value="{$product->name_category}" id="input_name" type="text" class="form-control" placeholder="{$product->name_category}">                    *}
                     <select name="input_category" class="form-floating col">                    
                         <option selected disabled>Seleccionar categoria</option>  
@@ -22,12 +22,12 @@
                                 </div>
                             {/foreach}   
 
-                        <option value='addNew' placeholder="agregarnuevo"></option>                        
+                        <option value='addNew' placeholder="agregarnuevo">ADD NEW</option>                        
                     </select>
-                    <input value="{$product->description}" id="input_name" type="textarea" class="form-control" placeholder="{$product->description}">
+                    <input name="input_description" value="{$product->description}" type="textarea" class="form-control" placeholder="{$product->description}">
                     <div class="form-floating col">            
-                        <input value="{$product->price_a}" id="input_name" type="text" class="form-control" placeholder="{$product->price_a}">
-                        <input value="{$product->price_b}" id="input_name" type="text" class="form-control" placeholder="{$product->price_b}">                  
+                        <input name="input_price_a" value="{$product->price_a}" type="text" class="form-control" placeholder="{$product->price_a}">
+                        <input name="input_price_b" value="{$product->price_b}" type="text" class="form-control" placeholder="{$product->price_b}">                  
                     </div>
                     <div class="form-floating col ">
                         <button type="submit" class="w-100 btn btn-lg btn-success">EDITAR</button>

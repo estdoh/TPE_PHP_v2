@@ -1,8 +1,10 @@
 <?php
+require_once './app/Helpers/AuthHelper.php';
 require_once './app/Model/ProductModel.php';
 require_once './app/Model/CategoryModel.php';
 require_once './app/View/ProductView.php';
-require_once './app/Helpers/AuthHelper.php';
+require_once './app/View/CategoryView.php';
+
 
 
 class ProductsController {
@@ -40,17 +42,18 @@ class ProductsController {
     function searchProducts($params = null) {
         // $this->authHelper->checkLoggedIn();
         $products = $this->model->getProducts();
-        $ProductsByCategory = $this->model->getProductsByCategory($params);
+        $ProductsByCategory = $this->modelCategories->getProductsByCategory($params);
         $this->view->viewProducts( $ProductsByCategory);
     }
 
-    function orderBy($params = null){
-        $price_a = $_POST['input_price_a'];
-        $price_b = $_POST['input_price_b'];
-        $this->model->addProduct($category,$name,$description,$price_a,$price_b);        
-        $products = $this->model->getProducts();
-        $categories = $this->modelCategories->getCategories();
-        $this->view->viewProducts($products, $categories);
+    function orderBy($ordertype = null){
+        // if (empty($orderby)){
+        //     $orderby = "";           
+        // } else if ($orderby = "ASC"){
+        //     $orderby = "DESC";
+        // };
+        $products = $this->model->orderProductsBy($ordertype);
+        $this->view->viewProducts($products);
     }
 
     function addProduct() {        
@@ -83,15 +86,15 @@ class ProductsController {
         $this->view->viewPageProduct($product, $categories);
     }
 
-    function editProduct($params){
+    function editProduct($id){
         $name = $_POST['input_name'];
         $category = $_POST['input_category'];
         $description = $_POST['input_description'];
         $price_a = $_POST['input_price_a'];
         $price_b = $_POST['input_price_b'];
-        $id = $params;        
-        $product = $this->model->updateProductById($id,$category,$name,$description,$price_a,$price_b);
-        $this->view->viewProducts($product);
+              
+        $products = $this->model->updateProductById($category,$name,$description,$price_a,$price_b,$id);
+        $this->view->viewProducts($products);
     }
 }
 

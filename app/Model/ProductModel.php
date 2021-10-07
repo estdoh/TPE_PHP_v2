@@ -6,7 +6,6 @@ class ProductsModel {
     public function __construct() {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=tpe_especial;charset=utf8', 'root', '');
     }
-
     /* Obtiene todas los Productos vinculando la tabla relacional categorias*/
     function getProducts() {
         $query = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category');
@@ -29,9 +28,9 @@ class ProductsModel {
         return $query->rowCount();
     }
 
-    function orderProductsBy($params){
-        $query = $this->db->prepare("SELECT * FROM products ORDER BY $params");
-        $query->execute([$params]);
+    function orderProductsBy($orderby){
+        $query = $this->db->prepare("SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category ORDER BY ? ASC");
+        $query->execute(array($orderby));
         $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $products;
     }
@@ -46,24 +45,11 @@ class ProductsModel {
         // return $products;
     }
 
-    function getProductsByCategory($category = null) {
-        $query = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category WHERE category.name=?');
-        // $query = $this->db->prepare('SELECT * FROM products WHERE category = ?');
-        $query->execute([$category]); // array($category)
-        $products = $query->fetchAll(PDO::FETCH_OBJ);
-        return $products;
-    }
-
-    function updateProductById($category,$name,$description,$price_a,$price_b,$id){
-        $query = $this->db->prepare('UPDATE products SET category=?,name=?,description=?,price_a=?,price_b=? WHERE id=?');
-        $query->execute([$id,$category,$name,$description,$price_a,$price_b]);
+    function updateProductById($category, $name, $description, $price_a, $price_b, $id){
+        $query = $this->db->prepare('UPDATE products SET category=?, name=?, description=?, price_a=?, price_b=? WHERE id=?');
+        $query->execute([$category, $name, $description, $price_a, $price_b, $id]);
         $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $products;
     }
     
-    // function getProduct($id){
-    //     $query = $this->db->prepare("SELECT * FROM products WHERE id=?");
-    //     $query->execute(array($id));
-    //     return $query->fetch(PDO::FETCH_OBJ);
-    // }
 }

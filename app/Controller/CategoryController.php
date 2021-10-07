@@ -1,7 +1,7 @@
 <?php
-require_once './app/Model/CategoryModel.php';
-require_once './app/View/CategoryView.php';
-require_once './app/Helpers/AuthHelper.php';
+// require_once './app/Model/CategoryModel.php';
+// require_once './app/View/CategoryView.php';
+// require_once './app/Helpers/AuthHelper.php';
 
 class CategoryController {
     private $model;
@@ -15,6 +15,7 @@ class CategoryController {
     }
 
     function showCategories() {
+        AuthHelper::start();
         // $this->authHelper->checkLoggedIn();    
         $categories = $this->model->getCategories();        
         $this->view->viewCategories($categories);
@@ -22,18 +23,22 @@ class CategoryController {
 
     function delCategories($params = null) {     
         // $this->authHelper->checkLoggedIn();
-        $this->model->deleteCategories($params);
-        $categories = $this->model->getCategories();
-        $this->view->viewCategories($categories);
+        if (AuthHelper::checkLoggedIn()){
+            $this->model->deleteCategories($params);
+            $categories = $this->model->getCategories();
+            $this->view->viewCategories($categories);
+        }
     }
 
     function addCategory (){
-        $name = $_POST['input_name'];
-        $description = $_POST['input_description'];
-        $this->model->addCategory($name,$description);
-        $categories = $this->model->getCategories();        
-        
-        $this->view->viewCategories($categories);
+        if (AuthHelper::checkLoggedIn()){
+            $name = $_POST['input_name'];
+            $description = $_POST['input_description'];
+            $this->model->addCategory($name,$description);
+            $categories = $this->model->getCategories();        
+            
+            $this->view->viewCategories($categories);
+        }
     }
 
     function searchCategories($params = null) {

@@ -8,7 +8,7 @@
         <ul class="navigation">
             <li><a href="showProducts">Productos</a></li>
             <li><a href="showCategories">Categorias</a></li>
-            <li><a href="Search">Busqueda</a></li>
+            {* <li><a href="Search">Busqueda</a></li> *}
             {if $email!=""}
                 <li><a href="logout">Logout</a></li>
             {else}

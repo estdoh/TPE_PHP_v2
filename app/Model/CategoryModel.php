@@ -26,7 +26,13 @@ class CategoryModel {
         return $query->rowCount();
     }
 
-    
+    function getProductsByCategory($category = null) {
+        $query = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category WHERE category.name=?');
+        // $query = $this->db->prepare('SELECT * FROM products WHERE category = ?');
+        $query->execute([$category]); // array($category)
+        $products = $query->fetchAll(PDO::FETCH_OBJ);
+        return $products;
+    }
     // function orderProductsBy($params){
     //     $query = $this->db->prepare("SELECT * FROM products ORDER BY $params");
     //     $query->execute([$params]);

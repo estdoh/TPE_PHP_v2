@@ -11,6 +11,9 @@ class CategoryView {
 
     function viewCategories($categories) {        
         $this->smarty->assign('categories', $categories);
+        if (isset($_SESSION["email"])){   
+            $this->smarty->assign('email', $_SESSION["email"]);
+        }
         $this->smarty->display('template/body-categories.tpl');
     }   
 

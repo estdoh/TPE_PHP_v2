@@ -13,16 +13,16 @@
             <button class=" w-100 btn btn-sm btn-success" id="addProduct" ><i class="fas fa-plus fa-xs" ></i></button>
         </div>
         {/if}
-        <div class="col-1 m-1">
+        {* <div class="col-1 m-1">
             <button class=" w-100 btn btn-sm btn-success" id="serchFilter" ><i class="fas fa-search fa-xs" ></i></button>
-        </div>     
+        </div>      *}
     
         <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light agregarcliente"> 
             <form id="form-products" action="InsertProduct" method="POST" autocomplete="on">                
                 <div class="form-group  mb-3">
                     <div class="form-floating col">
                         <input name="input_name" id="input_name" type="text" class="form-control" placeholder="Nombre">
-                        <label for="name"><p>Name</p></label>
+                        <label for="name"><p>Producto</p></label>
                     </div>
                     <div class="form-floating col">
                         <input name="input_description" id="input_description" type="text" class="form-control" placeholder="Descripcion">
@@ -68,7 +68,7 @@
             
         </div>
     
-        <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light m-1 inputFilter">
+        {* <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light m-1 inputFilter">
             <div class="form-group  mb-3">
                 <div class="form-floating col ">
                     <input class="form-control" type="text" id="filterEmpresa" placeholder="Busqueda por Empresa">
@@ -83,7 +83,7 @@
                     <label><p>Busqueda por E-mail</p></label> 
                 </div>
             </div>
-        </div> 
+        </div>  *}
                
     </div>
 
@@ -95,11 +95,11 @@
                 <caption>Doble click para editar</caption>
                 <thead>
                     <tr>
-                        <th>Nombre <a href="OrderBy/name/"> <i class="fas fa-filter fa-xs"></i></a></th>
-                        <th>Categoria<a href="OrderBy/category/"><i class="fas fa-filter fa-xs"></i></a></th>
-                        <th>Descripcion<a href="OrderBy/description/"><i class="fas fa-filter fa-xs"></i></a></th>
-                        <th>precio A<a href="OrderBy/price_a/"><i class="fas fa-filter fa-xs"></i></a></th>
-                        <th>Precio B<a href="OrderBy/price_b/"><i class="fas fa-filter fa-xs"></i></a></th>   
+                        <th>Producto <a href="OrderBy/name"> <i class="fas fa-filter fa-xs"></i></a></th>
+                        <th>Categoria<a href="OrderBy/category"><i class="fas fa-filter fa-xs"></i></a></th>
+                        <th>Descripcion<a href="OrderBy/description"><i class="fas fa-filter fa-xs"></i></a></th>
+                        <th>precio A<a href="OrderBy/price_a"><i class="fas fa-filter fa-xs"></i></a></th>
+                        <th>Precio B<a href="OrderBy/price_b"><i class="fas fa-filter fa-xs"></i></a></th>   
                         <th></th>
                         <th></th>                 
                     </tr>

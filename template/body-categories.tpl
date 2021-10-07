@@ -3,6 +3,7 @@
 
     <div class="inicio">
         <h2 class="resaltar">{$titulo}</h2>
+        <h4 class="resaltar">{$email}</h4>
         <h3>Carga de datos para <b>administrador</b></h3>
     </div>    
 
@@ -41,7 +42,7 @@
                 <caption>Doble click para editar</caption>
                 <thead>
                     <tr>
-                        <th>Nombre <a href="OrderBy/name/"> <i class="fas fa-filter fa-xs"></i></a></th>
+                        <th>Nombre Categoria <a href="OrderBy/name/"> <i class="fas fa-filter fa-xs"></i></a></th>
                         
                         <th>Descripcion<a href="OrderBy/description/"><i class="fas fa-filter fa-xs"></i></a></th>
                         
@@ -51,8 +52,8 @@
                 </thead>
                                 
                 <tbody id="listadoTD">
-                
-                {if session_status() === PHP_SESSION_NONE}
+                {if $email!=""}
+                {* {if session_status() === PHP_SESSION_NONE} *}
                     {foreach from=$categories item=$category}
                         <tr>
                             <td>  {$category->name}</td>                            
