@@ -1,7 +1,7 @@
 <?php
 require_once './libs/smarty/Smarty.class.php';
 
-class LoginView { 
+class UserView { 
 
     private $smarty;
     public function __construct() {
@@ -16,8 +16,11 @@ class LoginView {
 
     function showHome($error = ""){
         header("Location: ".BASE_URL."showProducts");
-        
         $this->smarty->assign('error', $error);
+    }
+
+    public function set_user($email){
+        $this->smarty->assign('email', $email);
     }
 
     function showRegister($error = ""){

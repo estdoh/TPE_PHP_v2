@@ -15,10 +15,11 @@ class ProductsController {
         $this->model = new ProductsModel();
         $this->modelCategories = new CategoryModel();
         $this->view = new ProductsView();
-        $this->authHelper = new AuthHelper();
     }    
 
     function showProducts() {
+        //Para utilizar variable de sesión, hay que hacer un start sessión, a la variable de sesión la usa el view.
+        AuthHelper::start(); 
         // $this->authHelper->checkLoggedIn();
         // llamar el modelo para obtener todas los productos
         $products = $this->model->getProducts();
@@ -29,9 +30,11 @@ class ProductsController {
 
     function delProducts($params = null) {     
         // $this->authHelper->checkLoggedIn();
-        $this->model->deleteProducts($params);
-        $products = $this->model->getProducts();
-        $this->view->viewProducts($products);
+        if (AuthHelper::checkLoggedIn()){
+            $this->model->deleteProducts($params);
+            $products = $this->model->getProducts();
+            $this->view->viewProducts($products);
+        }
     }
 
     function searchProducts($params = null) {
@@ -53,14 +56,16 @@ class ProductsController {
 
     function addProduct() {        
         // $this->authHelper->checkLoggedIn();
-        $name = $_POST['input_name'];
-        $description = $_POST['input_description'];
-        $category = $_POST['input_category'];
-        $price_a = $_POST['input_price_a'];
-        $price_b = $_POST['input_price_b'];
+        if (AuthHelper::checkLoggedIn()){
+            $name = $_POST['input_name'];
+            $description = $_POST['input_description'];
+            $category = $_POST['input_category'];
+            $price_a = $_POST['input_price_a'];
+            $price_b = $_POST['input_price_b'];
 
-        $products = $this->model->addProduct($category,$name,$description,$price_a,$price_b);        
-        $this->view->viewProducts($products);
+            $products = $this->model->addProduct($category,$name,$description,$price_a,$price_b);        
+            $this->view->viewProducts($products);
+        }
     }
 
     function presupuestar() {  
@@ -71,6 +76,7 @@ class ProductsController {
         $this->view->viewPresu($products, $categories);
     }
 
+    
     // function editProduct($params = null){
     //     $id = $params;
     //     // for ($i = 1; $i <= 10; $i++) {

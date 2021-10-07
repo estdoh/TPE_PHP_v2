@@ -3,16 +3,19 @@
 
     <div class="inicio">
         <h2 class="resaltar">{$titulo}</h2>
+        <h4 class="resaltar">{$email}</h4>
         <h3>Carga de datos para <b>administrador</b></h3>
     </div>    
 
-    <div class="container">        
+    <div class="container"> 
+        {if $email!=""}       
         <div class="col-1 m-1">
             <button class=" w-100 btn btn-sm btn-success" id="addProduct" ><i class="fas fa-plus fa-xs" ></i></button>
         </div>
+        {/if}
         <div class="col-1 m-1">
             <button class=" w-100 btn btn-sm btn-success" id="serchFilter" ><i class="fas fa-search fa-xs" ></i></button>
-        </div>        
+        </div>     
     
         <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light agregarcliente"> 
             <form id="form-products" action="InsertProduct" method="POST" autocomplete="on">                
@@ -103,8 +106,8 @@
                 </thead>
                                 
                 <tbody id="listadoTD">
-                
-                {if session_status() === PHP_SESSION_NONE}
+        
+                {if $email!=""}
                     {foreach from=$products item=$product}
                         <tr>
                             <td>  {$product->name}</td>

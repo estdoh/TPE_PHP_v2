@@ -1,7 +1,7 @@
 <?php
 require_once 'app/Controller/ProductController.php';
 require_once 'app/Controller/CategoryController.php';
-require_once 'app/Controller/LoginController.php';
+require_once 'app/Controller/UserController.php';
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -17,7 +17,7 @@ $params = explode('/', $action);
 // instancio la clase del controlador
 $ProductsController = new ProductsController();
 $CategoryController = new CategoryController();
-$LoginController = new LoginController();
+$LoginController = new UserController();
 
 
 //determina que camino seguir según la acción
@@ -43,7 +43,7 @@ switch ($params[0]) {
     case 'showCategories':
         $CategoryController->showCategories();
         break;
-    case 'delProducts':        
+    case 'delProducts':    
         $ProductsController->delProducts($params[1]);
         break;
     case 'delCategories':        
