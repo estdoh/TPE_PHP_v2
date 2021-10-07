@@ -22,17 +22,23 @@ class ProductsView {
 
     function renderError(){echo "error";}
 
-    function showEditProduct($id){ 
-        $this->smarty->assign('id', $id);        
-        $this->smarty->display('template/edit.tpl');
-    }   
+    function showEditProduct($product){ 
+        $this->smarty->assign('product', $product);        
+        $this->smarty->display('template/body.tpl');
+    }       
 
-    function viewPresu($products = null, $categoryproducts = null){         
-        $this->smarty->assign('categoryproducts', $categoryproducts);     
-        $this->smarty->assign('products', $products);
-        $this->smarty->display('template/presupuestador.tpl');
-    } 
+    function viewPageProduct($product, $categories){         
+        // $this->smarty->assign('titulo', 'Vista de producto');     
+        $this->smarty->assign('product', $product);
+        $this->smarty->assign('categories', $categories);
+        $this->smarty->display('template/product.tpl');
+    }
 
+    // function viewPresu($products = null, $categoryproducts = null){         
+    //     $this->smarty->assign('categoryproducts', $categoryproducts);     
+    //     $this->smarty->assign('products', $products);
+    //     $this->smarty->display('template/presupuestador.tpl');
+    // } 
 }
 
     // function renderProductsByCategory($products){

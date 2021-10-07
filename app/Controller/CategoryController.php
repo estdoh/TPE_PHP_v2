@@ -30,7 +30,9 @@ class CategoryController {
     function addCategory (){
         $name = $_POST['input_name'];
         $description = $_POST['input_description'];
-        $categories = $this->model->addCategory($name,$description);
+        $this->model->addCategory($name,$description);
+        $categories = $this->model->getCategories();        
+        
         $this->view->viewCategories($categories);
     }
 
