@@ -11,10 +11,8 @@ class ProductsView {
     }
 
     function viewProducts($products, $categories = null) {
-        $this->smarty->assign('products', $products);
-        
-        $this->smarty->assign('categories', $categories);
-        
+        $this->smarty->assign('products', $products);        
+        $this->smarty->assign('categories', $categories);        
         //seteo el smarty del producto con el email si es que existe el email (me logueé)
         if (isset($_SESSION["email"])){   
             $this->smarty->assign('email', $_SESSION["email"]);
@@ -22,12 +20,7 @@ class ProductsView {
         $this->smarty->display('template/body.tpl');
     }
 
-    function renderError(){echo "error";}
-
-    function showEditProduct($product){ 
-        $this->smarty->assign('product', $product);        
-        $this->smarty->display('template/body.tpl');
-    }       
+    function renderError(){echo "error";}     
 
     function viewPageProduct($product, $categories){         
         // $this->smarty->assign('titulo', 'Vista de producto');     
@@ -42,6 +35,11 @@ class ProductsView {
         $this->smarty->display('template/presupuestador.tpl');
     } 
 }
+
+    // function showEditProduct($product){ 
+    //     $this->smarty->assign('product', $product);        
+    //     $this->smarty->display('template/body.tpl');
+    // }  
 
     // function renderProductsByCategory($products){
     //     $this->smarty->assign('products', $products);        

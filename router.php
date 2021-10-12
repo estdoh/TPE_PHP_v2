@@ -70,6 +70,12 @@ switch ($params[0]) {
     case 'editProduct':        
         $ProductsController->editProduct($params[1]);
         break;
+    case 'viewCategory':        
+        $CategoryController->viewCategory($params[1]);
+        break;
+    case 'editCategory':        
+        $CategoryController->editCategory($params[1]);
+        break;
     default: 
         echo('404 Page not found aca estoy?'); 
         break;

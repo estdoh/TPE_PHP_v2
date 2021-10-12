@@ -33,6 +33,20 @@ class CategoryModel {
         $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $products;
     }
+
+    function getCategoryById($id) {
+        $query = $this->db->prepare('SELECT * FROM category WHERE id_category=?');
+        $query->execute(array($id));
+        $category = $query->fetch(PDO::FETCH_OBJ);        
+        return $category;       
+    }
+
+    function updateCategoryById($name, $description, $id_category){
+        $query = $this->db->prepare('UPDATE category SET name=?, description=? WHERE id_category=?');
+        $query->execute([$name, $description, $id_category]);
+        $category = $query->fetchAll(PDO::FETCH_OBJ);
+        return $category;
+    }
     // function orderProductsBy($params){
     //     $query = $this->db->prepare("SELECT * FROM products ORDER BY $params");
     //     $query->execute([$params]);

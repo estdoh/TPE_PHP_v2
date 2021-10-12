@@ -1,7 +1,6 @@
 <?php
-// require_once './app/Model/CategoryModel.php';
-// require_once './app/View/CategoryView.php';
-// require_once './app/Helpers/AuthHelper.php';
+require_once './app/View/CategoryView.php';
+require_once './app/Model/CategoryModel.php';
 
 class CategoryController {
     private $model;
@@ -25,8 +24,9 @@ class CategoryController {
         // $this->authHelper->checkLoggedIn();
         if (AuthHelper::checkLoggedIn()){
             $this->model->deleteCategories($params);
-            $categories = $this->model->getCategories();
-            $this->view->viewCategories($categories);
+            // $categories = $this->model->getCategories();
+            // $this->view->viewCategories($categories);
+            header("Location: ".BASE_URL."showCategories");
         }
     }
 
@@ -35,9 +35,9 @@ class CategoryController {
             $name = $_POST['input_name'];
             $description = $_POST['input_description'];
             $this->model->addCategory($name,$description);
-            $categories = $this->model->getCategories();        
-            
-            $this->view->viewCategories($categories);
+            // $categories = $this->model->getCategories(); 
+            // $this->view->viewCategories($categories);
+            header("Location: ".BASE_URL."showCategories");
         }
     }
 
@@ -48,4 +48,18 @@ class CategoryController {
         $this->view->viewCategories($productsByCategory);
     }
     
+    function viewCategory($params = null){
+        $id = $params;        
+        // $category = $this->model->getCategoryById($id);
+        $category = $this->model->getCategoryById($id);
+        $this->view->viewPageCategory($category);
+    }
+
+    function editCategory($id_category){
+        $name = $_POST['input_name'];
+        $description = $_POST['input_description'];
+
+        $this->model->updateCategoryById($name, $description, $id_category);
+        header("Location: ".BASE_URL."showCategories");
+    }
 }

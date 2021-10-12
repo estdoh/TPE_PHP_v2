@@ -16,13 +16,17 @@
                         <option selected disabled>Seleccionar categoria</option>  
 
                             {foreach from=$categories item=$category}  
-                            
+                                {if ({$product->name} === {$category->id_category}) }
+                                <div class="">
+                                    <option value='{$category->id_category}' selected >{$category->name}</option>
+                                </div>
+                                {else}
                                 <div class="">
                                     <option value='{$category->id_category}'>{$category->name}</option>
                                 </div>
-                            {/foreach}   
-
-                        <option value='addNew' placeholder="agregarnuevo">ADD NEW</option>                        
+                                {/if}
+                            {/foreach}
+                                             
                     </select>
                     <input name="input_description" value="{$product->description}" type="textarea" class="form-control" placeholder="{$product->description}">
                     <div class="form-floating col">            

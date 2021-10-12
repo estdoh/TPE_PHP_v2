@@ -1,10 +1,9 @@
 <?php
 require_once './app/Helpers/AuthHelper.php';
 require_once './app/Model/ProductModel.php';
-require_once './app/Model/CategoryModel.php';
 require_once './app/View/ProductView.php';
 require_once './app/View/CategoryView.php';
-
+require_once './app/Model/CategoryModel.php';
 
 
 class ProductsController {
@@ -34,8 +33,9 @@ class ProductsController {
         // $this->authHelper->checkLoggedIn();
         if (AuthHelper::checkLoggedIn()){
             $this->model->deleteProducts($params);
-            $products = $this->model->getProducts();
-            $this->view->viewProducts($products);
+            // $products = $this->model->getProducts();
+            // $this->view->viewProducts($products);
+            header("Location: ".BASE_URL."showProducts");
         }
     }
 
@@ -65,8 +65,8 @@ class ProductsController {
             $price_a = $_POST['input_price_a'];
             $price_b = $_POST['input_price_b'];
 
-            $products = $this->model->addProduct($category,$name,$description,$price_a,$price_b);        
-            $this->view->viewProducts($products);
+            $this->model->addProduct($category,$name,$description,$price_a,$price_b);
+            header("Location: ".BASE_URL."showProducts");
         }
 
 
@@ -92,9 +92,9 @@ class ProductsController {
         $description = $_POST['input_description'];
         $price_a = $_POST['input_price_a'];
         $price_b = $_POST['input_price_b'];
-              
-        $products = $this->model->updateProductById($category,$name,$description,$price_a,$price_b,$id);
-        $this->view->viewProducts($products);
+
+        $this->model->updateProductById($category,$name,$description,$price_a,$price_b,$id);
+        header("Location: ".BASE_URL."showProducts");
     }
 }
 
