@@ -12,19 +12,14 @@
                 <div class="form-floating col-12">
                     <input value="{$product->name}" name="input_name" type="text" class="form-control" placeholder="{$product->name}" required>   
                     {* <input value="{$product->name_category}" id="input_name" type="text" class="form-control" placeholder="{$product->name_category}">                    *}
-                    <select name="input_category" class="form-floating col" required>                    
+                    <select name="input_category" class="form-floating col" required ">                    
                         <option >Seleccionar categoria</option>  
-
                             {foreach from=$categories item=$category}  
-                                {* {if ({$product->name} === {$category->id_category}) } *}
-                                {* <div class=""> *}
-                                <option value='{$category->id_category}'>{$category->name}</option>
-                                {* </div> *}
-                                {* {else}
-                                <div class="">
+                                {if ({$product->name_category} === {$category->name}) }
+                                    <option selected="selected" value='{$category->id_category}'>{$category->name}</option
+                                {else}
                                     <option value='{$category->id_category}'>{$category->name}</option>
-                                </div>
-                                {/if} *}
+                                {/if} 
                             {/foreach}
                                              
                     </select>
