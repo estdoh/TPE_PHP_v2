@@ -39,7 +39,7 @@
     <div class="container">
         <div class="col-md-12 mt-sm-5 table-responsive">                   
             <table class="table table-sm table-hover" id="listadoClientes">
-                <caption>Doble click para editar</caption>
+                <caption>Presupuestador</caption>
                 <thead>
                     <tr>
                         <th>Nombre Categoria <a href="OrderBy/name/"> <i class="fas fa-filter fa-xs"></i></a></th>

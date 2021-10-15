@@ -68,8 +68,6 @@ class ProductsController {
             $this->model->addProduct($category,$name,$description,$price_a,$price_b);
             header("Location: ".BASE_URL."showProducts");
         }
-
-
     }
 
     function presupuestar() {  
@@ -79,8 +77,7 @@ class ProductsController {
         $this->view->viewPresu($products, $categories);
     }
 
-    function viewProduct($params = null){
-        $id = $params;        
+    function viewProduct($id = null){              
         $product = $this->model->getProductById($id);
         $categories = $this->modelCategories->getCategories($id);
         $this->view->viewPageProduct($product, $categories);
