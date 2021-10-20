@@ -12,15 +12,29 @@ class ApiCategoryController{
         $this->view = new ApiView();
     }
 
-    function obtenerCategories(){
+    function getCategories(){
         $tareas = $this->model->getCategories();
         return $this->view->response($tareas, 200);
     }
 
-    function obtenerCategory($params = []){
+    function getCategory($params = []){
         $id = $params[":ID"];
-        $tarea = $this->model->getCategoryById($id);
-        return $this->view->response($tarea, 200);
+        $category = $this->model->getCategoryById($id);
+        if (!empty($category)) // verifica si la tarea existe
+            return $this->view->response($category, 200);
+        else
+            $this->view->response("La categoria con el id=$id no existe", 404);
+
+    }
+
+    public function deleteCategory($params = null) {
+        $id = $params[':ID'];
+        $result =  $category = $this->model->deleteCategories($id);
+
+        if($result > 0)
+            $this->view->response("La categoria con el id=$id fue eliminada", 200);
+        else
+            $this->view->response("La categoria con el id=$id no existe", 404);
     }
 
 }
