@@ -12,12 +12,12 @@ class ApiProductController{
         $this->view = new ApiView();
     }
 
-    function getProductos(){
+    function getProducts(){
         $productos = $this->model->getProducts();
         return $this->view->response($productos, 200);
     }
 
-    function getProducto($params = []){
+    function getProduct($params = []){
         $id = $params[":ID"];
         $producto = $this->model->getProductById($id);
         if (!empty($producto))
@@ -28,24 +28,48 @@ class ApiProductController{
 
     public function deleteProduct($params = null) {
         $id = $params[':ID'];
-        $result =  $product = $this->model->deleteProducts($id);
+        $product = $this->model->getProducts($id);
 
-        if($result > 0)
+        // $result =  $product = $this->model->deleteProducts($id);
+        if($product){
+            $this->model->deleteProducts($id);
             $this->view->response("El producto con el id=$id fue eliminada", 200);
-        else
+        } else {
             $this->view->response("El producto con el id=$id no existe", 404);
+        };
     }
 
-    // public function InsertProduct($params = null){
-    //     $body = $this->getData();
+    public function InsertProduct($params = null){
+        //agarro los datos de request (json)
+        $body = $this->getBody();
 
-    //     $idproduct = $this->model->addProduct($body->category,$body->name,$body->description,$body->price_a,$body->price_b);
+        // verifica si la tarea existe
+        if (!empty($body)) {
+            $id = $this->model->addProduct($body->category,$body->name,$body->description,$body->price_a,$body->price_b);
+            $this->view->response( $this->model->getProductById($id), 201);
+        } else {
+            $this->view->response("El producto no se pudo insertar", 404);
+        };
+    }
 
-    //     if (!empty($idTask)) // verifica si la tarea existe
-    //         $this->view->response( $this->model->getProducts($idTask), 201);
-    //     else
-    //         $this->view->response("La tarea no se pudo insertar", 404);
-    // }
+    private function getBody(){
+        $bodystring = file_get_contents("php://input");
+        return json_decode($bodystring);
+    }
 
+    public function editProduct($params = null){
+        $id = $params[':ID'];
+        //agarro los datos de request (json)
+        $body = $this->getBody();
+        $product = $this->model->getProducts($id);
+
+        // verifica si la tarea existe
+        if (!empty($product)) {
+            $this->model->updateProductById($body->category,$body->name,$body->description,$body->price_a,$body->price_b,$id);
+            $this->view->response( $this->model->getProductById($id), 200);
+        } else {
+            $this->view->response("El producto no se pudo insertar", 404);
+        };
+    }
 
 }

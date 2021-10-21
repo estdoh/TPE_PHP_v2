@@ -17,6 +17,7 @@ class CategoryModel {
         // $this->authHelper->checkLoggedIn();    
         $query = $this->db->prepare("INSERT INTO category (name,description) VALUES (?,?)");
         $query->execute([$name,$description]);
+        return $this->db->lastInsertId();
     }
     
     function deleteCategories($id) {
@@ -47,11 +48,6 @@ class CategoryModel {
         $category = $query->fetchAll(PDO::FETCH_OBJ);
         return $category;
     }
-    // function orderProductsBy($params){
-    //     $query = $this->db->prepare("SELECT * FROM products ORDER BY $params");
-    //     $query->execute([$params]);
-    //     $products = $query->fetchAll(PDO::FETCH_OBJ);
-    //     return $products;
-    // }
+    
 }
     

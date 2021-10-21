@@ -38,6 +38,7 @@ class ProductsModel {
     function addProduct($category,$name,$description,$price_a,$price_b) {
         $query = $this->db->prepare("INSERT INTO products (category,name,description,price_a,price_b) VALUES (?,?,?,?,?)");
         $query->execute([$category,$name,$description,$price_a,$price_b]);
+        return $this->db->lastInsertId();
         
         // $querya = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category ORDER BY id DESC');
         // $querya->execute();
