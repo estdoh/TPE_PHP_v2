@@ -28,5 +28,29 @@ class UserView {
         $this->smarty->assign('error', $error);
         $this->smarty->display('template/register.tpl');
     }
+
+    function viewUsers($users) {
+        $this->smarty->assign('users', $users);
+        $this->smarty->assign('titulo', 'Administracion de usuarios'); 
+        // $this->smarty->assign('Titulo', "Administracion de usuarios registrados" );       
+        //seteo el smarty del producto con el email si es que existe el email (me logueé)
+        // if (isset($_SESSION["email"])){   
+        //     $this->smarty->assign('email', $_SESSION["email"]);
+        // }
+        if (isset($_SESSION["email"])){   
+            $this->smarty->assign('email', $_SESSION["email"]);
+        }
+        $this->smarty->display('template/usersAdmin.tpl');
+    }
+
+    function viewPageUser($user){         
+        // $this->smarty->assign('titulo', 'Vista de producto');     
+        $this->smarty->assign('user', $user);
+        if (isset($_SESSION["email"])){   
+            $this->smarty->assign('email', $_SESSION["email"]);
+        }
+        $this->smarty->display('template/user.tpl');
+    }
+
     
 }

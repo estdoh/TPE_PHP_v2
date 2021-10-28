@@ -41,7 +41,7 @@ class ApiCategoryController{
     }
 
     
-    public function InsertCategory($params = null){
+    public function insertCategory($params = null){
         //agarro los datos de request (json)
         $body = $this->getBody();
 

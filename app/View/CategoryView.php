@@ -26,5 +26,10 @@ class CategoryView {
     }
 
     function renderError(){echo "error";}
+    
+    function showCategoriesLayout() {
+        $this->smarty->display('template/body-categoriesCSR.tpl');
+    }
+
 
 }

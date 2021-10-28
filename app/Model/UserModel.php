@@ -14,10 +14,32 @@ class UserModel {
         return $user;
     }
 
-    function addUser($email, $contraseña){
-        $query = $this->db->prepare('INSERT INTO users (id_user,email,password,rol) VALUES (NULL,?,?,1)');
-        $query->execute(array($email,$contraseña));
+    function getUsers(){
+        $query = $this->db->prepare('SELECT * FROM users');
+        $query->execute();
+        $user = $query->fetchAll(PDO::FETCH_OBJ);
+        return $user;
+    }    
+
+    function getUserById($id) {
+        $query = $this->db->prepare('SELECT * FROM users WHERE id_user =?');
+        $query->execute(array($id));
+        $userByID = $query->fetch(PDO::FETCH_OBJ);        
+        return $userByID;       
+    }
+
+    function addUser($email, $password, $rol){
+        $query = $this->db->prepare('INSERT INTO users (id_user,email,password,rol) VALUES (NULL,?,?,?)');
+        $query->execute(array($email,$password, $rol));
         $user = $query->fetch(PDO::FETCH_OBJ);
         return $user;
     }
+
+    function updateUserById($id, $email, $password, $rol){
+        $query = $this->db->prepare('UPDATE products SET email=?, password=?, rol=? WHERE id=?');
+        $query->execute([$id, $email, $password, $rol]);
+        $user = $query->fetchAll(PDO::FETCH_OBJ);
+        return $user;
+    }
+
 }

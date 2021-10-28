@@ -6,8 +6,8 @@ include_once './app/Helpers/AuthHelper.php';
 class UserController {
     private $model;
     private $view;
-    private $user;
-    private $pass;
+    private $authHelper;
+    
 
     public function __construct(){
         $this->model = new UserModel();
@@ -52,8 +52,55 @@ class UserController {
         AuthHelper::checkLoggedOut();  
         $email = $_POST['email'];
         $contraseña = $_POST['password'];
+        $rol = $_POST['rol'];
         $hash = password_hash($contraseña, PASSWORD_BCRYPT);
-        $this->model->addUser($email, $hash);
+        $this->model->addUser($email, $hash, $rol);
         $this->view->showHome();
     }
+
+    function showUsers() {
+        // AuthHelper::start();
+        // AuthHelper::checkLoggedOut();  
+        if (AuthHelper::checkLoggedIn()) {
+        $users = $this->model->getUsers();
+        $this->view->viewUsers($users);
+        }
+        // header("Location: ".BASE_URL."showProducts");
+        
+    }
+
+    function viewUser($id = null) {       
+        if (AuthHelper::checkLoggedIn()) {
+            $user = $this->model->getUserById($id);
+            $this->view->viewPageUser($user);
+        }        
+    }
+    
+    function editUser($id) {       
+        if (AuthHelper::checkLoggedIn()) {
+            $name = $_POST['input_name'];
+            $description = $_POST['input_description'];
+            $rol = $_POST['input_rol'];
+            $users = $this->model->updateUserById($id,$name,$description,$rol);
+            $this->view->viewUsers($users);
+        }        
+    }
+
+    // function viewProduct($id = null){              
+    //     $product = $this->model->getProductById($id);
+    //     $categories = $this->modelCategories->getCategories($id);
+    //     $this->view->viewPageProduct($product, $categories);
+    // }
+
+    // function editProduct($id){
+    //     $name = $_POST['input_name'];
+    //     $category = $_POST['input_category'];
+    //     $description = $_POST['input_description'];
+    //     $price_a = $_POST['input_price_a'];
+    //     $price_b = $_POST['input_price_b'];
+
+    //     $this->model->updateProductById($category,$name,$description,$price_a,$price_b,$id);
+    //     header("Location: ".BASE_URL."showProducts");
+    // }
+
 }

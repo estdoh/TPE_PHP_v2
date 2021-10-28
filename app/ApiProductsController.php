@@ -39,7 +39,7 @@ class ApiProductController{
         };
     }
 
-    public function InsertProduct($params = null){
+    public function insertProduct($params = null){
         //agarro los datos de request (json)
         $body = $this->getBody();
 

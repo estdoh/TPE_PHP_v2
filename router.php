@@ -37,44 +37,62 @@ switch ($params[0]) {
     case 'register':        
         $LoginController->registerUser();
         break;
+
     case 'showProducts':
         $ProductsController->showProducts();
-        break;
-    case 'showCategories':
-        $CategoryController->showCategories();
-        break;
-    case 'delProducts':    
-        $ProductsController->delProducts($params[1]);
-        break;
-    case 'delCategories':        
-        $CategoryController->delCategories($params[1]);
-        break;
-    case 'Search':        
-        $ProductsController->searchProducts($params[1]);
-        break;
-    case 'OrderBy':        
-        $ProductsController->orderBy($params[1]);
         break;
     case 'InsertProduct':        
         $ProductsController->addProduct();
         break;
-    case 'InsertCategory':        
-        $CategoryController->addCategory();
+    case 'delProducts':    
+        $ProductsController->delProducts($params[1]);
         break;
-    case 'Presupuestar':        
-        $ProductsController->presupuestar();
-        break;    
     case 'viewProduct':        
         $ProductsController->viewProduct($params[1]);
         break;
     case 'editProduct':        
         $ProductsController->editProduct($params[1]);
         break;
+
+
+    case 'showCategories':
+        $CategoryController->showCategories();
+        break;
+    case 'InsertCategory':        
+        $CategoryController->addCategory();
+        break;
+    case 'delCategories':        
+        $CategoryController->delCategories($params[1]);
+        break;
     case 'viewCategory':        
         $CategoryController->viewCategory($params[1]);
         break;
     case 'editCategory':        
         $CategoryController->editCategory($params[1]);
+        break;
+
+    case 'showUsers':        //show json home
+        $LoginController->showUsers();
+        break;
+    case 'viewUser':        //show json home
+        $LoginController->viewUser($params[1]);
+        break;
+    case 'editUser':        //show json home
+        $LoginController->editUser($params[1]);
+        break;
+
+    case 'category-csr':        //show json home
+        $CategoryController->showHomeCSR();
+        break;
+
+    case 'Presupuestar':        
+        $ProductsController->presupuestar();
+        break;    
+    case 'Search':        
+        $ProductsController->searchProducts($params[1]);
+        break;
+    case 'OrderBy':        
+        $ProductsController->orderBy($params[1]);
         break;
     default: 
         echo('404 Page not found aca estoy?'); 

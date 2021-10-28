@@ -62,4 +62,9 @@ class CategoryController {
         $this->model->updateCategoryById($name, $description, $id_category);
         header("Location: ".BASE_URL."showCategories");
     }
+
+    function showHomeCSR() {
+        $this->view->showCategoriesLayout();
+    }
+
 }

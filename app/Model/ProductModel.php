@@ -49,8 +49,8 @@ class ProductsModel {
     function updateProductById($category, $name, $description, $price_a, $price_b, $id){
         $query = $this->db->prepare('UPDATE products SET category=?, name=?, description=?, price_a=?, price_b=? WHERE id=?');
         $query->execute([$category, $name, $description, $price_a, $price_b, $id]);
-        $products = $query->fetchAll(PDO::FETCH_OBJ);
-        return $products;
+        $product = $query->fetchAll(PDO::FETCH_OBJ);
+        return $product;
     }
     
 }
