@@ -58,44 +58,51 @@ switch ($params[0]) {
     case 'showCategories':
         $CategoryController->showCategories();
         break;
-    case 'InsertCategory':        
+    case 'InsertCategory':
         $CategoryController->addCategory();
         break;
-    case 'delCategories':        
+    case 'delCategories':
         $CategoryController->delCategories($params[1]);
         break;
-    case 'viewCategory':        
+    case 'viewCategory':
         $CategoryController->viewCategory($params[1]);
         break;
-    case 'editCategory':        
+    case 'editCategory':
         $CategoryController->editCategory($params[1]);
         break;
 
-    case 'showUsers':        //show json home
+    case 'showUsers':
         $LoginController->showUsers();
         break;
-    case 'viewUser':        //show json home
+    case 'viewUser':
         $LoginController->viewUser($params[1]);
         break;
-    case 'editUser':        //show json home
+    case 'editUser':
         $LoginController->editUser($params[1]);
         break;
+    case 'addUser':
+        $LoginController->addUser();
+        break;
+    case 'delUser':
+        $LoginController->delUser($params[1]);
+        break;
+
 
     case 'category-csr':        //show json home
         $CategoryController->showHomeCSR();
         break;
 
-    case 'Presupuestar':        
+    case 'Presupuestar':
         $ProductsController->presupuestar();
-        break;    
-    case 'Search':        
+        break;
+    case 'Search':
         $ProductsController->searchProducts($params[1]);
         break;
-    case 'OrderBy':        
+    case 'OrderBy':
         $ProductsController->orderBy($params[1]);
         break;
-    default: 
-        echo('404 Page not found aca estoy?'); 
+    default:
+        echo('404 Page not found aca estoy?');
         break;
 }
 

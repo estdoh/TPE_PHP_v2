@@ -42,4 +42,10 @@ class UserModel {
         return $user;
     }
 
+    function deleteUser($id) {
+        $query = $this->db->prepare('DELETE FROM users WHERE id_user=?');
+        $query->execute(array($id));
+        $query->fetchAll(PDO::FETCH_OBJ);
+        // return $query->rowCount();
+    }
 }

@@ -19,6 +19,11 @@ class UserView {
         $this->smarty->assign('error', $error);
     }
 
+    function showUsers($error = ""){
+        header("Location: ".BASE_URL."showUsers");
+        $this->smarty->assign('error', $error);
+    }
+
     public function set_user($email){
         $this->smarty->assign('email', $email);
     }
@@ -29,7 +34,7 @@ class UserView {
         $this->smarty->display('template/register.tpl');
     }
 
-    function viewUsers($users) {
+    function viewUsers($users=null) {
         $this->smarty->assign('users', $users);
         $this->smarty->assign('titulo', 'Administracion de usuarios'); 
         // $this->smarty->assign('Titulo', "Administracion de usuarios registrados" );       

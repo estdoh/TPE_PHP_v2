@@ -43,7 +43,7 @@ class UserController {
         }                
     }
 
-    function viewRegister() {   
+    function viewRegister() {
         AuthHelper::checkLoggedOut();      
         $this->view->showRegister();
     }  
@@ -56,6 +56,15 @@ class UserController {
         $hash = password_hash($contraseña, PASSWORD_BCRYPT);
         $this->model->addUser($email, $hash, $rol);
         $this->view->showHome();
+    }
+
+    function addUser() {       
+        $email = $_POST['email'];
+        $contraseña = $_POST['password'];
+        $rol = $_POST['rol'];
+        $hash = password_hash($contraseña, PASSWORD_BCRYPT);
+        $this->model->addUser($email, $hash, $rol);
+        $this->view->showUsers();
     }
 
     function showUsers() {
@@ -86,21 +95,14 @@ class UserController {
         }        
     }
 
-    // function viewProduct($id = null){              
-    //     $product = $this->model->getProductById($id);
-    //     $categories = $this->modelCategories->getCategories($id);
-    //     $this->view->viewPageProduct($product, $categories);
-    // }
+    function delUser($params = null) {     
+        if (AuthHelper::checkLoggedIn()){
+            $this->model->deleteUser($params);
+            // $products = $this->model->getProducts();
+            // $this->view->viewProducts($products);
+            header("Location: ".BASE_URL."showUsers");
+        }
+    }
 
-    // function editProduct($id){
-    //     $name = $_POST['input_name'];
-    //     $category = $_POST['input_category'];
-    //     $description = $_POST['input_description'];
-    //     $price_a = $_POST['input_price_a'];
-    //     $price_b = $_POST['input_price_b'];
-
-    //     $this->model->updateProductById($category,$name,$description,$price_a,$price_b,$id);
-    //     header("Location: ".BASE_URL."showProducts");
-    // }
 
 }

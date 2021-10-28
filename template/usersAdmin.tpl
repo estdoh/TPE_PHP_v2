@@ -18,7 +18,7 @@
         </div>      *}
     
         <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light agregarcliente"> 
-            <form id="form-products" action="register" method="POST" autocomplete="on">                
+            <form id="form-products" action="addUser" method="POST" autocomplete="on">                
                 <div class="form-group  mb-3">
                     <div class="form-floating col">
                         <input name="email" id="input_email" type="text" class="form-control" placeholder="Nombre">
@@ -68,7 +68,7 @@
                             <td>  {$user->email}</td>
                             <td> <a href="Search/{$user->rol}" >{$user->rol}</a></td>
                             
-                            <td> <a href='delUser/{$user->email}' class='w-100 btn btn-sm btn-danger' data-id='buttonSupr'><i class='fa fa-trash fa-sm' aria-hidden='true'></i> </a> </td> 
+                            <td> <a href='delUser/{$user->id_user}' class='w-100 btn btn-sm btn-danger' data-id='buttonSupr'><i class='fa fa-trash fa-sm' aria-hidden='true'></i> </a> </td> 
                             <td> <a href='viewUser/{$user->id_user}' class='w-100 btn btn-sm btn-primary edicionproducto' data-id='buttonEdit'><i class='fa fa-pencil fa-sm' aria-hidden='true'></i> </button> </td>                         
                         </tr>
                     {/foreach}
