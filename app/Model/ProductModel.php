@@ -10,8 +10,8 @@ class ProductsModel {
     function getProducts() {
         $query = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category');
         $query->execute();
-        $products = $query->fetchAll(PDO::FETCH_OBJ);        
-        return $products;       
+        $products = $query->fetchAll(PDO::FETCH_OBJ);
+        return $products;
     }
 
     function getProductById($id) {
@@ -52,5 +52,4 @@ class ProductsModel {
         $product = $query->fetchAll(PDO::FETCH_OBJ);
         return $product;
     }
-    
 }

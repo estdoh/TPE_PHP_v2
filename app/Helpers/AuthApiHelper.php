@@ -33,7 +33,7 @@ class AuthApiHelper{
     }
 
     function getUser($params = null){
-        $header = $this->authHelper->getHeader();
+        $header = $this->getHeader();
         // Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsIm5hbWUiOiJ1c3VhcmlvMSIsInJvbCI6WyJhZG1pbiIsIm90aGVyIl19.6mRGSZGxCeBuQWp5daMmkNbNMWeaQFzF77a7SCqNXuo
         if(strpos($header,"Bearer") === 0){
             $token = explode(" ", $header)[1];

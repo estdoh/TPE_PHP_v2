@@ -26,13 +26,24 @@
                         <input name="input_price_a" value="{$product->price_a}" type="text" class="form-control" placeholder="{$product->price_a}" required>
                         <input name="input_price_b" value="{$product->price_b}" type="text" class="form-control" placeholder="{$product->price_b}">                  
                     </div>
+                    <input name="comments" value="{$product->comments}" type="text" class="form-control" placeholder="{$product->comments}">
+                    
                     <div class="form-floating col ">
                         <button type="submit" class="w-100 btn btn-lg btn-success">EDITAR</button>
                     </div>
                 </div>
                
             </form>
-            
+            <form action="comments" method="POST">
+                <div class="form-floating col-12">
+                    <input name="input_comment" type="text" class="form-control" placeholder="Comentario">
+                    <input name="input_id_product" value="{$product->id}" type="hidden">
+                    <div class="form-floating col">
+                        <button type="submit" class="w-100 btn btn-lg btn-success">COMENTAR</button>
+                    </div>
+                </div>
+            </form>
+            <br>
         </div>
     </div>
 </body>

@@ -4,6 +4,7 @@ require_once 'libs/Router.php';
 require_once 'app/ApiProductsController.php';
 require_once 'app/ApiCategoryController.php';
 require_once 'app/ApiUserController.php';
+require_once 'app/ApiCommentsController.php';
 
 // crea el router
 $router = new Router();
@@ -23,6 +24,11 @@ $router->addRoute('categories', 'POST', 'ApiCategoryController', 'insertCategory
 
 $router->addRoute('products/:ID', 'PUT', 'ApiProductController', 'editProduct');
 $router->addRoute('categories/:ID', 'PUT', 'ApiCategoryController', 'editCategory');
+
+$router->AddRoute('comments', 'GET', 'ApiCommentsController', 'getComments');
+$router->AddRoute('comments/products/:ID', 'GET', 'ApiCommentsController', 'getCommentsById');
+$router->addRoute('comments', 'POST', 'ApiCommentsController', 'insertComments');
+$router->addRoute('comments/:ID', 'DELETE', 'ApiCommentsController', 'deleteComments');
 
 $router->AddRoute('user/token', 'GET', 'ApiUserController', 'getToken');
 $router->AddRoute('user/:ID', 'GET', 'ApiUserController', 'getUser');

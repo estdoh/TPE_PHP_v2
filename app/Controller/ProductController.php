@@ -4,21 +4,23 @@ require_once './app/Model/ProductModel.php';
 require_once './app/View/ProductView.php';
 require_once './app/View/CategoryView.php';
 require_once './app/Model/CategoryModel.php';
-
+require_once './app/Model/CommentsModel.php';
 
 class ProductsController {
     private $model;
     private $modelCategories;
+    private $modelComments;
     private $view;
     private $authHelper;
 
     public function __construct() {
         $authHelper = new AuthHelper();//esto nose
-        $authHelper->checkLoggedIn();//esto nose si no esta funciona pero en las filminas sta
+        // $authHelper->checkLoggedIn();//esto nose si no esta funciona pero en las filminas sta
 
         $this->model = new ProductsModel();
         $this->modelCategories = new CategoryModel();
         $this->view = new ProductsView();
+        $this->modelComments = new CommentsModel();
     }    
 
     function showProducts() {
@@ -79,6 +81,7 @@ class ProductsController {
     function viewProduct($id = null){              
         $product = $this->model->getProductById($id);
         $categories = $this->modelCategories->getCategories($id);
+        // $comments = $this->modelComments->getComments($id);
         $this->view->viewPageProduct($product, $categories);
     }
 
