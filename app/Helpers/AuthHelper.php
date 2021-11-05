@@ -8,7 +8,7 @@ class AuthHelper{
     static public function start() {
         if (session_status() != PHP_SESSION_ACTIVE)
             session_start();
-        return $_SESSION['USERNAME'];//esto tambiene sta en las filminas pero adnaba sin
+        // return $_SESSION['USERNAME'];//esto tambiene sta en las filminas pero adnaba sin
         
     }
 
