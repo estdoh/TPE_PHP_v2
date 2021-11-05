@@ -8,11 +8,11 @@
 
     <div class="container">
         <div class="col-12 mt-sm-5 table-responsive">                   
-            <form class="" action="editProduct/{$user->id_user}" method="POST">
+            <form class="" action="editUser/{$user->id_user}" method="POST">
                 <div class="form-floating col-12">
                     <input value="{$user->email}" name="input_email" type="text" class="form-control" placeholder="{$user->email}" required> 
-                    <input value="{$user->password}" name="input_email" type="text" class="form-control" placeholder="{$user->password}" required>     
-                    <select name="input_rol" class="form-floating col" required>                    
+                    <input value="{$user->password}" name="input_password" type="text" class="form-control" placeholder="{$user->password}" required>     
+                    {* <select name="input_rol" class="form-floating col" required>                    
                         <option >Seleccionar categoria</option>  
                         {foreach from=$users item=$user}  
                             {if ({$user->rol} === {$user->rol}) }
@@ -22,8 +22,8 @@
                             {/if} 
                         {/foreach}
                                             
-                    </select>
-                    <input name="input_description" value="{$user->rol}" type="textarea" class="form-control" placeholder="{$user->rol}">
+                    </select> *}
+                    <input name="input_rol" value="{$user->rol}" type="textarea" class="form-control" placeholder="{$user->rol}">
                     
                     <div class="form-floating col ">
                         <button type="submit" class="w-100 btn btn-lg btn-success">EDITAR</button>

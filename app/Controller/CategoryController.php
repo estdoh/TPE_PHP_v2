@@ -31,7 +31,7 @@ class CategoryController {
     }
 
     function addCategory (){
-        if (AuthHelper::checkLoggedIn()){
+        if ($this->authHelper->checkLoggedIn()){
             $name = $_POST['input_name'];
             $description = $_POST['input_description'];
             $this->model->addCategory($name,$description);
@@ -49,6 +49,7 @@ class CategoryController {
     }
     
     function viewCategory($params = null){
+
         $id = $params;        
         // $category = $this->model->getCategoryById($id);
         $category = $this->model->getCategoryById($id);
@@ -56,6 +57,8 @@ class CategoryController {
     }
 
     function editCategory($id_category){
+        $this->authHelper->checkLoggedIn();
+        
         $name = $_POST['input_name'];
         $description = $_POST['input_description'];
 

@@ -17,13 +17,14 @@ class ApiProductController{
         return $this->view->response($productos, 200);
     }
 
-    function getProduct($params = []){
+    function getProduct($params = null){
         $id = $params[":ID"];
         $producto = $this->model->getProductById($id);
         if (!empty($producto))
             return $this->view->response($producto, 200);
-        else
+        else {
             $this->view->response("La producto con el id=$id no existe", 404);
+        };
     }
 
     public function deleteProduct($params = null) {

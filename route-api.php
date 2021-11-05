@@ -3,6 +3,7 @@
 require_once 'libs/Router.php';
 require_once 'app/ApiProductsController.php';
 require_once 'app/ApiCategoryController.php';
+require_once 'app/ApiUserController.php';
 
 // crea el router
 $router = new Router();
@@ -22,6 +23,9 @@ $router->addRoute('categories', 'POST', 'ApiCategoryController', 'insertCategory
 
 $router->addRoute('products/:ID', 'PUT', 'ApiProductController', 'editProduct');
 $router->addRoute('categories/:ID', 'PUT', 'ApiCategoryController', 'editCategory');
+
+$router->AddRoute('user/token', 'GET', 'ApiUserController', 'getToken');
+$router->AddRoute('user/:ID', 'GET', 'ApiUserController', 'getUser');
 
 // rutea
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

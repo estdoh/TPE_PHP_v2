@@ -11,7 +11,6 @@
             <form class="" action="editProduct/{$product->id}" method="POST">
                 <div class="form-floating col-12">
                     <input value="{$product->name}" name="input_name" type="text" class="form-control" placeholder="{$product->name}" required>   
-                    {* <input value="{$product->name_category}" id="input_name" type="text" class="form-control" placeholder="{$product->name_category}">                    *}
                     <select name="input_category" class="form-floating col" required ">                    
                         <option >Seleccionar categoria</option>  
                             {foreach from=$categories item=$category}  
@@ -20,8 +19,7 @@
                                 {else}
                                     <option value='{$category->id_category}'>{$category->name}</option>
                                 {/if} 
-                            {/foreach}
-                                             
+                            {/foreach}                                             
                     </select>
                     <input name="input_description" value="{$product->description}" type="textarea" class="form-control" placeholder="{$product->description}">
                     <div class="form-floating col">            
@@ -40,9 +38,3 @@
 </body>
 
 {include file="template/footer.tpl"}
-
-            {* <li>  {$product->name}</li>
-            <li> <a href="Search/{$product->name_category}" >{$product->name_category}</a></li>
-            <li>{$product->description}</li>                            
-            <li>{$product->price_a}</li>
-            <li>{$product->price_b}</li>    *}

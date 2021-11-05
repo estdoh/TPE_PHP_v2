@@ -37,11 +37,6 @@ class UserView {
     function viewUsers($users=null) {
         $this->smarty->assign('users', $users);
         $this->smarty->assign('titulo', 'Administracion de usuarios'); 
-        // $this->smarty->assign('Titulo', "Administracion de usuarios registrados" );       
-        //seteo el smarty del producto con el email si es que existe el email (me logueé)
-        // if (isset($_SESSION["email"])){   
-        //     $this->smarty->assign('email', $_SESSION["email"]);
-        // }
         if (isset($_SESSION["email"])){   
             $this->smarty->assign('email', $_SESSION["email"]);
         }

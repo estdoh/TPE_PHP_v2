@@ -74,18 +74,20 @@ switch ($params[0]) {
     case 'showUsers':
         $LoginController->showUsers();
         break;
-    case 'viewUser':
-        $LoginController->viewUser($params[1]);
-        break;
-    case 'editUser':
-        $LoginController->editUser($params[1]);
-        break;
     case 'addUser':
         $LoginController->addUser();
         break;
     case 'delUser':
         $LoginController->delUser($params[1]);
         break;
+    case 'viewUser':
+        $LoginController->viewUser($params[1]);
+        break;
+    case 'editUser':
+        $LoginController->editUser($params[1]);
+        break;
+
+ 
 
 
     case 'category-csr':        //show json home

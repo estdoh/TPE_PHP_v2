@@ -1,13 +1,16 @@
 <?php
-
 require_once './libs/smarty/Smarty.class.php';
+require_once './app/Helpers/AuthHelper.php';
 
 class ProductsView {  
     private $smarty; 
     function __construct() {
+        $authHelper = new AuthHelper();
+        $userName = $authHelper->start();
+
         $this->smarty = new Smarty();   
         $this->smarty->assign('titulo', 'Carga de productos');   
-        $this->smarty->assign('email', '');  
+        $this->smarty->assign('email', $userName);  
     }
 
     function viewProducts($products, $categories = null) {

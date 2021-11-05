@@ -12,6 +12,8 @@ class UserController {
     public function __construct(){
         $this->model = new UserModel();
         $this->view = new UserView();
+        $this->authHelper = new AuthHelper();
+
     }  
 
     function login() {        
@@ -44,12 +46,14 @@ class UserController {
     }
 
     function viewRegister() {
-        AuthHelper::checkLoggedOut();      
+        $this->authHelper->checkLoggedOut();  
+        // AuthHelper::checkLoggedOut();     
         $this->view->showRegister();
     }  
 
     function registerUser() {  
-        AuthHelper::checkLoggedOut();  
+        $this->authHelper->checkLoggedOut();
+        // AuthHelper::checkLoggedOut();  
         $email = $_POST['email'];
         $contraseña = $_POST['password'];
         $rol = $_POST['rol'];
@@ -58,7 +62,8 @@ class UserController {
         $this->view->showHome();
     }
 
-    function addUser() {       
+    function addUser() {   
+        $this->authHelper->checkLoggedIn();   //esto es una prueba para que no se pueda acceder a esta funcion sin estar logueado 
         $email = $_POST['email'];
         $contraseña = $_POST['password'];
         $rol = $_POST['rol'];
@@ -68,30 +73,34 @@ class UserController {
     }
 
     function showUsers() {
-        // AuthHelper::start();
-        // AuthHelper::checkLoggedOut();  
-        if (AuthHelper::checkLoggedIn()) {
-        $users = $this->model->getUsers();
-        $this->view->viewUsers($users);
+        if ($this->authHelper->checkLoggedIn()) {                    
+            $users = $this->model->getUsers();
+            $this->view->viewUsers($users);
+        } else {
+            $this->view->showLogin("Acceso denegado");
         }
-        // header("Location: ".BASE_URL."showProducts");
-        
     }
+        // header("Location: ".BASE_URL."showProducts");       
+    
 
     function viewUser($id = null) {       
         if (AuthHelper::checkLoggedIn()) {
             $user = $this->model->getUserById($id);
             $this->view->viewPageUser($user);
+        } else {
+            $this->view->showLogin("Acceso denegado");
         }        
     }
     
     function editUser($id) {       
         if (AuthHelper::checkLoggedIn()) {
-            $name = $_POST['input_name'];
-            $description = $_POST['input_description'];
+            $email = $_POST['input_email'];
+            $password = $_POST['input_password'];
             $rol = $_POST['input_rol'];
-            $users = $this->model->updateUserById($id,$name,$description,$rol);
-            $this->view->viewUsers($users);
+            $this->model->updateUserById($email,$password,$rol,$id);
+            header("Location: ".BASE_URL."showUsers");
+        } else {
+            $this->view->showLogin("Acceso denegado");
         }        
     }
 
@@ -101,6 +110,8 @@ class UserController {
             // $products = $this->model->getProducts();
             // $this->view->viewProducts($products);
             header("Location: ".BASE_URL."showUsers");
+        } else {
+            $this->view->showLogin("Acceso denegado");
         }
     }
 

@@ -13,6 +13,9 @@ class ProductsController {
     private $authHelper;
 
     public function __construct() {
+        $authHelper = new AuthHelper();//esto nose
+        $authHelper->checkLoggedIn();//esto nose si no esta funciona pero en las filminas sta
+
         $this->model = new ProductsModel();
         $this->modelCategories = new CategoryModel();
         $this->view = new ProductsView();
@@ -21,7 +24,6 @@ class ProductsController {
     function showProducts() {
         //Para utilizar variable de sesión, hay que hacer un start sessión, a la variable de sesión la usa el view.
         AuthHelper::start(); 
-        // $this->authHelper->checkLoggedIn();
         // llamar el modelo para obtener todas los productos
         $products = $this->model->getProducts();
         $categories = $this->modelCategories->getCategories();
@@ -40,7 +42,6 @@ class ProductsController {
     }
 
     function searchProducts($params = null) {
-        // $this->authHelper->checkLoggedIn();
         $products = $this->model->getProducts();
         $ProductsByCategory = $this->modelCategories->getProductsByCategory($params);
         $this->view->viewProducts( $ProductsByCategory);
@@ -57,7 +58,6 @@ class ProductsController {
     }
 
     function addProduct() {        
-        // $this->authHelper->checkLoggedIn();
         if (AuthHelper::checkLoggedIn()){
             $name = $_POST['input_name'];
             $description = $_POST['input_description'];
@@ -71,7 +71,6 @@ class ProductsController {
     }
 
     function presupuestar() {  
-        // $this->authHelper->checkLoggedIn();
         $categories = $this->modelCategories->getCategories();      
         $products= $this->model->getProducts();
         $this->view->viewPresu($products, $categories);
@@ -113,27 +112,3 @@ class ProductsController {
 //     actualizo la vista
 //     $this->view->renderProductsByCategory($products);
 //     $products = $this->model->getProductsByCategory($params);
-    
-
-
-//     // $id = $params[1];
-//     // llamar el modelo para obtener todas los productos
-//     $this->model->deleteProducts($params);
-//     $products = $this->model->getProducts();
-//     // actualizo la vista
-//     $this->view->viewProducts($products);
-// }
-
-// function showProductsByCategory() {
-//     // verifica datos obligatorios
-//     if (!isset($_GET['category']) || empty($_GET['category'])) {
-//         $this->view->renderError();
-//         return;
-//     }
-//     // obtiene el genero enviado por GET 
-//     $category = $_GET['category'];
-//     // obtengo las peliculas del modelo
-//     $products = $this->model->getProductsByCategory($category);
-//     // actualizo la vista
-//     $this->view->renderProductsByCategory($category, $products);
-// }

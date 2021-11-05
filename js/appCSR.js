@@ -33,3 +33,37 @@ async function getCategories() {
 
 getCategories();
 
+//
+// function getTasks() {
+//     fetch('api/tareas/')
+//     .then(response => response.json())
+//     .then(tasks => {
+//         let content = document.querySelector(".lista-tareas");
+//         content.innerHTML = "";
+//         for(let task of tasks) {
+//            content.innerHTML += createTaskHTML(task);
+//             }
+//     })
+//     .catch(error => console.log(error));
+//     }
+
+
+
+// documentdocument.querySelector("#form-tarea").addEventListener('submit', addTask);
+// function addTask(e) {
+//     e.preventDefault();
+//     let data = {
+//         titulo: document.querySelector("input[name=titulo]").value,
+//         descripcion: document.querySelector("input[name=descripcion]").value,
+//         prioridad: document.querySelector("input[name=prioridad]").value
+//     }
+//     fetch('api/tareas', {
+//         method: 'POST',
+//         headers: {'Content-Type': 'application/json'},
+//         body: JSON.stringify(data)
+//     })
+//     .then(response => {
+//         getTasks();
+//     })
+//     .catch(error => console.log(error));
+//     }
