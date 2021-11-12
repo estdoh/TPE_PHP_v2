@@ -7,15 +7,15 @@
     </div>   
 
     <div class="container">
-        <div class="col-12 mt-sm-5 table-responsive">                   
+        <div class="col-12 mt-sm-5 table-responsive">
             <form class="" action="editProduct/{$product->id}" method="POST">
                 <div class="form-floating col-12">
-                    <input value="{$product->name}" name="input_name" type="text" class="form-control" placeholder="{$product->name}" required>   
-                    <select name="input_category" class="form-floating col" required ">                    
-                        <option >Seleccionar categoria</option>  
+                    <input value="{$product->name}" name="input_name" type="text" class="form-control" placeholder="{$product->name}" required>
+                    <select name="input_category" class="form-floating col" required>                    
+                        <option>Seleccionar categoria</option>
                             {foreach from=$categories item=$category}  
                                 {if ({$product->name_category} === {$category->name}) }
-                                    <option selected="selected" value='{$category->id_category}'>{$category->name}</option
+                                    <option selected="selected" value='{$category->id_category}'>{$category->name}</option>
                                 {else}
                                     <option value='{$category->id_category}'>{$category->name}</option>
                                 {/if} 
@@ -31,9 +31,9 @@
                     <div class="form-floating col ">
                         <button type="submit" class="w-100 btn btn-lg btn-success">EDITAR</button>
                     </div>
-                </div>
-               
+                </div>               
             </form>
+
             <form action="comments" method="POST">
                 <div class="form-floating col-12">
                     <input name="input_comment" type="text" class="form-control" placeholder="Comentario">
