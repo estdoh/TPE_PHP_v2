@@ -32,6 +32,8 @@ class AuthHelper{
         self::start();
         if(isset($_SESSION['email'])){
             header("Location: ". BASE_URL."");
+            return false;
         }
+        return true;
     }
 }

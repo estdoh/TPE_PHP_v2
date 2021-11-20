@@ -52,14 +52,14 @@ class UserController {
     }  
 
     function registerUser() {  
-        $this->authHelper->checkLoggedOut();
-        // AuthHelper::checkLoggedOut();  
-        $email = $_POST['email'];
-        $contraseña = $_POST['password'];
-        $rol = $_POST['rol'];
-        $hash = password_hash($contraseña, PASSWORD_BCRYPT);
-        $this->model->addUser($email, $hash, $rol);
-        $this->view->showHome();
+        if (AuthHelper::checkLoggedOut()){
+            $email = $_POST['email'];
+            $contraseña = $_POST['password'];
+            $rol = 1;
+            $hash = password_hash($contraseña, PASSWORD_BCRYPT);
+            $this->model->addUser($email, $hash, $rol);
+            $this->verifyLogin();
+        }
     }
 
     function addUser() {   
