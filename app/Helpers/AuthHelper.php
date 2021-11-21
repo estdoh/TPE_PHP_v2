@@ -13,10 +13,11 @@ class AuthHelper{
         
     }
 
-    static public function login($email) {
+    static public function login($email, $rol) {
         self::start();
         $_SESSION['IS_LOGGED'] = true;
         $_SESSION['email'] = $email;
+        $_SESSION['rol'] = $rol;
     }
 
     public static function checkLoggedIn(){
@@ -25,6 +26,21 @@ class AuthHelper{
             header("Location: ".BASE_URL."login");
             return false;
         }
+        return true;
+    }
+
+    public static function checkLoggedInAdmin(){
+        self::start();
+        if(!isset($_SESSION["email"])){
+            header("Location: ".BASE_URL."login");
+            return false;
+        }
+        
+        if ($_SESSION["rol"] != "ADMIN" && $_SESSION["rol"] != "SUPER-ADMIN"){
+            header("Location: ".BASE_URL."");
+            return false;
+        }        
+
         return true;
     }
 

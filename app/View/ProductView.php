@@ -17,9 +17,7 @@ class ProductsView {
         $this->smarty->assign('products', $products);        
         $this->smarty->assign('categories', $categories);        
         //seteo el smarty del producto con el email si es que existe el email (me logueé)
-        if (isset($_SESSION["email"])){   
-            $this->smarty->assign('email', $_SESSION["email"]);
-        }
+        $this->setSmartyVariables();
         $this->smarty->display('template/body.tpl');
     }
 
@@ -37,6 +35,13 @@ class ProductsView {
         $this->smarty->assign('products', $products);
         $this->smarty->display('template/presupuestador.tpl');
     } 
+
+    function setSmartyVariables(){
+        if (isset($_SESSION["email"])){   
+            $this->smarty->assign('email', $_SESSION["email"]);
+            $this->smarty->assign('rol', $_SESSION["rol"]);
+        }
+    }
 }
 
     // function showEditProduct($product){ 

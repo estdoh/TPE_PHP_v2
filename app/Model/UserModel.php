@@ -35,9 +35,9 @@ class UserModel {
         return $user;
     }
 
-    function updateUserById($email, $password, $rol, $id){
-        $query = $this->db->prepare('UPDATE users SET email=?, password=?, rol=? WHERE id_user=?');
-        $query->execute([$email, $password, $rol, $id]);
+    function updateUserById($rol, $id){
+        $query = $this->db->prepare('UPDATE users SET rol=? WHERE id_user=?');
+        $query->execute([$rol, $id]);
         $user = $query->fetchAll(PDO::FETCH_OBJ);
         return $user;
     }

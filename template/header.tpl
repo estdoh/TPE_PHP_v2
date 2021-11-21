@@ -11,7 +11,9 @@
             <li><a href="category-csr">CategoriasCSR</a></li>
             {* <li><a href="Search">Busqueda</a></li> *}
             {if $email!=""}
-                <li><a href="showUsers">Users</a></li>
+                {if $rol=="ADMIN" || $rol=="SUPER-ADMIN"}
+                    <li><a href="showUsers">Users</a></li>
+                {/if}
                 <li><a href="logout">Logout</a></li>
             {else}
                 <li class="nav-item"><a href="login">Login</a></li>

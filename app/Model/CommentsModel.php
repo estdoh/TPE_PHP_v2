@@ -44,6 +44,13 @@ class CommentsModel {
         return $product;
     }
 
+    function deleteCommentsByUser($id_user) {
+        $query = $this->db->prepare('DELETE FROM comments WHERE id_user=?');
+        $query->execute(array($id_user));
+        // $products = $query->fetchAll(PDO::FETCH_OBJ);
+        return $query->rowCount();
+    }
+
 
     
 }

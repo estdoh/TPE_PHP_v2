@@ -30,9 +30,9 @@
                     </div> 
                     <select name="rol" class="form-floating col" required>                    
                         <option selected="selected" >Seleccionar Rol</option>                         
-                        <option value='0'>SUPER-ADMIN</option>
-                        <option value='1'>ADMIN</option>
-                        <option value='2'>USER</option>                  
+                        <option value='SUPER-ADMIN'>SUPER-ADMIN</option>
+                        <option value='ADMIN'>ADMIN</option>
+                        <option value='USER'>USER</option>                  
                         
                     </select>      
                 </div>  
@@ -52,11 +52,10 @@
                 <caption>Presupuestador</caption>
                 <thead>
                     <tr>
-                        <th>Usuario <a href="OrderBy/name"> <i class="fas fa-filter fa-xs"></i></a></th>
-                        <th>Rol<a href="OrderBy/category"><i class="fas fa-filter fa-xs"></i></a></th>
+                        <th>Usuario</th>
+                        <th>Rol</th>
                         <th></th>   
-                        <th></th>
-                                       
+                        <th></th>        
                     </tr>
                 </thead>
                                 
@@ -66,22 +65,10 @@
                     {foreach from=$users item=$user}
                         <tr>
                             <td>  {$user->email}</td>
-                            <td> <a href="Search/{$user->rol}" >{$user->rol}</a></td>
+                            <td>  {$user->rol} </td>
                             
                             <td> <a href='delUser/{$user->id_user}' class='w-100 btn btn-sm btn-danger' data-id='buttonSupr'><i class='fa fa-trash fa-sm' aria-hidden='true'></i> </a> </td> 
                             <td> <a href='viewUser/{$user->id_user}' class='w-100 btn btn-sm btn-primary edicionproducto' data-id='buttonEdit'><i class='fa fa-pencil fa-sm' aria-hidden='true'></i> </button> </td>                         
-                        </tr>
-                    {/foreach}
-                {else}
-                
-                    {foreach from=$products item=$product}
-                    
-                        <tr>
-                            <td></td>
-                            <td> </td>
-                            <td></td>                            
-                            <td></td>
-                            <td></td>
                         </tr>
                     {/foreach}
                 {/if}

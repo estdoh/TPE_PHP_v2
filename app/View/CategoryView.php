@@ -12,9 +12,7 @@ class CategoryView {
 
     function viewCategories($categories) {        
         $this->smarty->assign('categories', $categories);
-        if (isset($_SESSION["email"])){   
-            $this->smarty->assign('email', $_SESSION["email"]);
-        }
+        $this->setSmartyVariables();
         $this->smarty->display('template/body-categories.tpl');
     }  
     
@@ -29,6 +27,13 @@ class CategoryView {
     
     function showCategoriesLayout() {
         $this->smarty->display('template/body-categoriesCSR.tpl');
+    }
+
+    function setSmartyVariables(){
+        if (isset($_SESSION["email"])){   
+            $this->smarty->assign('email', $_SESSION["email"]);
+            $this->smarty->assign('rol', $_SESSION["rol"]);
+        }
     }
 
 

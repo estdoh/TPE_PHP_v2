@@ -37,19 +37,22 @@ class UserView {
     function viewUsers($users=null) {
         $this->smarty->assign('users', $users);
         $this->smarty->assign('titulo', 'Administracion de usuarios'); 
-        if (isset($_SESSION["email"])){   
-            $this->smarty->assign('email', $_SESSION["email"]);
-        }
+        $this->setSmartyVariables();
         $this->smarty->display('template/usersAdmin.tpl');
     }
 
     function viewPageUser($user){         
         // $this->smarty->assign('titulo', 'Vista de producto');     
         $this->smarty->assign('user', $user);
+        $this->setSmartyVariables();
+        $this->smarty->display('template/user.tpl');
+    }
+
+    function setSmartyVariables(){
         if (isset($_SESSION["email"])){   
             $this->smarty->assign('email', $_SESSION["email"]);
+            $this->smarty->assign('rol', $_SESSION["rol"]);
         }
-        $this->smarty->display('template/user.tpl');
     }
 
     

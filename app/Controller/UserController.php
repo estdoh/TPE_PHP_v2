@@ -1,18 +1,20 @@
 <?php
 require_once './app/Model/UserModel.php';
+require_once './app/Model/CommentsModel.php';
 require_once './app/View/UserView.php';
 include_once './app/Helpers/AuthHelper.php';
 
 class UserController {
     private $model;
     private $view;
-    private $authHelper;
+    private $model_comments;
+
     
 
     public function __construct(){
         $this->model = new UserModel();
         $this->view = new UserView();
-        $this->authHelper = new AuthHelper();
+        $this->model_comments = new CommentsModel();
 
     }  
 
@@ -35,7 +37,8 @@ class UserController {
             $user = $this->model->getUser($email);            
             //verifica coincidencias
             if (!empty($user) && password_verify($password, $user->password)) {
-                AuthHelper::login($email);
+                $rol = $user->rol;
+                AuthHelper::login($email,$rol);
                 //$_SESSION['email'] = $email;
                 //$this->view->set_user($email);
                  $this->view->showHome();
@@ -46,16 +49,16 @@ class UserController {
     }
 
     function viewRegister() {
-        $this->authHelper->checkLoggedOut();  
-        // AuthHelper::checkLoggedOut();     
-        $this->view->showRegister();
+        if (AuthHelper::checkLoggedOut()) {   
+            $this->view->showRegister();
+        }
     }  
 
     function registerUser() {  
         if (AuthHelper::checkLoggedOut()){
             $email = $_POST['email'];
             $contraseña = $_POST['password'];
-            $rol = 2;
+            $rol = "USER";
             $hash = password_hash($contraseña, PASSWORD_BCRYPT);
             $this->model->addUser($email, $hash, $rol);
             $this->verifyLogin();
@@ -63,17 +66,18 @@ class UserController {
     }
 
     function addUser() {   
-        $this->authHelper->checkLoggedIn();   //esto es una prueba para que no se pueda acceder a esta funcion sin estar logueado 
-        $email = $_POST['email'];
-        $contraseña = $_POST['password'];
-        $rol = $_POST['rol'];
-        $hash = password_hash($contraseña, PASSWORD_BCRYPT);
-        $this->model->addUser($email, $hash, $rol);
-        $this->view->showUsers();
+        if (AuthHelper::checkLoggedInAdmin()) {    
+            $email = $_POST['email'];
+            $contraseña = $_POST['password'];
+            $rol = $_POST['rol'];
+            $hash = password_hash($contraseña, PASSWORD_BCRYPT);
+            $this->model->addUser($email, $hash, $rol);
+            $this->view->showUsers();
+        }
     }
 
     function showUsers() {
-        if ($this->authHelper->checkLoggedIn()) {                    
+        if (AuthHelper::checkLoggedInAdmin()) {                    
             $users = $this->model->getUsers();
             $this->view->viewUsers($users);
         } else {
@@ -84,7 +88,7 @@ class UserController {
     
 
     function viewUser($id = null) {       
-        if (AuthHelper::checkLoggedIn()) {
+        if (AuthHelper::checkLoggedInAdmin()) {
             $user = $this->model->getUserById($id);
             $this->view->viewPageUser($user);
         } else {
@@ -93,11 +97,9 @@ class UserController {
     }
     
     function editUser($id) {       
-        if (AuthHelper::checkLoggedIn()) {
-            $email = $_POST['input_email'];
-            $password = $_POST['input_password'];
+        if (AuthHelper::checkLoggedInAdmin()) {
             $rol = $_POST['input_rol'];
-            $this->model->updateUserById($email,$password,$rol,$id);
+            $this->model->updateUserById($rol,$id);
             header("Location: ".BASE_URL."showUsers");
         } else {
             $this->view->showLogin("Acceso denegado");
@@ -105,7 +107,9 @@ class UserController {
     }
 
     function delUser($params = null) {     
-        if (AuthHelper::checkLoggedIn()){
+        if (AuthHelper::checkLoggedInAdmin()){
+             //aca hay que llamar al deleteCommentsByUser porque si no no puedo borrar al usuario.
+            $this->model_comments->deleteCommentsByUser($params);
             $this->model->deleteUser($params);
             // $products = $this->model->getProducts();
             // $this->view->viewProducts($products);

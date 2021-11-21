@@ -10,21 +10,27 @@
         <div class="col-12 mt-sm-5 table-responsive">                   
             <form class="" action="editUser/{$user->id_user}" method="POST">
                 <div class="form-floating col-12">
-                    <input value="{$user->email}" name="input_email" type="text" class="form-control" placeholder="{$user->email}" required> 
-                    <input value="{$user->password}" name="input_password" type="text" class="form-control" placeholder="{$user->password}" required>     
-                    {* <select name="input_rol" class="form-floating col" required>                    
-                        <option >Seleccionar categoria</option>  
-                        {foreach from=$users item=$user}  
-                            {if ({$user->rol} === {$user->rol}) }
-                                <option selected="selected" value='{$user->rol}'>{$user->rol}</option>
-                            {else}
-                                <option value='{$user->rol}'>{$user->rol}</option>
-                            {/if} 
-                        {/foreach}
-                                            
-                    </select> *}
-                    <input name="input_rol" value="{$user->rol}" type="textarea" class="form-control" placeholder="{$user->rol}">
-                    
+                    <input value="{$user->email}" name="input_email" type="text" class="form-control" placeholder="{$user->email}" required readonly> 
+                    <select name="input_rol" data-selected="ADMIN" class="form-floating col" required>
+                        {if ({$user->rol} === "SUPER-ADMIN") }                                           
+                            <option value='SUPER-ADMIN' selected>SUPER-ADMIN</option>
+                        {else}
+                            <option value='SUPER-ADMIN' >SUPER-ADMIN</option>
+                        {/if}
+                        
+                        {if ({$user->rol} === "ADMIN") }                                           
+                            <option value='ADMIN' selected>ADMIN</option>
+                        {else}
+                            <option value='ADMIN' >ADMIN</option>
+                        {/if}
+
+                        {if ({$user->rol} === "USER") }                                           
+                            <option value='USER' selected>USER</option>
+                        {else}
+                            <option value='USER' >USER</option>
+                        {/if}
+               
+                    </select>    
                     <div class="form-floating col ">
                         <button type="submit" class="w-100 btn btn-lg btn-success">EDITAR</button>
                     </div>
