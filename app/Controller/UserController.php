@@ -55,7 +55,7 @@ class UserController {
         if (AuthHelper::checkLoggedOut()){
             $email = $_POST['email'];
             $contraseña = $_POST['password'];
-            $rol = 1;
+            $rol = 3;
             $hash = password_hash($contraseña, PASSWORD_BCRYPT);
             $this->model->addUser($email, $hash, $rol);
             $this->verifyLogin();
