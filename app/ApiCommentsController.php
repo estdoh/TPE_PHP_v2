@@ -1,6 +1,7 @@
 <?php
 require_once "Model/CommentsModel.php";
 require_once "View/ApiView.php";
+require_once "Helpers/AuthHelper.php";
 
 class ApiCommentsController{
 
@@ -40,16 +41,24 @@ class ApiCommentsController{
     }
     
     public function insertComments($params = null){
-        //agarro los datos de request (json)
-        $body = $this->getBody();
-
-        // verifica si la tarea existe
-        if (!empty($body)) {
-            $id = $this->model->addComments($body->comment,$body->rating,$body->product_id, $body->user_id);
-            $this->view->response( $this->model->getCommentsById($id), 201);
-        } else {
-            $this->view->response("El Comentario no se pudo insertar", 404);
-        };
+        if (AuthHelper::checkLoggedIn()){
+            $body = $this->getBody();
+            if(!isset( $body->user_id) || $body->user_id=="" || !isset( $body->product_id) || $body->product_id=="" ){
+                $this->view->response("El Comentario no se pudo insertar", 400);
+            }
+            else{
+                if (!empty($body)) {
+                    $id = $this->model->addComments($body->comment,$body->rating,$body->product_id, $body->user_id);
+                    $this->view->response( $this->model->getCommentsById($id), 200);
+                } else {
+                    $this->view->response("El Comentario no se pudo insertar", 404);
+                }
+            }
+        }
+        else{
+            $this->view->response("El usuario no está autorizado para realizar el comentario", 401);
+        }
+        // verifica si la tarea existe 
     }
 
     private function getBody(){

@@ -4,6 +4,7 @@
         <h1>Presupuestador</h1>
 
     </div>
+    <div class="container">
     <nav class="menu">
         <ul class="navigation">
             <li><a href="showProducts">Productos</a></li>
@@ -20,5 +21,6 @@
             {/if}
         </ul>            
     </nav>
+    </div>
     <i class="btn_menu fa fa-bars fa-lg" aria-hidden="true"></i>       
 </header>

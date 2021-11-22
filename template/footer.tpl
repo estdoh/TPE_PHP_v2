@@ -4,6 +4,5 @@
     </footer>
 
     <script src="js/menu.js"></script>
-    <script src="js/desplegarAdd.js"></script>
 </body>
 </html>

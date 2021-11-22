@@ -38,7 +38,7 @@ class UserController {
             //verifica coincidencias
             if (!empty($user) && password_verify($password, $user->password)) {
                 $rol = $user->rol;
-                AuthHelper::login($email,$rol);
+                AuthHelper::login($email,$rol,$user->id_user);
                 //$_SESSION['email'] = $email;
                 //$this->view->set_user($email);
                  $this->view->showHome();

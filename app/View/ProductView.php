@@ -27,6 +27,7 @@ class ProductsView {
         // $this->smarty->assign('titulo', 'Vista de producto');     
         $this->smarty->assign('product', $product);
         $this->smarty->assign('categories', $categories);
+        $this->setSmartyVariables();
         $this->smarty->display('template/product.tpl');
     }
 
@@ -40,6 +41,7 @@ class ProductsView {
         if (isset($_SESSION["email"])){   
             $this->smarty->assign('email', $_SESSION["email"]);
             $this->smarty->assign('rol', $_SESSION["rol"]);
+            $this->smarty->assign('user_id', $_SESSION["user_id"]);
         }
     }
 }

@@ -13,11 +13,12 @@ class AuthHelper{
         
     }
 
-    static public function login($email, $rol) {
+    static public function login($email, $rol,$user_id) {
         self::start();
         $_SESSION['IS_LOGGED'] = true;
         $_SESSION['email'] = $email;
         $_SESSION['rol'] = $rol;
+        $_SESSION['user_id'] = $user_id;
     }
 
     public static function checkLoggedIn(){
