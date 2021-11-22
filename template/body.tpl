@@ -13,12 +13,12 @@
             <button class=" w-100 btn btn-sm btn-success" id="addProduct" ><i class="fas fa-plus fa-xs" ></i></button>
         </div>
         {/if}
-        {* <div class="col-1 m-1">
+        <div class="col-1 m-1">
             <button class=" w-100 btn btn-sm btn-success" id="serchFilter" ><i class="fas fa-search fa-xs" ></i></button>
-        </div>      *}
+        </div>     
     
         <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light agregarcliente"> 
-            <form id="form-products" action="InsertProduct" method="POST" autocomplete="on">                
+            <form id="form-products" action="InsertProduct" method="POST" autocomplete="on" enctype="multipart/form-data">                
                 <div class="form-group  mb-3">
                     <div class="form-floating col">
                         <input name="input_name" id="input_name" type="text" class="form-control" placeholder="Nombre">
@@ -28,20 +28,20 @@
                         <input name="input_description" id="input_description" type="text" class="form-control" placeholder="Descripcion">
                         <label for="description"><p>Descripcion</p></label>
                     </div>
-                    
+                
+                    <div class="form-floating col">
+                        <input name="input_image" id="input_image" type="file" class="form-control-file" multiple>
+                        <label for="image"><p>Imagen</p></label>
+                    </div>
                     <select name="input_category" class="form-floating col">                    
                         <option selected disabled>Seleccionar categoria</option>  
-
-                            {foreach from=$categories item=$category}  
-                            
+                            {foreach from=$categories item=$category}                             
                                 <div class="col-2 m-1">
                                     <option value='{$category->id_category}'>{$category->name}</option>
                                 </div>
                             {/foreach}   
-
                         <option value='addNew' placeholder="agregarnuevo"></option>                        
-                    </select>
-                    
+                    </select>                    
                 
                     <div class="form-floating col">
                         <input name="input_price_a" id="input_price_a" type="number" class="form-control" placeholder="PrecioB">
@@ -50,25 +50,19 @@
                     <div class="form-floating col">
                         <input name="input_price_b" id="input_price_b" type="number" class="form-control" placeholder="PrecioB">
                         <label for="price_b"><p>Precio B</p></label>
-                    </div>                        
+                    </div>
+                </div>
 
-
-                </div>  
-                <!-- <div class="form-floating mb-3">
-                    <input id="otrosCliente" id="otrosCliente" type="text" class="form-control" placeholder="otros">
-                    <label for="otrosCliente"><p>Otros</p></label>
-                </div> -->
                 <div class="form-floating mb-2">
                     <div class="form-floating col ">
                         <button type="submit" class="w-100 btn btn-lg btn-success" >AGREGAR </button>
                     </div>
                 </div>
-            </form>
 
-            
+            </form>           
         </div>
     
-        {* <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light m-1 inputFilter">
+        <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light m-1 inputFilter">
             <div class="form-group  mb-3">
                 <div class="form-floating col ">
                     <input class="form-control" type="text" id="filterEmpresa" placeholder="Busqueda por Empresa">
@@ -83,7 +77,7 @@
                     <label><p>Busqueda por E-mail</p></label> 
                 </div>
             </div>
-        </div>  *}
+        </div> 
                
     </div>
 
@@ -95,6 +89,7 @@
                 <caption>Presupuestador</caption>
                 <thead>
                     <tr>
+                        <th>imagen</th>
                         <th>Producto <a href="OrderBy/name"> <i class="fas fa-filter fa-xs"></i></a></th>
                         <th>Categoria<a href="OrderBy/category"><i class="fas fa-filter fa-xs"></i></a></th>
                         <th>Descripcion<a href="OrderBy/description"><i class="fas fa-filter fa-xs"></i></a></th>
@@ -113,20 +108,23 @@
                 {if $email!=""}
                     {foreach from=$products item=$product}
                         <tr>
-                            <td>  {$product->name}</td>
-                            <td> <a href="Search/{$product->name_category}" >{$product->name_category}</a></td>
+                            {if $product->img}
+                                <td><img src="{$product->img}" class="img-fluid" alt="Responsive image" width="100px"></td>
+                            {else}
+                                <td><img src="images/noimagen.png" class="img-fluid" alt="Responsive image" width="100px"></td>
+                            {/if}
+                            <td>{$product->name}</td>
+                            <td><a href="Search/{$product->name_category}" >{$product->name_category}</a></td>
                             <td>{$product->description}</td>                            
                             <td>{$product->price_a}</td>
                             <td>{$product->price_b}</td>
-                            <td> <a href='commentsProducts/{$product->id}' class='w-100 btn btn-sm btn-info' data-id='buttonComentario'><i class='fa fa-eye fa-sm' aria-hidden='true'></i> </a> </td>
-                            <td> <a href='delProducts/{$product->id}' class='w-100 btn btn-sm btn-danger' data-id='buttonSupr'><i class='fa fa-trash fa-sm' aria-hidden='true'></i> </a> </td> 
-                            <td> <a href='viewProduct/{$product->id}' class='w-100 btn btn-sm btn-primary edicionproducto' data-id='buttonEdit'><i class='fa fa-pencil fa-sm' aria-hidden='true'></i> </button> </td>                         
+                            <td><a href='commentsProducts/{$product->id}' class='w-100 btn btn-sm btn-info' data-id='buttonComentario'><i class='fa fa-eye fa-sm' aria-hidden='true'></i> </a> </td>
+                            <td><a href='delProducts/{$product->id}' class='w-100 btn btn-sm btn-danger' data-id='buttonSupr'><i class='fa fa-trash fa-sm' aria-hidden='true'></i> </a> </td> 
+                            <td><a href='viewProduct/{$product->id}' class='w-100 btn btn-sm btn-primary edicionproducto' data-id='buttonEdit'><i class='fa fa-pencil fa-sm' aria-hidden='true'></i> </button> </td>                         
                         </tr>
                     {/foreach}
-                {else}
-                
-                    {foreach from=$products item=$product}
-                    
+                {else}                
+                    {foreach from=$products item=$product}                    
                         <tr>
                             <td>  {$product->name}</td>
                             <td> <a href="Search/{$product->name_category}" >{$product->name_category}</a></td>
@@ -145,4 +143,5 @@
     </div>
 </body>
 
+<script src="js/desplegarAdd.js"></script>
 {include file="template/footer.tpl"}

@@ -35,15 +35,19 @@ class ProductsModel {
         return $products;
     }
 
-    function addProduct($category,$name,$description,$price_a,$price_b) {
-        $query = $this->db->prepare("INSERT INTO products (category,name,description,price_a,price_b) VALUES (?,?,?,?,?)");
-        $query->execute([$category,$name,$description,$price_a,$price_b]);
-        return $this->db->lastInsertId();
-        
-        // $querya = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category ORDER BY id DESC');
-        // $querya->execute();
-        // $products = $querya->fetchAll(PDO::FETCH_OBJ);
-        // return $products;
+    function addProduct($category,$name,$description, $imagen = null, $price_a,$price_b) {
+        $pathImg = null;
+        if ($imagen) {
+            $pathImg = $this->uploadImage($imagen);
+            $query = $this->db->prepare("INSERT INTO products (category,name,description,img,price_a,price_b) VALUES (?,?,?,?,?,?)");
+            $query->execute([$category,$name,$description,$pathImg,$price_a,$price_b]);
+            return $this->db->lastInsertId();
+        }
+        //  else {
+        //     $query = $this->db->prepare("INSERT INTO products (category,name,description,price_a,price_b) VALUES (?,?,?,?,?)");
+        //     $query->execute([$category,$name,$description,$price_a,$price_b]);
+        //     return $this->db->lastInsertId();
+        // }
     }
 
     function updateProductById($category, $name, $description, $price_a, $price_b, $id){
@@ -52,4 +56,11 @@ class ProductsModel {
         $product = $query->fetchAll(PDO::FETCH_OBJ);
         return $product;
     }
+
+    private function uploadImage($imagen){
+        $uploads_dir = '/images' . uniqid() . '.png';
+        move_uploaded_file($imagen, $uploads_dir);
+        return $uploads_dir;
+    }
+
 }

@@ -8,8 +8,17 @@
 
     <div class="container" id="product" product_id="{$product->id}" user_id="{$user_id}" rol="{$rol}">
         <div class="col-12 mt-sm-5 table-responsive">
-            <form class="" action="editProduct/{$product->id}" method="POST">
+            <form class="" action="editProduct/{$product->id}" method="POST" enctype="multipart/form-data">
                 <div class="form-floating col-12">
+                    {* add image *}
+                    {if $product->img}
+                        <img src="{$product->img}" alt="{$product->name}" class="img-fluid">
+                        <input type="file" name="imagesToUpload[]" id="input_image" class="form-control-file" multiple>
+                    {else}
+                        <img src="images/noimagen.png" alt="No Imagen" class="img-fluid">
+                        <input type="file" name="imagesToUpload[]" id="input_image" class="form-control-file" multiple>
+                    {/if}
+                    
                     <input value="{$product->name}" name="input_name" type="text" class="form-control" placeholder="{$product->name}" required>
                     <select name="input_category" class="form-floating col" required>                    
                         <option>Seleccionar categoria</option>
