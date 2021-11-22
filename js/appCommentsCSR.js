@@ -7,7 +7,8 @@ let agregar_comentarios = new Vue({
         titulo: "Dejanos tu puntaje",
         errors: [],
         comentario: null,
-        puntaje: null
+        puntaje: null,
+        rol: 0
     },
     methods: {
         agregarComentario: function(e) {
@@ -104,10 +105,21 @@ function obtenerId_user() {
     return id
 }
 
-function obtenerComentarios() {
+function setRol(){
     let rol_nombre = document.getElementById('product').getAttribute('rol');
-    if  (rol_nombre=="ADMIN" || rol_nombre=="SUPER-ADMIN")
+    if  (rol_nombre=="ADMIN" || rol_nombre=="SUPER-ADMIN"){
+        obtener_comentarios.rol=2;
+        agregar_comentarios.rol=2;
+    }
+    else if (rol_nombre=="USER"){
         obtener_comentarios.rol=1;
+        agregar_comentarios.rol=1;
+    }
+
+    
+}
+function obtenerComentarios() {
+    setRol();
     let id_producto = obtenerId_producto();
     fetch('api/comments/products/' + id_producto)
         .then(response => response.json())

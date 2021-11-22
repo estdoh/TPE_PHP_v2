@@ -99,9 +99,12 @@
                         <th>Categoria<a href="OrderBy/category"><i class="fas fa-filter fa-xs"></i></a></th>
                         <th>Descripcion<a href="OrderBy/description"><i class="fas fa-filter fa-xs"></i></a></th>
                         <th>precio A<a href="OrderBy/price_a"><i class="fas fa-filter fa-xs"></i></a></th>
-                        <th>Precio B<a href="OrderBy/price_b"><i class="fas fa-filter fa-xs"></i></a></th>   
-                        <th></th>
-                        <th></th>                 
+                        <th>Precio B<a href="OrderBy/price_b"><i class="fas fa-filter fa-xs"></i></a></th>          
+                        <th></th> 
+                        {if $email!=""} 
+                            <th></th>
+                            <th></th>
+                        {/if}                
                     </tr>
                 </thead>
                                 
@@ -115,6 +118,7 @@
                             <td>{$product->description}</td>                            
                             <td>{$product->price_a}</td>
                             <td>{$product->price_b}</td>
+                            <td> <a href='commentsProducts/{$product->id}' class='w-100 btn btn-sm btn-info' data-id='buttonComentario'><i class='fa fa-eye fa-sm' aria-hidden='true'></i> </a> </td>
                             <td> <a href='delProducts/{$product->id}' class='w-100 btn btn-sm btn-danger' data-id='buttonSupr'><i class='fa fa-trash fa-sm' aria-hidden='true'></i> </a> </td> 
                             <td> <a href='viewProduct/{$product->id}' class='w-100 btn btn-sm btn-primary edicionproducto' data-id='buttonEdit'><i class='fa fa-pencil fa-sm' aria-hidden='true'></i> </button> </td>                         
                         </tr>
@@ -129,6 +133,8 @@
                             <td>{$product->description}</td>                            
                             <td>{$product->price_a}</td>
                             <td>{$product->price_b}</td>
+                            <td> <a href='commentsProducts/{$product->id}' class='w-100 btn btn-sm btn-info' data-id='buttonComentario'><i class='fa fa-eye fa-sm' aria-hidden='true'></i> </a> </td>
+
                         </tr>
                     {/foreach}
                 {/if}

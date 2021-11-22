@@ -43,6 +43,16 @@ class ProductsView {
             $this->smarty->assign('rol', $_SESSION["rol"]);
             $this->smarty->assign('user_id', $_SESSION["user_id"]);
         }
+        else{
+            $this->smarty->assign('rol', 'noLog');
+            $this->smarty->assign('user_id','0');
+        }
+    }
+
+    function viewCommentsProduct($product_id){
+        $this->smarty->assign('product_id', $product_id);        
+        $this->setSmartyVariables();
+        $this->smarty->display('template/bodyComments.tpl');
     }
 }
 

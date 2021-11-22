@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 12-11-2021 a las 14:21:05
--- Versión del servidor: 5.7.31
--- Versión de PHP: 7.4.9
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 22-11-2021 a las 20:18:37
+-- Versión del servidor: 10.4.19-MariaDB
+-- Versión de PHP: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,13 +27,11 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `category`
 --
 
-DROP TABLE IF EXISTS `category`;
-CREATE TABLE IF NOT EXISTS `category` (
-  `id_category` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `category` (
+  `id_category` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `description` varchar(400) NOT NULL,
-  PRIMARY KEY (`id_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+  `description` varchar(400) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `category`
@@ -53,25 +51,36 @@ INSERT INTO `category` (`id_category`, `name`, `description`) VALUES
 -- Estructura de tabla para la tabla `comments`
 --
 
-DROP TABLE IF EXISTS `comments`;
-CREATE TABLE IF NOT EXISTS `comments` (
-  `id_comment` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comments` (
+  `id_comment` int(20) NOT NULL,
   `comment` varchar(500) NOT NULL,
   `rating` int(20) NOT NULL,
   `product_id` int(20) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  PRIMARY KEY (`id_comment`),
-  KEY `product_id` (`product_id`),
-  KEY `id_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `comments`
 --
 
 INSERT INTO `comments` (`id_comment`, `comment`, `rating`, `product_id`, `id_user`) VALUES
-(1, 'esto es un comentario', 1, 1026, 15),
-(2, 'esto es otro comentario', 4, 1026, 15);
+(7, 'muy bueno', 1, 1098, 29),
+(8, 'muy bueno', 1, 1098, 29),
+(9, 'muy bueno', 1, 1098, 29),
+(10, 'muy bueno', 1, 1098, 29),
+(11, 'muy bueno', 1, 1098, 29),
+(12, 'Excelente ', 4, 1098, 21),
+(13, 'muy bueno', 4, 1098, 21),
+(14, 'muy malo', 1, 1099, 21),
+(15, 'normal', 3, 1098, 21),
+(16, 'me gustó', 5, 1098, 21),
+(17, 'pasable', 3, 1098, 21),
+(20, 'dasdsadsa', 1, 1098, 29),
+(21, 'malo', 2, 1098, 29),
+(22, 'maloo', 3, 1098, 29),
+(27, 'maloo', 2, 1161, 29),
+(28, 'maloo', 2, 1161, 29),
+(29, 't7sudhgsnfh', 2, 1161, 21);
 
 -- --------------------------------------------------------
 
@@ -79,27 +88,21 @@ INSERT INTO `comments` (`id_comment`, `comment`, `rating`, `product_id`, `id_use
 -- Estructura de tabla para la tabla `products`
 --
 
-DROP TABLE IF EXISTS `products`;
-CREATE TABLE IF NOT EXISTS `products` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
   `category` int(150) NOT NULL,
   `name` varchar(400) CHARACTER SET utf8mb4 NOT NULL,
   `description` varchar(450) CHARACTER SET utf8mb4 NOT NULL,
   `comments` int(11) NOT NULL,
   `price_a` int(11) NOT NULL,
-  `price_b` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `category` (`category`),
-  KEY `comments` (`comments`)
-) ENGINE=InnoDB AUTO_INCREMENT=1162 DEFAULT CHARSET=utf8;
+  `price_b` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `products`
 --
 
 INSERT INTO `products` (`id`, `category`, `name`, `description`, `comments`, `price_a`, `price_b`) VALUES
-(1026, 3, 'POSTEO', 'Frente (imagen) y dorso (datos)', 1, 507, 60843),
-(1058, 2, 'PAD, FUNDA CELULARES, TAZA', 'Aplicación de logo simple o identidad previamente diseñada', 0, 1079, 1295),
 (1098, 4, 'ENVASE', 'desarrollo morfologica de estuche troquelado, envase pet, brick, etc. no incluye grafica (ver item anterior)', 0, 45110, 54132),
 (1099, 4, 'MODELADO 3D DE ENVASE', 'Costo por envase. Forma simple (caja, frasco, etc).', 0, 7410, 8892),
 (1100, 3, 'RENDERIZADO DE MODELO 3D', 'imagen de producto. Precio unitario de cada imágen/vista.', 0, 1, 1),
@@ -113,25 +116,82 @@ INSERT INTO `products` (`id`, `category`, `name`, `description`, `comments`, `pr
 -- Estructura de tabla para la tabla `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id_user` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `rol` int(1) NOT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
+  `rol` varchar(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id_user`, `email`, `password`, `rol`) VALUES
-(15, 'prueba@prueba', '$2a$12$hUnqKh3dKBUi25a1FqeyC.2KhHrndsCMpM7hIrIyX37cEzybYczS.', 1),
-(16, 'prueba@qwert.com', '$2a$12$hUnqKh3dKBUi25a1FqeyC.2KhHrndsCMpM7hIrIyX37cEzybYczS.', 1),
-(17, 'hola@hola.com', '$2a$12$hUnqKh3dKBUi25a1FqeyC.2KhHrndsCMpM7hIrIyX37cEzybYczS.', 1),
-(18, 'hola@asdasdas.com', '$2a$12$hUnqKh3dKBUi25a1FqeyC.2KhHrndsCMpM7hIrIyX37cEzybYczS.', 1),
-(20, 'qwerty', '$2a$12$hUnqKh3dKBUi25a1FqeyC.2KhHrndsCMpM7hIrIyX37cEzybYczS.', 0);
+(21, 'slherrera91@gmail.com', '$2y$10$VWc8P8xorsOl.dAQ9ImFC.nYX7vERAPd2sRSFq4WXmxgjlJ8rX7jW', 'SUPER-ADMIN'),
+(28, 'admin@prueba', '$2y$10$OKRMwNHhN4nJsj/.N6p9guEcsF91AWt0bsUwfQRU6.cNx1FIfDw9O', 'ADMIN'),
+(29, 'user@prueba', '$2y$10$Hg88pAqC3u3eyCTRd4NmXOGH1RRsUXCcChvSPkYebKzIxPrCbrD6O', 'USER'),
+(30, 'edit@prueba', '$2y$10$VGEHjzTDRW1mo7L5JVq4HebP2YG0CK29YSO1e2ImeWu5V.0VdC1oK', 'USER');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id_category`);
+
+--
+-- Indices de la tabla `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id_comment`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indices de la tabla `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category` (`category`),
+  ADD KEY `comments` (`comments`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `category`
+--
+ALTER TABLE `category`
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de la tabla `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id_comment` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT de la tabla `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1162;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Restricciones para tablas volcadas

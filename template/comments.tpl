@@ -1,6 +1,6 @@
 {literal}
-    <section id="template-vue-agregar">
-        <h1 class="text-center">{{titulo}}</h1>
+    <section v-if="rol>=1" id="template-vue-agregar" >
+        <h1 class="text-center" >{{titulo}}</h1>
         <div v-if="errors.length" class="col-12 bg-danger text-center text-light p-3">
             <p v-for="error in errors">*{{ error }}</p>
         </div>
@@ -36,7 +36,7 @@
                             <th>Puntaje</th>
                             <th>Comentario</th>   
                             <th>Usuario</th>
-                            <th v-if="rol==1">Eliminar</th>             
+                            <th v-if="rol==2">Eliminar</th>             
                         </tr>
                     </thead>
                                     
@@ -45,7 +45,7 @@
                             <td>  {{ comentario.rating }}</td>
                             <td>  {{ comentario.comment }}</td>
                             <td>  {{ comentario.email }}</td>
-                            <td v-if="rol==1"> <a class='w-100 btn btn-sm btn-danger' data-id='buttonSupr' v-on:click="eliminar_comentario(comentario.id_comment)"><i class='fa fa-trash fa-sm' aria-hidden='true'  ></i> </a> </td>
+                            <td v-if="rol==2"> <a class='w-100 btn btn-sm btn-danger' data-id='buttonSupr' v-on:click="eliminar_comentario(comentario.id_comment)"><i class='fa fa-trash fa-sm' aria-hidden='true'  ></i> </a> </td>
                         </tr>
                     </tbody>
                 </table>          

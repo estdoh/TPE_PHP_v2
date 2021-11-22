@@ -95,6 +95,10 @@ class ProductsController {
         $this->model->updateProductById($category,$name,$description,$price_a,$price_b,$id);
         header("Location: ".BASE_URL."showProducts");
     }
+
+    function commentsProducts($product_id){
+        $this->view->viewCommentsProduct($product_id);
+    }
 }
 
 // function searchProducts($params = null) {

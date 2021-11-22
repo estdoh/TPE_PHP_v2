@@ -33,7 +33,7 @@
                     </div>
                 </div>               
             </form>
-            {include file="template/comments.tpl"}
+          
 
             <br>
         </div>

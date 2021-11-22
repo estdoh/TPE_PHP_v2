@@ -19,18 +19,9 @@ class ApiCommentsController{
     }
 
     function getCommentsByProductId($params = []){
-        if (AuthHelper::checkLoggedIn()){
-            $id = $params[":ID"];
-            $comments = $this->model->getCommentsByProductId($id);
-            if (!empty($comments)){ // verifica si la tarea existe
-                $this->view->response($comments, 200);
-            } else {
-                $this->view->response("El comentario id=$id no existe", 404);
-            };
-        }
-        else{
-            $this->view->response("El usuario no está autorizado", 401);
-        }
+        $id = $params[":ID"];
+        $comments = $this->model->getCommentsByProductId($id);
+        $this->view->response($comments, 200);
     }
 
     public function deleteComment($params = null) {

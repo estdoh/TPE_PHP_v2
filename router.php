@@ -87,8 +87,9 @@ switch ($params[0]) {
         $LoginController->editUser($params[1]);
         break;
 
- 
-
+    case 'commentsProducts':
+        $ProductsController->commentsProducts($params[1]);
+        break;
 
     case 'category-csr':        //show json home
         $CategoryController->showHomeCSR();
