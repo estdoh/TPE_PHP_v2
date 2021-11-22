@@ -21,15 +21,20 @@ class ApiCommentsController{
     function getCommentsByProductId($params = []){
         $id = $params[":ID"];
         $minRating = 0;
-        if (isset($_GET["minrating"]))
-            $minRating = $_GET["minrating"];
-        $comments = $this->model->getCommentsByProductId($id,$minRating);
+        $orderby = "id_comment";
+        if (AuthHelper::checkLoggedInApi()){
+            if (isset($_GET["minrating"]))
+                $minRating = $_GET["minrating"];
+            if (isset($_GET["orderby"]))
+                $orderby = $_GET["orderby"];
+        }
+        $comments = $this->model->getCommentsByProductId($id,$minRating,$orderby);
         $this->view->response($comments, 200);
     }
 
 
     public function deleteComment($params = null) {
-        if (AuthHelper::checkLoggedInAdmin()){
+        if (AuthHelper::checkLoggedInAdminApi()){
             $id = $params[':ID'];
             $comment = $this->model->getCommentById($id);
             // $result =  $product = $this->model->deleteProducts($id);
@@ -47,7 +52,7 @@ class ApiCommentsController{
     }
     
     public function insertComments($params = null){
-        if (AuthHelper::checkLoggedIn()){
+        if (AuthHelper::checkLoggedInApi()){
             $body = $this->getBody();
             if(!isset( $body->user_id) || $body->user_id=="" || !isset( $body->product_id) || $body->product_id=="" ){
                 $this->view->response("El Comentario no se pudo insertar", 400);

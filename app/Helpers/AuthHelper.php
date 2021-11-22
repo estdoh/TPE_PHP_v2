@@ -30,13 +30,28 @@ class AuthHelper{
         return true;
     }
 
+    public static function checkLoggedInApi(){
+        self::start();
+        if(!isset($_SESSION["email"])){
+            return false;
+        }
+        return true;
+    }
+
     public static function checkLoggedInAdmin(){
         self::start();
+        
         if(!isset($_SESSION["email"])){
             header("Location: ".BASE_URL."login");
             return false;
         }
         
+        if(!isset($_SESSION["rol"])){
+            header("Location: ".BASE_URL."");
+            return false;
+        }
+        
+
         if ($_SESSION["rol"] != "ADMIN" && $_SESSION["rol"] != "SUPER-ADMIN"){
             header("Location: ".BASE_URL."");
             return false;
@@ -44,6 +59,26 @@ class AuthHelper{
 
         return true;
     }
+
+    public static function checkLoggedInAdminApi(){
+        self::start();
+        
+        if(!isset($_SESSION["email"])){
+            return false;
+        }
+        
+        if(!isset($_SESSION["rol"])){
+            return false;
+        }
+        
+
+        if ($_SESSION["rol"] != "ADMIN" && $_SESSION["rol"] != "SUPER-ADMIN"){
+            return false;
+        }        
+
+        return true;
+    }
+    
 
     public static function checkLoggedOut() {
         self::start();

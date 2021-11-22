@@ -29,17 +29,18 @@ let agregar_comentarios = new Vue({
     }
 });
 
-let filtrar_comentarios = new Vue({
-    el: "#template-vue-filtrar",
+let parametro_comentarios = new Vue({
+    el: "#template-vue-parametro",
     data: {
-        titulo: "Filtrar por puntaje",
+        titulo: "Filtrar y ordenar comentarios",
         puntajeFiltro: 1,
-        rol: 0
+        rol: 0,
+        orden: "id_comment"
     },
     methods: {
         filtrarComentarios: function(e) {
             e.preventDefault();
-            obtenerComentarios(puntajeFiltro);
+            obtenerComentarios();
         }
     }
 });
@@ -123,12 +124,12 @@ function setRol(){
     if  (rol_nombre=="ADMIN" || rol_nombre=="SUPER-ADMIN"){
         obtener_comentarios.rol=2;
         agregar_comentarios.rol=2;
-        filtrar_comentarios.rol=2;
+        parametro_comentarios.rol=2;
     }
     else if (rol_nombre=="USER"){
         obtener_comentarios.rol=1;
         agregar_comentarios.rol=1;
-        filtrar_comentarios.rol=1;
+        parametro_comentarios.rol=1;
     }
 
     
@@ -136,9 +137,10 @@ function setRol(){
 function obtenerComentarios() {
     setRol();
     let id_producto = obtenerId_producto();
-    fetch('api/comments/products/' + id_producto +'?minrating='+filtrar_comentarios.puntajeFiltro)
+    fetch('api/comments/products/' + id_producto +'?minrating='+parametro_comentarios.puntajeFiltro + '&orderby='+parametro_comentarios.orden)
         .then(response => response.json())
         .then(comentarios => {
+            console.log(comentarios);
             obtener_comentarios.comentarios = comentarios; // similar a $this->smarty->assign("tasks", $tasks)
 
         })

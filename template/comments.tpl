@@ -25,11 +25,12 @@
     </section>
 
 
-    <section v-if="rol>=1" id="template-vue-filtrar" >
+    <section v-if="rol>=1" id="template-vue-parametro" >
         <h2 class="text-center" >{{titulo}}</h2>
         <form  method="POST" @submit="filtrarComentarios">
             <div class="container">
                 <div class="col-2 m-2">
+                    <label for="puntajeFiltro"> <span>Filtrar por Puntaje</span> </label>
                     <select v-model="puntajeFiltro" id="puntajeFiltro" class="form-control" name="puntajeFiltro">
                         <option value="1">1</option>
                         <option value="2">2 </option>
@@ -38,8 +39,19 @@
                         <option value="5">5 </option>
                     </select>
                 </div>
+
                 <div class="col-2 m-2">
-                    <button class=" w-100 btn btn-sm btn-success" id="filter" ><i class="fas fa-filter fa-xs" ></i></button>
+                    <label for="orden"> <span>Ordenar por:</span> </label>
+                    <select v-model="orden" id="orden" class="form-control" name="orden">
+                        <option value="id_comment">ID</option>
+                        <option value="date">Fecha </option>
+                        <option value="rating">Puntaje</option>
+                    </select>
+                </div>
+
+                <div class="col-2 m-2">
+                    <label for="filter"> <span>Refrescar</span> </label>
+                    <button class=" w-100 btn btn-sm btn-success" id="filter" ><i class="fas fa-redo fa-xs" ></i></button>
                 </div>
                 
             </div>
@@ -59,6 +71,7 @@
                             <th>Puntaje</th>
                             <th>Comentario</th>   
                             <th>Usuario</th>
+                            <th>Fecha</th>
                             <th v-if="rol==2">Eliminar</th>             
                         </tr>
                     </thead>
@@ -68,6 +81,7 @@
                             <td>  {{ comentario.rating }}</td>
                             <td>  {{ comentario.comment }}</td>
                             <td>  {{ comentario.email }}</td>
+                            <td>  {{ comentario.date }}</td>
                             <td v-if="rol==2"> <a class='w-100 btn btn-sm btn-danger' data-id='buttonSupr' v-on:click="eliminar_comentario(comentario.id_comment)"><i class='fa fa-trash fa-sm' aria-hidden='true'  ></i> </a> </td>
                         </tr>
                     </tbody>

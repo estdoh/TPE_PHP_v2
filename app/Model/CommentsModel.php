@@ -21,17 +21,23 @@ class CommentsModel {
         return $comments;       
     }
 
-    function getCommentsByProductId($id,$minrating){
-        $query = $this->db->prepare('SELECT C.*, U.email FROM comments as C JOIN users as U on C.id_user = U.id_user WHERE product_id=? and rating>= ?');
-        
-        // $query = $this->db->prepare('SELECT * FROM comments WHERE id_comment=?');
+    function getCommentsByProductId($id,$minrating,$orderby){
+        $querys = [
+            "rating" => "ORDER BY rating",
+            "id_comment" => "ORDER BY id_comment",
+            "date" => "ORDER BY date"
+        ];
+        $orderQuery = $querys[$orderby];
+
+        $query = $this->db->prepare("SELECT C.*, U.email FROM comments as C JOIN users as U on C.id_user = U.id_user WHERE product_id=? and rating>= ? $orderQuery");
+
         $query->execute([$id,$minrating]);
         $comments = $query->fetchAll(PDO::FETCH_OBJ);
         return $comments;
     }
 
     function addComments($comment,$rating,$product_id,$id_user) {
-        $query = $this->db->prepare("INSERT INTO comments (comment,rating,product_id,id_user) VALUES (?,?,?,?)");
+        $query = $this->db->prepare("INSERT INTO comments (comment,rating,product_id,id_user,date) VALUES (?,?,?,?,CURRENT_TIMESTAMP())");
         $query->execute([$comment,$rating,$product_id,$id_user]);
         return $this->db->lastInsertId();
     }
