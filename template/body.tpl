@@ -30,7 +30,7 @@
                     </div>
                 
                     <div class="form-floating col">
-                        <input name="input_image" id="input_image" type="file" class="form-control-file" multiple>
+                        <input type="file" name="input_image" id="input_image" class="form-control-file" multiple>
                         <label for="image"><p>Imagen</p></label>
                     </div>
                     <select name="input_category" class="form-floating col">                    

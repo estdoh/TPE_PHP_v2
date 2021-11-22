@@ -13,10 +13,10 @@
                     {* add image *}
                     {if $product->img}
                         <img src="{$product->img}" alt="{$product->name}" class="img-fluid">
-                        <input type="file" name="imagesToUpload[]" id="input_image" class="form-control-file" multiple>
+                        <input type="file" name="input_image" id="input_image" class="form-control-file" multiple>
                     {else}
                         <img src="images/noimagen.png" alt="No Imagen" class="img-fluid">
-                        <input type="file" name="imagesToUpload[]" id="input_image" class="form-control-file" multiple>
+                        <input type="file" name="input_image" id="input_image" class="form-control-file" multiple>
                     {/if}
                     
                     <input value="{$product->name}" name="input_name" type="text" class="form-control" placeholder="{$product->name}" required>

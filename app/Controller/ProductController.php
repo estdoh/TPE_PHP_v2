@@ -62,16 +62,21 @@ class ProductsController {
         if (AuthHelper::checkLoggedIn()){     
             $name = $_POST['input_name'];
             $description = $_POST['input_description'];
-            $imagen_name = $_FILES['input_image']['tmp_name'];//$this->addImage();
-            $imagen_type = $_FILES['input_image']['type'];
             $category = $_POST['input_category'];
             $price_a = $_POST['input_price_a'];
             $price_b = $_POST['input_price_b'];
+
+            $imagen_name = $_FILES['input_image']['tmp_name'];//$this->addImage();
+            $imagen_type = $_FILES['input_image']['type'];
+            $pathImg = null;
+            $pathImg = $this->uploadImage($imagen_name);
             
-            if( $imagen_type == "image/jpg" || $imagen_type == "image/jpeg" || $imagen_type == "image/png" || $imagen_type == "image/gif" ){
-                $this->model->addProduct($name, $description, $imagen_name, $category, $price_a, $price_b);
-                header("Location: ".BASE_URL."showProducts");
-            } 
+            $this->model->addProduct($category, $name, $description, $pathImg, $price_a, $price_b);
+            header("Location: ".BASE_URL."showProducts");
+            // if( $imagen_type == "image/jpg" || $imagen_type == "image/jpeg" || $imagen_type == "image/png" || $imagen_type == "image/gif" ){
+            //     $this->model->addProduct($name, $description, $imagen_name, $category, $price_a, $price_b);
+            //     header("Location: ".BASE_URL."showProducts");
+            // } 
             // else {
             //     $this->model->addProduct($name, $description, $category, $price_a, $price_b);
             //     header("Location: ".BASE_URL."showProducts");
@@ -79,6 +84,12 @@ class ProductsController {
         } else {
             header("Location: ".BASE_URL."login");
         }
+    }
+
+    private function uploadImage($imagen_name){
+        $uploads_dir = 'images/' . uniqid() . '.png';
+        move_uploaded_file($imagen_name, $uploads_dir);
+        return $uploads_dir;
     }
 
     function presupuestar() {  
@@ -101,7 +112,13 @@ class ProductsController {
         $price_a = $_POST['input_price_a'];
         $price_b = $_POST['input_price_b'];
 
-        $this->model->updateProductById($category,$name,$description,$price_a,$price_b,$id);
+        $imagen_name = $_FILES['input_image']['tmp_name'];//$this->addImage();
+        $imagen_type = $_FILES['input_image']['type'];
+        $pathImg = null;
+        $pathImg = $this->uploadImage($imagen_name);
+
+        // $this->model->updateProductById($category,$name,$description,$price_a,$price_b,$id);
+        $this->model->updateProductById($category, $name, $description, $pathImg, $price_a, $price_b, $id);
         header("Location: ".BASE_URL."showProducts");
     }
 
@@ -169,22 +186,3 @@ class ProductsController {
     }
        
 }
-
-// function searchProducts($params = null) {
-//     $this->authHelper->checkLoggedIn();
-//     $products = $this->model->getProducts();
-//     $productsByCategory = $this->modelCategories->getProductsByCategory($params);
-//     $this->view->viewProducts($productsByCategory);
-
-//     // verifica datos obligatorios
-//     if (!isset($_GET['category']) || empty($_GET['category'])) {
-//         $this->view->renderError();
-//         return;
-//     }
-//     obtiene el genero enviado por GET 
-//     $category = $_GET['category'];
-//     obtengo las peliculas del modelo
-    
-//     actualizo la vista
-//     $this->view->renderProductsByCategory($products);
-//     $products = $this->model->getProductsByCategory($params);
