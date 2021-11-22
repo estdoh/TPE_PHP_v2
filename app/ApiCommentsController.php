@@ -20,9 +20,13 @@ class ApiCommentsController{
 
     function getCommentsByProductId($params = []){
         $id = $params[":ID"];
-        $comments = $this->model->getCommentsByProductId($id);
+        $minRating = 0;
+        if (isset($_GET["minrating"]))
+            $minRating = $_GET["minrating"];
+        $comments = $this->model->getCommentsByProductId($id,$minRating);
         $this->view->response($comments, 200);
     }
+
 
     public function deleteComment($params = null) {
         if (AuthHelper::checkLoggedInAdmin()){

@@ -5,7 +5,6 @@
             <p v-for="error in errors">*{{ error }}</p>
         </div>
         <form  method="POST" @submit="agregarComentario">
-            
             <div class="form-floating col-12">
                 <label for="puntaje"> <span>Mi puntaje:</span> </label>
                 <select v-model="puntaje" id="puntaje" class="form-control" name="puntaje">
@@ -24,6 +23,30 @@
             </div>
         </form>
     </section>
+
+
+    <section v-if="rol>=1" id="template-vue-filtrar" >
+        <h2 class="text-center" >{{titulo}}</h2>
+        <form  method="POST" @submit="filtrarComentarios">
+            <div class="container">
+                <div class="col-2 m-2">
+                    <select v-model="puntajeFiltro" id="puntajeFiltro" class="form-control" name="puntajeFiltro">
+                        <option value="1">1</option>
+                        <option value="2">2 </option>
+                        <option value="3">3</option>
+                        <option value="4">4 </option>
+                        <option value="5">5 </option>
+                    </select>
+                </div>
+                <div class="col-2 m-2">
+                    <button class=" w-100 btn btn-sm btn-success" id="filter" ><i class="fas fa-filter fa-xs" ></i></button>
+                </div>
+                
+            </div>
+        </form>
+    </section>
+
+
     <section id="template-vue-obtener">
         <h1 class="text-center">{{titulo}}</h1>
         <div class="container">

@@ -1,6 +1,4 @@
 "use strict";
-
-
 let agregar_comentarios = new Vue({
     el: "#template-vue-agregar",
     data: {
@@ -27,9 +25,25 @@ let agregar_comentarios = new Vue({
             if (!this.puntaje) {
                 this.errors.push('El puntaje es obligatorio');
             }
+        },
+    }
+});
+
+let filtrar_comentarios = new Vue({
+    el: "#template-vue-filtrar",
+    data: {
+        titulo: "Filtrar por puntaje",
+        puntajeFiltro: 1,
+        rol: 0
+    },
+    methods: {
+        filtrarComentarios: function(e) {
+            e.preventDefault();
+            obtenerComentarios(puntajeFiltro);
         }
     }
 });
+
 
 let obtener_comentarios = new Vue({
     el: "#template-vue-obtener",
@@ -68,7 +82,6 @@ function agregarComentario(comentario, puntaje) {
 
     // defino el JSON con los datos proporcionados por el usuario y el id del plato.
     let comentario_usuario = {
-
         comment: comentario,
         rating: puntaje,
         product_id: id,
@@ -110,10 +123,12 @@ function setRol(){
     if  (rol_nombre=="ADMIN" || rol_nombre=="SUPER-ADMIN"){
         obtener_comentarios.rol=2;
         agregar_comentarios.rol=2;
+        filtrar_comentarios.rol=2;
     }
     else if (rol_nombre=="USER"){
         obtener_comentarios.rol=1;
         agregar_comentarios.rol=1;
+        filtrar_comentarios.rol=1;
     }
 
     
@@ -121,7 +136,7 @@ function setRol(){
 function obtenerComentarios() {
     setRol();
     let id_producto = obtenerId_producto();
-    fetch('api/comments/products/' + id_producto)
+    fetch('api/comments/products/' + id_producto +'?minrating='+filtrar_comentarios.puntajeFiltro)
         .then(response => response.json())
         .then(comentarios => {
             obtener_comentarios.comentarios = comentarios; // similar a $this->smarty->assign("tasks", $tasks)
