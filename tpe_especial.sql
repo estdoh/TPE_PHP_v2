@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2021 a las 20:18:37
+-- Tiempo de generación: 23-11-2021 a las 00:00:31
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -56,31 +56,35 @@ CREATE TABLE `comments` (
   `comment` varchar(500) NOT NULL,
   `rating` int(20) NOT NULL,
   `product_id` int(20) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` int(11) NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `comments`
 --
 
-INSERT INTO `comments` (`id_comment`, `comment`, `rating`, `product_id`, `id_user`) VALUES
-(7, 'muy bueno', 1, 1098, 29),
-(8, 'muy bueno', 1, 1098, 29),
-(9, 'muy bueno', 1, 1098, 29),
-(10, 'muy bueno', 1, 1098, 29),
-(11, 'muy bueno', 1, 1098, 29),
-(12, 'Excelente ', 4, 1098, 21),
-(13, 'muy bueno', 4, 1098, 21),
-(14, 'muy malo', 1, 1099, 21),
-(15, 'normal', 3, 1098, 21),
-(16, 'me gustó', 5, 1098, 21),
-(17, 'pasable', 3, 1098, 21),
-(20, 'dasdsadsa', 1, 1098, 29),
-(21, 'malo', 2, 1098, 29),
-(22, 'maloo', 3, 1098, 29),
-(27, 'maloo', 2, 1161, 29),
-(28, 'maloo', 2, 1161, 29),
-(29, 't7sudhgsnfh', 2, 1161, 21);
+INSERT INTO `comments` (`id_comment`, `comment`, `rating`, `product_id`, `id_user`, `date`) VALUES
+(1, 'Satisfecho', 4, 1098, 29, '2021-11-22 19:35:04'),
+(7, 'muy bueno', 1, 1098, 29, '2021-11-22 19:33:07'),
+(8, 'muy bueno', 1, 1098, 29, '2021-11-22 19:33:07'),
+(9, 'muy bueno', 1, 1098, 29, '2021-11-22 19:33:07'),
+(10, 'muy bueno', 1, 1098, 29, '2021-11-22 19:33:07'),
+(11, 'muy bueno', 1, 1098, 29, '2021-11-22 19:33:07'),
+(12, 'Excelente ', 4, 1098, 21, '2021-11-22 19:33:07'),
+(13, 'muy bueno', 4, 1098, 21, '2021-11-22 19:33:07'),
+(14, 'muy malo', 1, 1099, 21, '2021-11-22 19:33:07'),
+(15, 'normal', 3, 1098, 21, '2021-11-22 19:33:07'),
+(16, 'me gustó', 5, 1098, 21, '2021-11-22 19:33:07'),
+(17, 'pasable', 3, 1098, 21, '2021-11-22 19:33:07'),
+(20, 'dasdsadsa', 1, 1098, 29, '2021-11-22 19:33:07'),
+(21, 'malo', 2, 1098, 29, '2021-11-22 19:33:07'),
+(22, 'maloo', 3, 1098, 29, '2021-11-22 19:33:07'),
+(27, 'maloo', 2, 1161, 29, '2021-11-22 19:33:07'),
+(28, 'maloo', 2, 1161, 29, '2021-11-22 19:33:07'),
+(29, 't7sudhgsnfh', 2, 1161, 21, '2021-11-22 19:33:07'),
+(30, 'sASs', 1, 1098, 29, '2021-11-22 19:33:07'),
+(31, 'sASs', 1, 1098, 29, '2021-11-22 19:33:07');
 
 -- --------------------------------------------------------
 
@@ -179,7 +183,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT de la tabla `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id_comment` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_comment` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
