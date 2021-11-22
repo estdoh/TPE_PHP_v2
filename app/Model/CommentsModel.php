@@ -14,13 +14,20 @@ class CommentsModel {
         return $comments;       
     }
 
-    function getCommentsById($id){
+    function getCommentById($id) {
+        $query = $this->db->prepare('SELECT * FROM comments WHERE id_comment = ?');
+        $query->execute([$id]);
+        $comments = $query->fetch(PDO::FETCH_OBJ);        
+        return $comments;       
+    }
+
+    function getCommentsByProductId($id){
         // $query = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category WHERE id=?');
 
-        $query = $this->db->prepare('SELECT * FROM comments JOIN products WHERE id_comment=?');
+        $query = $this->db->prepare('SELECT C.*, U.email FROM comments as C JOIN users as U on C.id_user = U.id_user WHERE product_id=?');
         // $query = $this->db->prepare('SELECT * FROM comments WHERE id_comment=?');
-        $query->execute(array($id));
-        $comments = $query->fetch(PDO::FETCH_OBJ);
+        $query->execute([$id]);
+        $comments = $query->fetchAll(PDO::FETCH_OBJ);
         return $comments;
     }
 
@@ -30,9 +37,9 @@ class CommentsModel {
         return $this->db->lastInsertId();
     }
 
-    function deleteComments($id) {
-        $query = $this->db->prepare('DELETE FROM comments WHERE id=?');
-        $query->execute(array($id));
+    function deleteComment($id) {
+        $query = $this->db->prepare('DELETE FROM comments WHERE id_comment=?');
+        $query->execute([$id]);
         // $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $query->rowCount();
     }

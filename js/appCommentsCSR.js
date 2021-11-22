@@ -1,8 +1,6 @@
 "use strict";
 
 
-
-
 let agregar_comentarios = new Vue({
     el: "#template-vue-agregar",
     data: {
@@ -32,6 +30,32 @@ let agregar_comentarios = new Vue({
     }
 });
 
+let obtener_comentarios = new Vue({
+    el: "#template-vue-obtener",
+    data: {
+        titulo: "Comentarios",
+        comentarios: [],
+        rol: 0
+    },
+    methods: {
+        eliminar_comentario: function(id) {
+            fetch('api/comments/' + id, {
+
+                    "method": "DELETE",
+                    "mode": 'cors',
+                })
+                .then(respuesta => {
+                    if (respuesta.ok)
+                        obtenerComentarios();
+                    else
+                        console.log("error al eliminar");
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+    }
+});
 /**
  * @param comentario
  * @param puntaje
@@ -62,7 +86,7 @@ function agregarComentario(comentario, puntaje) {
                 alert('error al agregar comentario');
         })
         .then(response => {
-
+            obtenerComentarios();
         })
         .catch(exception => console.log(exception));
 
@@ -79,3 +103,21 @@ function obtenerId_user() {
     let id = document.getElementById('product').getAttribute('user_id');
     return id
 }
+
+function obtenerComentarios() {
+    let rol_nombre = document.getElementById('product').getAttribute('rol');
+    if  (rol_nombre=="ADMIN" || rol_nombre=="SUPER-ADMIN")
+        obtener_comentarios.rol=1;
+    let id_producto = obtenerId_producto();
+    fetch('api/comments/products/' + id_producto)
+        .then(response => response.json())
+        .then(comentarios => {
+            obtener_comentarios.comentarios = comentarios; // similar a $this->smarty->assign("tasks", $tasks)
+
+        })
+        .catch(error => console.log(error));
+}
+
+
+
+obtenerComentarios();

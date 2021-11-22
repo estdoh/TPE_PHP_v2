@@ -18,26 +18,37 @@ class ApiCommentsController{
         return $this->view->response($comments, 200);
     }
 
-    function getCommentsById($params = []){
-        $id = $params[":ID"];
-        $comments = $this->model->getCommentsById($id);
-        if (!empty($comments)){ // verifica si la tarea existe
-            return $this->view->response($comments, 200);
-        } else {
-            $this->view->response("El comentario id=$id no existe", 404);
-        };
+    function getCommentsByProductId($params = []){
+        if (AuthHelper::checkLoggedIn()){
+            $id = $params[":ID"];
+            $comments = $this->model->getCommentsByProductId($id);
+            if (!empty($comments)){ // verifica si la tarea existe
+                $this->view->response($comments, 200);
+            } else {
+                $this->view->response("El comentario id=$id no existe", 404);
+            };
+        }
+        else{
+            $this->view->response("El usuario no está autorizado", 401);
+        }
     }
 
-    public function deleteComments($params = null) {
-        $id = $params[':ID'];
-        $comments = $this->model->getComments($id);
-        // $result =  $product = $this->model->deleteProducts($id);
-        if($comments){
-            $this->model->deleteComments($id);
-            $this->view->response("El asdqwe con el id=$id fue eliminada", 200);
-        } else {
-            $this->view->response("El 2345 con el id=$id no existe", 404);
-        };
+    public function deleteComment($params = null) {
+        if (AuthHelper::checkLoggedInAdmin()){
+            $id = $params[':ID'];
+            $comment = $this->model->getCommentById($id);
+            // $result =  $product = $this->model->deleteProducts($id);
+            if($comment){
+                $this->model->deleteComment($id);
+                $this->view->response("El comentario con el id=$id fue eliminada", 200);
+            } else {
+                $this->view->response("El comentario con el id=$id no existe", 404);
+            };
+        }
+        else{
+            $this->view->response("El usuario no está autorizado", 401);
+        }
+
     }
     
     public function insertComments($params = null){
@@ -58,7 +69,6 @@ class ApiCommentsController{
         else{
             $this->view->response("El usuario no está autorizado para realizar el comentario", 401);
         }
-        // verifica si la tarea existe 
     }
 
     private function getBody(){
@@ -66,6 +76,7 @@ class ApiCommentsController{
         return json_decode($bodystring);
     }
 
+    /*
     public function editComments($params = null){
         $id_comment = $params[':ID'];
         //agarro los datos de request (json)
@@ -80,4 +91,5 @@ class ApiCommentsController{
             $this->view->response("El category no se pudo insertar", 404);
         };
     }
+    */
 }

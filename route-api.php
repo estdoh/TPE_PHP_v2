@@ -26,9 +26,9 @@ $router->addRoute('products/:ID', 'PUT', 'ApiProductController', 'editProduct');
 $router->addRoute('categories/:ID', 'PUT', 'ApiCategoryController', 'editCategory');
 
 $router->AddRoute('comments', 'GET', 'ApiCommentsController', 'getComments');
-$router->AddRoute('comments/products/:ID', 'GET', 'ApiCommentsController', 'getCommentsById');
+$router->AddRoute('comments/products/:ID', 'GET', 'ApiCommentsController', 'getCommentsByProductId');
 $router->addRoute('comments', 'POST', 'ApiCommentsController', 'insertComments');
-$router->addRoute('comments/:ID', 'DELETE', 'ApiCommentsController', 'deleteComments');
+$router->addRoute('comments/:ID', 'DELETE', 'ApiCommentsController', 'deleteComment');
 
 $router->AddRoute('user/token', 'GET', 'ApiUserController', 'getToken');
 $router->AddRoute('user/:ID', 'GET', 'ApiUserController', 'getUser');
