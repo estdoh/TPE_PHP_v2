@@ -86,6 +86,23 @@ class ProductsController {
         }
     }
 
+    function editProduct($id){
+        $name = $_POST['input_name'];
+        $category = $_POST['input_category'];
+        $description = $_POST['input_description'];
+        $price_a = $_POST['input_price_a'];
+        $price_b = $_POST['input_price_b'];
+
+        $imagen_name = $_FILES['input_image']['tmp_name'];//$this->addImage();
+        $imagen_type = $_FILES['input_image']['type'];
+        $pathImg = null;
+        $pathImg = $this->uploadImage($imagen_name);
+
+        // $this->model->updateProductById($category,$name,$description,$price_a,$price_b,$id);
+        $this->model->updateProductById($category, $name, $description, $pathImg, $price_a, $price_b, $id);
+        header("Location: ".BASE_URL."showProducts");
+    }
+
     private function uploadImage($imagen_name){
         $uploads_dir = 'images/' . uniqid() . '.png';
         move_uploaded_file($imagen_name, $uploads_dir);
@@ -103,23 +120,6 @@ class ProductsController {
         $categories = $this->modelCategories->getCategories($id);
         // $comments = $this->modelComments->getComments($id);
         $this->view->viewPageProduct($product, $categories);
-    }
-
-    function editProduct($id){
-        $name = $_POST['input_name'];
-        $category = $_POST['input_category'];
-        $description = $_POST['input_description'];
-        $price_a = $_POST['input_price_a'];
-        $price_b = $_POST['input_price_b'];
-
-        $imagen_name = $_FILES['input_image']['tmp_name'];//$this->addImage();
-        $imagen_type = $_FILES['input_image']['type'];
-        $pathImg = null;
-        $pathImg = $this->uploadImage($imagen_name);
-
-        // $this->model->updateProductById($category,$name,$description,$price_a,$price_b,$id);
-        $this->model->updateProductById($category, $name, $description, $pathImg, $price_a, $price_b, $id);
-        header("Location: ".BASE_URL."showProducts");
     }
 
     function commentsProducts($product_id){

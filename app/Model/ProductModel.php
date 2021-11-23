@@ -36,7 +36,7 @@ class ProductsModel {
     }
 
     function addProduct($category,$name,$description, $pathImg = null, $price_a,$price_b) {        
-            $query = $this->db->prepare("INSERT INTO products (category,name,description,img,price_a,price_b) VALUES (?,?,?,?,?,?)");
+            $query = $this->db->prepare('INSERT INTO products (category,name,description,img,price_a,price_b) VALUES (?,?,?,?,?,?)');
             $query->execute([$category,$name,$description,$pathImg,$price_a,$price_b]);
             $product = $query->fetchAll(PDO::FETCH_OBJ);
             return $product;    
