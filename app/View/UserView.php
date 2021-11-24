@@ -1,8 +1,7 @@
 <?php
 require_once './libs/smarty/Smarty.class.php';
 
-class UserView { 
-
+class UserView {
     private $smarty;
     public function __construct() {
         $this->smarty = new Smarty();
@@ -34,26 +33,23 @@ class UserView {
         $this->smarty->display('template/register.tpl');
     }
 
-    function viewUsers($users=null) {
+    function viewUsers($users=null){
         $this->smarty->assign('users', $users);
-        $this->smarty->assign('titulo', 'Administracion de usuarios'); 
+        $this->smarty->assign('titulo', 'Administracion de usuarios');
         $this->setSmartyVariables();
         $this->smarty->display('template/usersAdmin.tpl');
     }
 
-    function viewPageUser($user){         
-        // $this->smarty->assign('titulo', 'Vista de producto');     
+    function viewPageUser($user){
         $this->smarty->assign('user', $user);
         $this->setSmartyVariables();
         $this->smarty->display('template/user.tpl');
     }
 
     function setSmartyVariables(){
-        if (isset($_SESSION["email"])){   
+        if (isset($_SESSION["email"])){
             $this->smarty->assign('email', $_SESSION["email"]);
             $this->smarty->assign('rol', $_SESSION["rol"]);
         }
-    }
-
-    
+    }    
 }

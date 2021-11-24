@@ -24,7 +24,6 @@
         </form>
     </section>
 
-
     <section v-if="rol>=1" id="template-vue-parametro" >
         <h2 class="text-center" >{{titulo}}</h2>
         <form  method="POST" @submit="filtrarComentarios">

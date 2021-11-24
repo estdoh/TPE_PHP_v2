@@ -6,7 +6,6 @@ function base64url_encode($data) {
 
 class AuthApiHelper{
     private $key;
-
     public function __construct() {
         $this->key = 'ClaveSecreta';
     }
@@ -27,7 +26,6 @@ class AuthApiHelper{
                     'pass' => $pass
                 );
             }
-
         }
         return null;
     }
@@ -53,7 +51,7 @@ class AuthApiHelper{
                 }
             }
         }
-        return null;        
+        return null;
     }
 
     public function createToken($user){
@@ -68,7 +66,6 @@ class AuthApiHelper{
         );
         // $header = json_encode($header);
         // $payload = json_encode($payload);
-
         // $header = base64_encode($header);
         // $payload = base64_encode($payload);
         $header = base64url_encode(json_encode($header));

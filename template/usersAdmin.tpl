@@ -2,11 +2,8 @@
 {include file="template/head.tpl"}
 
     <div class="inicio">
-        {* <h2 class="resaltar">{$titulo}</h2>
-        <h4 class="resaltar">{$email}</h4> *}
         <h3>Carga de usuarios para <b>administrador</b></h3>
-    </div>    
-
+    </div>
 
     <div class="container">
         <div class="col-md-12 mt-sm-5 table-responsive">                   
@@ -35,8 +32,7 @@
                     {/foreach}
                 {/if}
                 </tbody>
-            </table>          
-
+            </table>
         </div>
     </div>
 </body>

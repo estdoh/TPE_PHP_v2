@@ -37,11 +37,8 @@
     </div>
 
     <div class="container">
-        <div class="col-md-12 mt-sm-5 table-responsive">                   
-            
-                
-                {include file='template/vue/categoryList.tpl'}
-                
+        <div class="col-md-12 mt-sm-5 table-responsive">
+            {include file='template/vue/categoryList.tpl'}
         </div>
     </div>
 </body>

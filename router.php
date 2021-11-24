@@ -19,7 +19,6 @@ $ProductsController = new ProductsController();
 $CategoryController = new CategoryController();
 $LoginController = new UserController();
 
-
 //determina que camino seguir según la acción
 switch ($params[0]) {
     case 'login':        
@@ -31,10 +30,10 @@ switch ($params[0]) {
     case 'verify':        
         $LoginController->verifyLogin();
         break;
-    case 'viewRegister':        
+    case 'viewRegister':
         $LoginController->viewRegister();
         break;
-    case 'register':        
+    case 'register':
         $LoginController->registerUser();
         break;
 
@@ -94,26 +93,15 @@ switch ($params[0]) {
     case 'category-csr':        //show json home
         $CategoryController->showHomeCSR();
         break;
+    // case 'viewCategoryCRS':
+    //     $CategoryController->viewCategoryCSR($params[1]);
+    //     break;
 
-    case 'Presupuestar':
-        $ProductsController->presupuestar();
-        break;
-    case 'Search':
-        $ProductsController->searchProducts($params[1]);
-        break;
-    case 'OrderBy':
-        $ProductsController->orderBy($params[1]);
-        break;
+    // case 'Presupuestar':
+    //     $ProductsController->presupuestar();
+    //     break;
+
     default:
         echo('404 Page not found aca estoy?');
         break;
 }
-
-    // case 'showProductsByCategory': 
-    //     // [about] o [about,javi]
-    //     $category = NULL;
-    //     if(isset($params[1])){
-    //         $category = $params[1];
-    //     }
-    //     showProductsByCategory($category); 
-    //     break;
