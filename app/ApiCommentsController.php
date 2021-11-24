@@ -70,21 +70,4 @@ class ApiCommentsController{
         $bodystring = file_get_contents("php://input");
         return json_decode($bodystring);
     }
-
-    /*
-    public function editComments($params = null){
-        $id_comment = $params[':ID'];
-        //agarro los datos de request (json)
-        $body = $this->getBody();
-        $comments = $this->model->getComments($id_comment);
-
-        // verifica si la tarea existe
-        if (!empty($comments)) {
-            $this->model->updateCommentById($body->comment,$body->rating);
-            $this->view->response( $this->model->getCommentsById($id_comment), 200);
-        } else {
-            $this->view->response("El category no se pudo insertar", 404);
-        };
-    }
-    */
 }

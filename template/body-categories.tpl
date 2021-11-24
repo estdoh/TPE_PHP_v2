@@ -71,5 +71,5 @@
         </div>
     </div>
 </body>
-
+<script src="js/desplegarAdd.js"></script>
 {include file="template/footer.tpl"}

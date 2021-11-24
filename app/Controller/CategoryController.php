@@ -21,8 +21,15 @@ class CategoryController {
 
     function delCategories($params = null) {
         if (AuthHelper::checkLoggedIn()){
-            $this->model->deleteCategories($params);            
-            header("Location: ".BASE_URL."showCategories");
+            $products = $this->model->getProductsByCategoryId($params);
+            if (count($products)==0){
+                $this->model->deleteCategories($params);
+                header("Location: ".BASE_URL."showCategories");
+            }
+            else{
+                $this->showError("No se puede borrar la categoría, existen productos asociados");
+            }
+            
         }
     }
 
@@ -65,5 +72,9 @@ class CategoryController {
         $id = $params;
         $category = $this->model->getCategoryById($id);
         $this->view->viewCategoryCSRLayout($category);
+    }
+
+    public function showError($msg){
+        $this->view->showError($msg);
     }
 }

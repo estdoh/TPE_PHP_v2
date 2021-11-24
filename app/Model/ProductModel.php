@@ -24,9 +24,8 @@ class ProductsModel {
     function deleteProducts($id) {
         $query = $this->db->prepare('DELETE FROM products WHERE id=?');
         $query->execute(array($id));
-        // $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $query->rowCount();
-    }
+    } 
 
     function orderProductsBy($orderby){
         $query = $this->db->prepare("SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category ORDER BY ? ASC");
@@ -60,12 +59,6 @@ class ProductsModel {
         $product = $query->fetchAll(PDO::FETCH_OBJ);
         return $product;
     }   
-
-    private function uploadImage2($imagen_name){
-        $uploads_dir = 'images/' . uniqid() . '.png';
-        move_uploaded_file($imagen_name, $uploads_dir);
-        return $uploads_dir;
-    }
 
     private function uploadImage($imagen_name){
         $uploads_dir = "images/" . uniqid() . "." . strtolower(pathinfo($imagen_name['name'], PATHINFO_EXTENSION));  

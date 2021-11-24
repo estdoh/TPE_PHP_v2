@@ -33,4 +33,10 @@ class CategoryView {
             $this->smarty->assign('rol', $_SESSION["rol"]);
         }
     }
+
+    public function showError($error){
+        $this->smarty->assign('error', "Error");
+        $this->smarty->assign('subtitle', $error);
+        $this->smarty->display('template/showError.tpl');
+    }
 }

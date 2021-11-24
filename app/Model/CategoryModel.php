@@ -32,6 +32,13 @@ class CategoryModel {
         return $products;
     }
 
+    function getProductsByCategoryId($category = null) {
+        $query = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category WHERE category.id_category=?');
+        $query->execute([$category]); // array($category)
+        $products = $query->fetchAll(PDO::FETCH_OBJ);
+        return $products;
+    }
+
     function getCategoryById($id) {
         $query = $this->db->prepare('SELECT * FROM category WHERE id_category=?');
         $query->execute(array($id));
