@@ -9,8 +9,6 @@ class AuthHelper{
         if (session_status() != PHP_SESSION_ACTIVE){
             session_start();
         }
-        // return $_SESSION['USERNAME'];//esto tambiene sta en las filminas pero adnaba sin
-        
     }
 
     static public function login($email, $rol,$user_id) {
@@ -39,24 +37,19 @@ class AuthHelper{
     }
 
     public static function checkLoggedInAdmin(){
-        self::start();
-        
+        self::start();        
         if(!isset($_SESSION["email"])){
             header("Location: ".BASE_URL."login");
             return false;
         }
-        
         if(!isset($_SESSION["rol"])){
             header("Location: ".BASE_URL."");
             return false;
         }
-        
-
         if ($_SESSION["rol"] != "ADMIN" && $_SESSION["rol"] != "SUPER-ADMIN"){
             header("Location: ".BASE_URL."");
             return false;
-        }        
-
+        }
         return true;
     }
 
@@ -65,22 +58,17 @@ class AuthHelper{
         
         if(!isset($_SESSION["email"])){
             return false;
-        }
-        
+        }        
         if(!isset($_SESSION["rol"])){
             return false;
         }
-        
-
         if ($_SESSION["rol"] != "ADMIN" && $_SESSION["rol"] != "SUPER-ADMIN"){
             return false;
-        }        
-
+        }
         return true;
-    }
-    
+    }    
 
-    public static function checkLoggedOut() {
+    public static function checkLoggedOut(){
         self::start();
         if(isset($_SESSION['email'])){
             header("Location: ". BASE_URL."");

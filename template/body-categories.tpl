@@ -23,16 +23,13 @@
                         <input name="input_description" id="input_description" type="text" class="form-control" placeholder="Descripcion">
                         <label for="description"><p>Descripcion</p></label>
                     </div>
-
-                </div>  
-               
+                </div>               
                 <div class="form-floating mb-2 col-2">
                     <div class="form-floating col ">
                         <button type="submit" class="w-100 btn btn-lg btn-success" >AGREGAR </button>
                     </div>
                 </div>
-            </form>
-            
+            </form>            
         </div>         
     </div>
 
@@ -42,10 +39,8 @@
                 <caption>Presupuestador</caption>
                 <thead>
                     <tr>
-                        <th>Nombre Categoria <a href="OrderBy/name/"> <i class="fas fa-filter fa-xs"></i></a></th>
-                        
-                        <th>Descripcion<a href="OrderBy/description/"><i class="fas fa-filter fa-xs"></i></a></th>
-                        
+                        <th>Nombre Categoria <a href="OrderBy/name/"> <i class="fas fa-filter fa-xs"></i></a></th>                        
+                        <th>Descripcion<a href="OrderBy/description/"><i class="fas fa-filter fa-xs"></i></a></th>                        
                         <th></th> 
                         <th></th>                 
                     </tr>
@@ -63,13 +58,10 @@
                         </tr>
                     {/foreach}
                 {else}
-                
                     {foreach from=$categories item=$category}
-                    
                         <tr>
-                            <td>  {$category->name}</td>                            
-                            <td>{$category->description}</td>                            
-                            
+                            <td>  {$category->name}</td>
+                            <td>{$category->description}</td>
                         </tr>
                     {/foreach}
                 {/if}

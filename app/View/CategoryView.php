@@ -14,11 +14,9 @@ class CategoryView {
         $this->smarty->assign('categories', $categories);
         $this->setSmartyVariables();
         $this->smarty->display('template/body-categories.tpl');
-    }  
+    }
     
     function viewPageCategory($category){         
-        // $this->smarty->assign('titulo', 'Vista de producto');     
-        // $this->smarty->assign('product', $product);
         $this->smarty->assign('category', $category);
         $this->smarty->display('template/category.tpl');
     }
@@ -35,6 +33,4 @@ class CategoryView {
             $this->smarty->assign('rol', $_SESSION["rol"]);
         }
     }
-
-
 }

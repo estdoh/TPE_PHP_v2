@@ -14,30 +14,28 @@ class ProductsController {
     private $authHelper;
 
     public function __construct() {
-        $authHelper = new AuthHelper();//esto nose
-        // $authHelper->checkLoggedIn();//esto nose si no esta funciona pero en las filminas sta
+        $authHelper = new AuthHelper();        
         $this->model = new ProductsModel();
         $this->modelCategories = new CategoryModel();
         $this->view = new ProductsView();
         $this->modelComments = new CommentsModel();
     }    
 
-    function showProducts() {
-        //Para utilizar variable de sesión, hay que hacer un start sessión, a la variable de sesión la usa el view.
+    function  showProducts2(){
+        $productos = $this->model->getProducts();
+        return $this->view->response($products, 200);
+    }
+
+    function showProducts() {        
         AuthHelper::start(); 
-        // llamar el modelo para obtener todas los productos
         $products = $this->model->getProducts();
-        $categories = $this->modelCategories->getCategories();
-        // actualizo la vista
+        $categories = $this->modelCategories->getCategories();        
         $this->view->viewProducts($products, $categories);
     }
 
-    function delProducts($params = null) {     
-        // $this->authHelper->checkLoggedIn();
+    function delProducts($params = null) {
         if (AuthHelper::checkLoggedIn()){
-            $this->model->deleteProducts($params);
-            // $products = $this->model->getProducts();
-            // $this->view->viewProducts($products);
+            $this->model->deleteProducts($params);            
             header("Location: ".BASE_URL."showProducts");
         }
     }
@@ -46,16 +44,6 @@ class ProductsController {
         $products = $this->model->getProducts();
         $ProductsByCategory = $this->modelCategories->getProductsByCategory($params);
         $this->view->viewProducts( $ProductsByCategory);
-    }
-
-    function orderBy($ordertype = null){
-        // if (empty($orderby)){
-        //     $orderby = "";           
-        // } else if ($orderby = "ASC"){
-        //     $orderby = "DESC";
-        // };
-        $products = $this->model->orderProductsBy($ordertype);
-        $this->view->viewProducts($products);
     }
 
     function addProduct() {        
@@ -74,7 +62,7 @@ class ProductsController {
                 $this->showError("El nombre o la categoría no pueden ser vacios");
             }
             else{
-                $imagen_name = $_FILES['input_image']['tmp_name'];//$this->addImage();
+                $imagen_name = $_FILES['input_image']['tmp_name'];
                 $imagen_type = $_FILES['input_image']['type'];
                 $pathImg = null;
                 $pathImg = $this->uploadImage($imagen_name);
@@ -115,7 +103,6 @@ class ProductsController {
             $imagen_type = $_FILES['input_image']['type'];
             $pathImg = null;
             $pathImg = $this->uploadImage($imagen_name);
-
             // $this->model->updateProductById($category,$name,$description,$price_a,$price_b,$id);
             $this->model->updateProductById($category, $name, $description, $pathImg, $price_a, $price_b, $id);
             header("Location: ".BASE_URL."showProducts");

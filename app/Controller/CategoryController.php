@@ -14,60 +14,56 @@ class CategoryController {
     }
 
     function showCategories() {
-        AuthHelper::start();
-        // $this->authHelper->checkLoggedIn();    
+        AuthHelper::start();   
         $categories = $this->model->getCategories();        
         $this->view->viewCategories($categories);
     }
 
-    function delCategories($params = null) {     
-        // $this->authHelper->checkLoggedIn();
+    function delCategories($params = null) {
         if (AuthHelper::checkLoggedIn()){
-            $this->model->deleteCategories($params);
-            // $categories = $this->model->getCategories();
-            // $this->view->viewCategories($categories);
+            $this->model->deleteCategories($params);            
             header("Location: ".BASE_URL."showCategories");
         }
     }
 
     function addCategory (){
-        if ($this->authHelper->checkLoggedIn()){
+        if (AuthHelper::checkLoggedIn()){
             $name = $_POST['input_name'];
             $description = $_POST['input_description'];
             $this->model->addCategory($name,$description);
-            // $categories = $this->model->getCategories(); 
-            // $this->view->viewCategories($categories);
             header("Location: ".BASE_URL."showCategories");
         }
     }
 
-    function searchCategories($params = null) {
-        // $this->authHelper->checkLoggedIn();
+    function searchCategories($params = null) {        
         $categories = $this->model->getCategories($params);
         $productsByCategory = $this->model->getProductsByCategory($params);
         $this->view->viewCategories($productsByCategory);
     }
     
     function viewCategory($params = null){
-
-        $id = $params;        
-        // $category = $this->model->getCategoryById($id);
+        $id = $params;
         $category = $this->model->getCategoryById($id);
         $this->view->viewPageCategory($category);
     }
 
     function editCategory($id_category){
-        $this->authHelper->checkLoggedIn();
-        
-        $name = $_POST['input_name'];
-        $description = $_POST['input_description'];
-
-        $this->model->updateCategoryById($name, $description, $id_category);
-        header("Location: ".BASE_URL."showCategories");
+        if (AuthHelper::checkLoggedIn()){
+            $this->authHelper->checkLoggedIn();        
+            $name = $_POST['input_name'];
+            $description = $_POST['input_description'];
+            $this->model->updateCategoryById($name, $description, $id_category);
+            header("Location: ".BASE_URL."showCategories");
+        }
     }
 
     function showHomeCSR() {
         $this->view->showCategoriesLayout();
     }
 
+    function viewCategoryCSR($params = null){
+        $id = $params;
+        $category = $this->model->getCategoryById($id);
+        $this->view->viewCategoryCSRLayout($category);
+    }
 }

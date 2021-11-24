@@ -4,7 +4,6 @@ require_once "View/ApiView.php";
 require_once "Helpers/AuthHelper.php";
 
 class ApiCommentsController{
-
     private $model;
     private $view;
 
@@ -33,7 +32,7 @@ class ApiCommentsController{
     }
 
 
-    public function deleteComment($params = null) {
+    public function deleteComment($params = null){
         if (AuthHelper::checkLoggedInAdminApi()){
             $id = $params[':ID'];
             $comment = $this->model->getCommentById($id);
@@ -44,11 +43,9 @@ class ApiCommentsController{
             } else {
                 $this->view->response("El comentario con el id=$id no existe", 404);
             };
-        }
-        else{
+        } else {
             $this->view->response("El usuario no está autorizado", 401);
         }
-
     }
     
     public function insertComments($params = null){
@@ -56,8 +53,7 @@ class ApiCommentsController{
             $body = $this->getBody();
             if(!isset( $body->user_id) || $body->user_id=="" || !isset( $body->product_id) || $body->product_id=="" ){
                 $this->view->response("El Comentario no se pudo insertar", 400);
-            }
-            else{
+            } else {
                 if (!empty($body)) {
                     $id = $this->model->addComments($body->comment,$body->rating,$body->product_id, $body->user_id);
                     $this->view->response( $this->model->getCommentsById($id), 200);
@@ -65,8 +61,7 @@ class ApiCommentsController{
                     $this->view->response("El Comentario no se pudo insertar", 404);
                 }
             }
-        }
-        else{
+        } else {
             $this->view->response("El usuario no está autorizado para realizar el comentario", 401);
         }
     }

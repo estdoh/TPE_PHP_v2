@@ -6,7 +6,7 @@ class ProductsModel {
     public function __construct() {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=tpe_especial;charset=utf8', 'root', '');
     }
-    /* Obtiene todas los Productos vinculando la tabla relacional categorias*/
+    
     function getProducts() {
         $query = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category');
         $query->execute();
@@ -24,7 +24,6 @@ class ProductsModel {
     function deleteProducts($id) {
         $query = $this->db->prepare('DELETE FROM products WHERE id=?');
         $query->execute(array($id));
-        // $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $query->rowCount();
     }
 
@@ -36,17 +35,10 @@ class ProductsModel {
     }
 
     function addProduct($category,$name,$description, $pathImg = null, $price_a,$price_b) {        
-            $query = $this->db->prepare('INSERT INTO products (category,name,description,img,price_a,price_b) VALUES (?,?,?,?,?,?)');
-            $query->execute([$category,$name,$description,$pathImg,$price_a,$price_b]);
-            $product = $query->fetchAll(PDO::FETCH_OBJ);
-            return $product;    
-            // return $this->db->lastInsertId();
-        
-        //  else {
-        //     $query = $this->db->prepare("INSERT INTO products (category,name,description,price_a,price_b) VALUES (?,?,?,?,?)");
-        //     $query->execute([$category,$name,$description,$price_a,$price_b]);
-        //     return $this->db->lastInsertId();
-        // }
+        $query = $this->db->prepare('INSERT INTO products (category,name,description,img,price_a,price_b) VALUES (?,?,?,?,?,?)');
+        $query->execute([$category,$name,$description,$pathImg,$price_a,$price_b]);
+        $product = $query->fetchAll(PDO::FETCH_OBJ);
+        return $product;            
     }
 
     function updateProductById($category, $name, $description, $pathImg = null, $price_a, $price_b, $id){

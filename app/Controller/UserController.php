@@ -7,25 +7,21 @@ include_once './app/Helpers/AuthHelper.php';
 class UserController {
     private $model;
     private $view;
-    private $model_comments;
-
-    
+    private $model_comments;    
 
     public function __construct(){
         $this->model = new UserModel();
         $this->view = new UserView();
         $this->model_comments = new CommentsModel();
-
     }  
 
-    function login() {        
+    function login(){
         $this->view->showLogin();
     }
 
-    function logout() {        
+    function logout(){        
         session_start();
         session_destroy();
-        //$this->view->showLogin("Finalizo Sesion");
         $this->view->showHome();
     }
 
@@ -84,8 +80,6 @@ class UserController {
             $this->view->showLogin("Acceso denegado");
         }
     }
-        // header("Location: ".BASE_URL."showProducts");       
-    
 
     function viewUser($id = null) {       
         if (AuthHelper::checkLoggedInAdmin()) {

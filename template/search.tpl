@@ -4,8 +4,7 @@
     <div class="inicio">
         <h2 class="resaltar">{$titulo}</h2>
         <h3>busqeuda de datos para <b>administrador</b></h3>
-    </div>    
-
+    </div>
 
     <div class="container">
         <div class="col-md-12 mt-sm-5 table-responsive">                   
@@ -36,8 +35,7 @@
                         </tr>
                     {/foreach}
                 </tbody>
-            </table>          
-
+            </table>
         </div>
     </div>
 </body>

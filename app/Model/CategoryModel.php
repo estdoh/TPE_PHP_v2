@@ -45,6 +45,5 @@ class CategoryModel {
         $category = $query->fetchAll(PDO::FETCH_OBJ);
         return $category;
     }
-    
 }
     

@@ -24,7 +24,6 @@ class ApiCategoryController{
             return $this->view->response($category, 200);
         else
             $this->view->response("La categoria con el id=$id no existe", 404);
-
     }
 
     public function deleteCategory($params = null) {
@@ -72,6 +71,14 @@ class ApiCategoryController{
         } else {
             $this->view->response("El category no se pudo insertar", 404);
         };
+    }
+
+    function viewCategory($params = null){
+        $id_category = $params[':ID'];
+        $body = $this->getBody();     
+        // $category = $this->model->getCategoryById($id);
+        $category = $this->model->getCategoryById($id_category);
+        $this->view->viewPageCategory($category);
     }
 
 

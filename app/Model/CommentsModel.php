@@ -1,7 +1,6 @@
 <?php
 
-class CommentsModel {
-    
+class CommentsModel {    
     private $db;
     public function __construct() {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=tpe_especial;charset=utf8', 'root', '');
@@ -30,7 +29,6 @@ class CommentsModel {
         $orderQuery = $querys[$orderby];
 
         $query = $this->db->prepare("SELECT C.*, U.email FROM comments as C JOIN users as U on C.id_user = U.id_user WHERE product_id=? and rating>= ? $orderQuery");
-
         $query->execute([$id,$minrating]);
         $comments = $query->fetchAll(PDO::FETCH_OBJ);
         return $comments;
@@ -59,10 +57,6 @@ class CommentsModel {
     function deleteCommentsByUser($id_user) {
         $query = $this->db->prepare('DELETE FROM comments WHERE id_user=?');
         $query->execute(array($id_user));
-        // $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $query->rowCount();
-    }
-
-
-    
+    }    
 }

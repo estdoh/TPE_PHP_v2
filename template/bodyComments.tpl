@@ -4,5 +4,4 @@
     {include file="template/comments.tpl"}
 </div>
 
-
 {include file="template/footer.tpl"}
