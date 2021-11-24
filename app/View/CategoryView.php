@@ -31,6 +31,10 @@ class CategoryView {
         if (isset($_SESSION["email"])){   
             $this->smarty->assign('email', $_SESSION["email"]);
             $this->smarty->assign('rol', $_SESSION["rol"]);
+            $this->smarty->assign('user_id', $_SESSION["user_id"]);
+        } else {
+            $this->smarty->assign('rol', 'noLog');
+            $this->smarty->assign('user_id','0');
         }
     }
 

@@ -20,7 +20,7 @@ class CategoryController {
     }
 
     function delCategories($params = null) {
-        if (AuthHelper::checkLoggedIn()){
+        if (AuthHelper::checkLoggedInAdmin()){
             $products = $this->model->getProductsByCategoryId($params);
             if (count($products)==0){
                 $this->model->deleteCategories($params);
@@ -28,39 +28,52 @@ class CategoryController {
             }
             else{
                 $this->showError("No se puede borrar la categoría, existen productos asociados");
-            }
-            
+            } 
+        }
+        else{
+            $this->showError("Usuario no autorizado");
         }
     }
 
     function addCategory (){
-        if (AuthHelper::checkLoggedIn()){
+        if (AuthHelper::checkLoggedInAdmin()){
             $name = $_POST['input_name'];
             $description = $_POST['input_description'];
-            $this->model->addCategory($name,$description);
-            header("Location: ".BASE_URL."showCategories");
+            if ($name == "") { 
+                $this->showError("El nombre no puede estar vacío");
+            }
+            else{
+                $this->model->addCategory($name,$description);
+                header("Location: ".BASE_URL."showCategories");
+            }
+        }
+        else{
+            $this->showError("Usuario no autorizado");
         }
     }
 
-    function searchCategories($params = null) {        
-        $categories = $this->model->getCategories($params);
-        $productsByCategory = $this->model->getProductsByCategory($params);
-        $this->view->viewCategories($productsByCategory);
-    }
     
     function viewCategory($params = null){
-        $id = $params;
-        $category = $this->model->getCategoryById($id);
-        $this->view->viewPageCategory($category);
+        if (AuthHelper::checkLoggedInAdmin()){
+            $id = $params;
+            $category = $this->model->getCategoryById($id);
+            $this->view->viewPageCategory($category);
+        } 
+        else{
+            $this->showError("Usuario no autorizado");
+        }
     }
 
     function editCategory($id_category){
-        if (AuthHelper::checkLoggedIn()){
+        if (AuthHelper::checkLoggedInAdmin()){
             $this->authHelper->checkLoggedIn();        
             $name = $_POST['input_name'];
             $description = $_POST['input_description'];
             $this->model->updateCategoryById($name, $description, $id_category);
             header("Location: ".BASE_URL."showCategories");
+        }
+        else{
+            $this->showError("Usuario no autorizado");
         }
     }
 
