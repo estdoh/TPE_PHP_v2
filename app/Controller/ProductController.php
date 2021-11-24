@@ -28,9 +28,12 @@ class ProductsController {
     }
 
     function delProducts($params = null) {     
-        if (AuthHelper::checkLoggedIn()){
+        if (AuthHelper::checkLoggedInAdmin()){
             $this->model->deleteProducts($params);
             header("Location: ".BASE_URL."showProducts");
+        }
+        else{
+            $this->showError("Usuario no autorizado");
         }
     }
 
@@ -41,7 +44,7 @@ class ProductsController {
     }
 
     function addProduct() {        
-        if (AuthHelper::checkLoggedIn()){     
+        if (AuthHelper::checkLoggedInAdmin()){     
             $name = $_POST['input_name'];
             $description = $_POST['input_description'];
             $category = ""; 
@@ -67,12 +70,12 @@ class ProductsController {
             }
         }   
         else {
-            header("Location: ".BASE_URL."login");
+            $this->showError("Usuario no autorizado");
         }
     }
 
     function editProduct($id){
-        if (AuthHelper::checkLoggedIn()){
+        if (AuthHelper::checkLoggedInAdmin()){
             $name = $_POST['input_name'];
             $category = "";
             $description = $_POST['input_description'];
@@ -99,17 +102,11 @@ class ProductsController {
             }
         }
         else {
-            header("Location: ".BASE_URL."login");
+            $this->showError("Usuario no autorizado");
         }
     }
 
-    function presupuestar() {  
-        $categories = $this->modelCategories->getCategories();      
-        $products= $this->model->getProducts();
-        $this->view->viewPresu($products, $categories);
-    }
-
-    function viewProduct($id = null){              
+    function viewProduct($id = null){     
         $product = $this->model->getProductById($id);
         $categories = $this->modelCategories->getCategories($id);
         $this->view->viewPageProduct($product, $categories);

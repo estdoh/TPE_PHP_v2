@@ -43,11 +43,9 @@ class AuthHelper{
             return false;
         }
         if(!isset($_SESSION["rol"])){
-            header("Location: ".BASE_URL."");
             return false;
         }
         if ($_SESSION["rol"] != "ADMIN" && $_SESSION["rol"] != "SUPER-ADMIN"){
-            header("Location: ".BASE_URL."");
             return false;
         }
         return true;

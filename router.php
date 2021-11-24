@@ -93,6 +93,9 @@ switch ($params[0]) {
     case 'category-csr':        //show json home
         $CategoryController->showHomeCSR();
         break;
+    case 'Search':
+        $ProductsController->searchProducts($params[1]);
+        break;
     // case 'viewCategoryCRS':
     //     $CategoryController->viewCategoryCSR($params[1]);
     //     break;
