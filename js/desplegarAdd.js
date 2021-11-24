@@ -12,10 +12,10 @@ function addClienteIcon(){
 
 document.querySelector("#serchFilter").addEventListener('click', addSearchIcon);
 function addSearchIcon(){
-    let filtros = document.querySelector(".inputFilter");
-    if (filtros.style.display == 'inline'){
-        filtros.style.display = 'none';
+    let search = document.querySelector(".inputFilter");
+    if (search.style.display == 'inline'){
+        search.style.display = 'none';
     } else {
-        filtros.style.display = 'inline';
+        search.style.display = 'inline';
     };   
 }

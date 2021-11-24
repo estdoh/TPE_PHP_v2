@@ -26,6 +26,12 @@ class ProductsModel {
         return $products;
     }
 
+    function getProductsByFilter($search) {        
+        $query = $this->db->prepare("SELECT * FROM products LIKE '$search%'");                                    
+        $query->execute();
+        $products = $query->fetchAll(PDO::FETCH_OBJ);
+        return $products;
+    }
     // function getProd() {
     //     $query = $this->db->prepare('SELECT * FROM products
     //     LIKE '$params%'');

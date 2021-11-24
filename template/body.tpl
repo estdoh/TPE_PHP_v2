@@ -62,27 +62,29 @@
 
             </form>           
         </div>
-
+        
         <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light m-1 inputFilter">
-            <div class="form-group  mb-3">
-                <div class="form-floating col ">
-                    <input class="form-control" type="text" id="filterEmpresa" placeholder="Busqueda por Empresa">
-                    <label ><p>Busqueda por Empresa</p></label>
+            <form class="form-floating" action="filter" method="GET" autocomplete="on">
+
+                <div class="form-group  mb-3">
+                    <div class="form-floating col ">
+                        <input name="input_search" class="form-control" type="text">
+                        <label ><p>Busqueda</p></label>
+                    </div>
+                    
+                    <div class="form-floating col ">
+                        <button type="submit" class="w-100 btn btn-lg btn-success" >AGREGAR </button>
+                    </div>
                 </div>
-                <div class="form-floating col ">
-                    <input class="form-control" type="text" id="filterCliente" placeholder="Busqueda por Cliente"> 
-                    <label><p>Busqueda por Cliente</p></label>   
-                </div>
-                <div class="form-floating col ">
-                    <input class="form-control" type="text" id="filterMail" placeholder="Busqueda por E-mail">
-                    <label><p>Busqueda por E-mail</p></label> 
-                </div>
-            </div>
+                    
+                
+            </form>
         </div> 
-               
     </div>
 
-{include file="template/categorybuttons.tpl"}
+    {if (isset($category))}
+    {include file="template/categorybuttons.tpl"}
+    {/if}
 
     <div class="container">
         <div class="col-md-12 mt-sm-5 table-responsive">                   

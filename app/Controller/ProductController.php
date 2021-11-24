@@ -53,6 +53,15 @@ class ProductsController {
         $this->view->viewSearch($ProductsByCategory);
     }
 
+    function filter($params = null) {
+        if(isset($_GET['input_search'])){
+            $search = $_GET['input_search'];
+            $products = $this->model->getProductsByFilter($search);
+            $ProductsByCategory = $this->modelCategories->getProductsByCategory($params);
+            $this->view->viewProducts($products, $ProductsByCategory);
+        }
+    }
+
     function addProduct() {        
         if (AuthHelper::checkLoggedInAdmin()){     
             $name = $_POST['input_name'];
