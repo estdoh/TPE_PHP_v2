@@ -14,8 +14,6 @@ class ProductsController {
     private $authHelper;
 
     public function __construct() {
-        $authHelper = new AuthHelper();//esto nose
-        // $authHelper->checkLoggedIn();//esto nose si no esta funciona pero en las filminas sta
         $this->model = new ProductsModel();
         $this->modelCategories = new CategoryModel();
         $this->view = new ProductsView();
@@ -23,21 +21,15 @@ class ProductsController {
     }    
 
     function showProducts() {
-        //Para utilizar variable de sesión, hay que hacer un start sessión, a la variable de sesión la usa el view.
         AuthHelper::start(); 
-        // llamar el modelo para obtener todas los productos
         $products = $this->model->getProducts();
         $categories = $this->modelCategories->getCategories();
-        // actualizo la vista
         $this->view->viewProducts($products, $categories);
     }
 
     function delProducts($params = null) {     
-        // $this->authHelper->checkLoggedIn();
         if (AuthHelper::checkLoggedIn()){
             $this->model->deleteProducts($params);
-            // $products = $this->model->getProducts();
-            // $this->view->viewProducts($products);
             header("Location: ".BASE_URL."showProducts");
         }
     }
@@ -46,16 +38,6 @@ class ProductsController {
         $products = $this->model->getProducts();
         $ProductsByCategory = $this->modelCategories->getProductsByCategory($params);
         $this->view->viewProducts( $ProductsByCategory);
-    }
-
-    function orderBy($ordertype = null){
-        // if (empty($orderby)){
-        //     $orderby = "";           
-        // } else if ($orderby = "ASC"){
-        //     $orderby = "DESC";
-        // };
-        $products = $this->model->orderProductsBy($ordertype);
-        $this->view->viewProducts($products);
     }
 
     function addProduct() {        
@@ -74,58 +56,51 @@ class ProductsController {
                 $this->showError("El nombre o la categoría no pueden ser vacios");
             }
             else{
-                $imagen_name = $_FILES['input_image']['tmp_name'];//$this->addImage();
-                $imagen_type = $_FILES['input_image']['type'];
-                $pathImg = null;
-                $pathImg = $this->uploadImage($imagen_name);
-
-                $this->model->addProduct($category, $name, $description, $pathImg, $price_a, $price_b);
+                if($_FILES['input_image']['type'] == "image/jpg" || $_FILES['input_image']['type'] == "image/jpeg" 
+                    || $_FILES['input_image']['type'] == "image/png" ) {
+                    $this->model->addProduct($category, $name, $description, $price_a, $price_b,$_FILES['input_image']);
+                }
+                else {
+                    $this->model->addProduct($category, $name, $description, $price_a, $price_b);
+                }        
                 header("Location: ".BASE_URL."showProducts");
             }
-        }
-            // if( $imagen_type == "image/jpg" || $imagen_type == "image/jpeg" || $imagen_type == "image/png" || $imagen_type == "image/gif" ){
-            //     $this->model->addProduct($name, $description, $imagen_name, $category, $price_a, $price_b);
-            //     header("Location: ".BASE_URL."showProducts");
-            // } 
-            // else {
-            //     $this->model->addProduct($name, $description, $category, $price_a, $price_b);
-            //     header("Location: ".BASE_URL."showProducts");
-            // }            
+        }   
         else {
             header("Location: ".BASE_URL."login");
         }
     }
 
     function editProduct($id){
-        $name = $_POST['input_name'];
-        $category = $_POST['input_category'];
-        $description = $_POST['input_description'];
-        if (isset($_POST['input_category'])){
-            $category = $_POST['input_category'];
+        if (AuthHelper::checkLoggedIn()){
+            $name = $_POST['input_name'];
+            $category = "";
+            $description = $_POST['input_description'];
+            if (isset($_POST['input_category'])){
+                $category = $_POST['input_category'];
+            }
+
+            $price_a = $_POST['input_price_a'];
+            $price_b = $_POST['input_price_b'];
+
+            if($name == "" || $category == ""){
+                $this->showError("El nombre o la categoría no pueden ser vacios");
+            }
+            else{
+                if($_FILES['input_image']['type'] == "image/jpg" || $_FILES['input_image']['type'] == "image/jpeg" 
+                || $_FILES['input_image']['type'] == "image/png" ) {
+                    $this->model->updateProductById($category, $name, $description, $price_a, $price_b, $id,$_FILES['input_image']);
+                }
+                else {
+                    $this->model->updateProductById($category, $name, $description, $price_a, $price_b,$id);
+                }        
+                header("Location: ".BASE_URL."showProducts");
+        
+            }
         }
-
-        $price_a = $_POST['input_price_a'];
-        $price_b = $_POST['input_price_b'];
-
-        if($name == "" || $category == ""){
-            $this->showError("El nombre o la categoría no pueden ser vacios");
+        else {
+            header("Location: ".BASE_URL."login");
         }
-        else{
-            $imagen_name = $_FILES['input_image']['tmp_name'];//$this->addImage();
-            $imagen_type = $_FILES['input_image']['type'];
-            $pathImg = null;
-            $pathImg = $this->uploadImage($imagen_name);
-
-            // $this->model->updateProductById($category,$name,$description,$price_a,$price_b,$id);
-            $this->model->updateProductById($category, $name, $description, $pathImg, $price_a, $price_b, $id);
-            header("Location: ".BASE_URL."showProducts");
-        }
-    }
-
-    private function uploadImage($imagen_name){
-        $uploads_dir = 'images/' . uniqid() . '.png';
-        move_uploaded_file($imagen_name, $uploads_dir);
-        return $uploads_dir;
     }
 
     function presupuestar() {  
@@ -137,7 +112,6 @@ class ProductsController {
     function viewProduct($id = null){              
         $product = $this->model->getProductById($id);
         $categories = $this->modelCategories->getCategories($id);
-        // $comments = $this->modelComments->getComments($id);
         $this->view->viewPageProduct($product, $categories);
     }
 
