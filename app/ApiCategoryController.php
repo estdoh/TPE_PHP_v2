@@ -1,6 +1,7 @@
 <?php
 require_once "Model/CategoryModel.php";
 require_once "View/ApiView.php";
+require_once "Helpers/AuthHelper.php";
 
 class ApiCategoryController{
 
@@ -27,16 +28,20 @@ class ApiCategoryController{
     }
 
     public function deleteCategory($params = null) {
-        $id = $params[':ID'];        
-        $categories = $this->model->getCategories($id);
-        // $result =  $product = $this->model->deleteProducts($id);
+        if (AuthHelper::checkLoggedInAdminApi()){
+            $id = $params[':ID'];        
+            $categories = $this->model->getCategories($id);
+            // $result =  $product = $this->model->deleteProducts($id);
 
-        if($categories){
-            $this->model->deleteCategories($id);
-            $this->view->response("El categoria con el id=$id fue eliminada", 200);
+            if($categories){
+                $this->model->deleteCategories($id);
+                $this->view->response("El categoria con el id=$id fue eliminada", 200);
+            } else {
+                $this->view->response("El categoria con el id=$id no existe", 404);
+            };
         } else {
-            $this->view->response("El categoria con el id=$id no existe", 404);
-        };
+            $this->view->response("Usuario no estas autorizado", 401);
+        }
     }
 
     
@@ -80,6 +85,4 @@ class ApiCategoryController{
         $category = $this->model->getCategoryById($id_category);
         $this->view->viewPageCategory($category);
     }
-
-
 }

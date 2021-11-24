@@ -1,4 +1,5 @@
 <?php
+require_once './app/Helpers/AuthHelper.php';
 require_once './app/View/CategoryView.php';
 require_once './app/Model/CategoryModel.php';
 
@@ -78,7 +79,7 @@ class CategoryController {
     }
 
     function showHomeCSR() {
-        $categories = $this->model->getCategories();     
+        AuthHelper::start();     
         $this->view->showCategoriesLayout();
     }
 

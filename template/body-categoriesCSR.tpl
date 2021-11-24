@@ -37,7 +37,7 @@
     </div>
 
     <div class="container">
-        <div class="col-md-12 mt-sm-5 table-responsive">
+        <div id="categories" user_id="{$user_id}" rol="{$rol}" class="col-md-12 mt-sm-5 table-responsive">
             {include file='template/vue/categoryList.tpl'}
         </div>
     </div>

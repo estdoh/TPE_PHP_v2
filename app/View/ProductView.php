@@ -17,10 +17,6 @@ class ProductsView {
         $this->smarty->assign('categories', $categories);
         $this->setSmartyVariables();
         $this->smarty->display('template/body.tpl');
-    }
-
-    function renderError(){
-        echo "error";
     }     
 
     function viewPageProduct($product, $categories){  
@@ -29,6 +25,8 @@ class ProductsView {
         $this->setSmartyVariables();
         $this->smarty->display('template/product.tpl');
     }
+
+    function renderError(){echo "error";}
 
     function viewPresu($products = null, $categoryproducts = null){         
         $this->smarty->assign('categoryproducts', $categoryproducts);     

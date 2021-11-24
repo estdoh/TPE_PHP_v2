@@ -56,19 +56,18 @@ let obtener_comentarios = new Vue({
     methods: {
         eliminar_comentario: function(id) {
             fetch('api/comments/' + id, {
-
-                    "method": "DELETE",
-                    "mode": 'cors',
-                })
-                .then(respuesta => {
-                    if (respuesta.ok)
-                        obtenerComentarios();
-                    else
-                        console.log("error al eliminar");
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+                "method": "DELETE",
+                "mode": 'cors',
+            })
+            .then(respuesta => {
+                if (respuesta.ok)
+                    obtenerComentarios();
+                else
+                    console.log("error al eliminar");
+            })
+            .catch(err => {
+                console.log(err);
+            })
         }
     }
 });
@@ -90,20 +89,20 @@ function agregarComentario(comentario, puntaje) {
     };
     // eviar JSON a la API para que se encargue de registrar el comentario en la base de datos. 
     fetch('api/comments', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(comentario_usuario)
-        })
-        .then((response) => {
-            if (response.ok)
-                console.log('ok');
-            else
-                alert('error al agregar comentario');
-        })
-        .then(response => {
-            obtenerComentarios();
-        })
-        .catch(exception => console.log(exception));
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comentario_usuario)
+    })
+    .then((response) => {
+        if (response.ok)
+            console.log('ok');
+        else
+            alert('error al agregar comentario');
+    })
+    .then(response => {
+        obtenerComentarios();
+    })
+    .catch(exception => console.log(exception));
 }
 
 
@@ -145,7 +144,5 @@ function obtenerComentarios() {
         })
         .catch(error => console.log(error));
 }
-
-
 
 obtenerComentarios();

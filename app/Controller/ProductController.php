@@ -67,7 +67,7 @@ class ProductsController {
                 else {
                     $this->model->addProduct($category, $name, $description, $price_a, $price_b);
                 }        
-                // header("Location: ".BASE_URL."showProducts");
+                header("Location: ".BASE_URL."showProducts");
             }
         }   
         else {
