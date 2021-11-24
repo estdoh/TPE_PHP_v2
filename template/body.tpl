@@ -67,7 +67,7 @@
     <div class="container">
         <div class="col-md-12 mt-sm-5 table-responsive">                   
             <table class="table table-sm table-hover" id="listadoClientes">
-                <caption>Presupuestador</caption>
+                <caption></caption>
                 <thead>
                     <tr>
                         <th>imagen</th>
@@ -124,10 +124,18 @@
                 {/if}
                 </tbody>
             </table>          
-
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">                
+                    {for $i=0 to $cantProducts}
+                        <li class="page-item"><a class="page-link" href="showProducts?page={$i+1}">{$i+1}</a></li>
+                    {/for}   
+                </ul>
+            </nav>
         </div>
     </div>
 </body>
+
+
 
 <script src="js/desplegarAdd.js"></script>
 {include file="template/footer.tpl"}

@@ -7,14 +7,25 @@ class ProductsModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=tpe_especial;charset=utf8', 'root', '');
     }
     
-    function getProducts() {
-        $query = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category');
+    function getProducts($page) {        
+        $query = $this->db->prepare("SELECT products.*,category.name as name_category 
+                                    FROM products 
+                                    JOIN category ON products.category = category.id_category 
+                                    LIMIT 5 OFFSET $page");                                    
         $query->execute();
         $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $products;
     }
 
-    function getProductById($id) {
+    function getProd() {
+        $query = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category');
+                                    
+        $query->execute(array($page));
+        $products = $query->fetchAll(PDO::FETCH_OBJ);
+        return $products;
+    }
+
+    function getProductById($id){
         $query = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category WHERE id=?');
         $query->execute(array($id));
         $product = $query->fetch(PDO::FETCH_OBJ);        

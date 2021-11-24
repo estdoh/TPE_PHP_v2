@@ -12,9 +12,10 @@ class ProductsView {
         $this->smarty->assign('email', $userName);
     }
 
-    function viewProducts($products, $categories = null){
+    function viewProducts($cantProducts,$products, $categories = null){
         $this->smarty->assign('products', $products);        
         $this->smarty->assign('categories', $categories);
+        $this->smarty->assign('cantProducts', $cantProducts);
         $this->setSmartyVariables();
         $this->smarty->display('template/body.tpl');
     }     

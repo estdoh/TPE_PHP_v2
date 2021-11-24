@@ -21,10 +21,19 @@ class ProductsController {
     }    
 
     function showProducts() {
-        AuthHelper::start(); 
-        $products = $this->model->getProducts();
-        $categories = $this->modelCategories->getCategories();
-        $this->view->viewProducts($products, $categories);
+        AuthHelper::start();        
+        if(empty($_GET['page'])){
+            $pagination = 1;        
+        } else {
+            $pagination = $_GET['page'];            
+        }       
+        if (ctype_digit($pagination)) {
+            $page = ($pagination - 1) * 5;
+            $products = $this->model->getProducts($page);  
+            $cantProducts = intval(count($products)/5)+1;        
+            $categories = $this->modelCategories->getCategories();
+            $this->view->viewProducts($cantProducts, $products, $categories);
+        }
     }
 
     function delProducts($params = null) {     
