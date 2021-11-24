@@ -17,13 +17,23 @@ class ProductsModel {
         return $products;
     }
 
-    function getProd() {
-        $query = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category');
-                                    
-        $query->execute(array($page));
+    function getProductsByCategory() {        
+        $query = $this->db->prepare("SELECT products.*,category.name as name_category 
+                                    FROM products 
+                                    JOIN category ON products.category = category.id_category");                                    
+        $query->execute();
         $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $products;
     }
+
+    // function getProd() {
+    //     $query = $this->db->prepare('SELECT * FROM products
+    //     LIKE '$params%'');
+                                    
+    //     $query->execute(array($page));
+    //     $products = $query->fetchAll(PDO::FETCH_OBJ);
+    //     return $products;
+    // }
 
     function getProductById($id){
         $query = $this->db->prepare('SELECT products.*,category.name as name_category FROM products JOIN category ON products.category = category.id_category WHERE id=?');

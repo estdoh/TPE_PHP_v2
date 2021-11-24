@@ -12,6 +12,9 @@
             <div class="col-1 m-1">
                 <button class=" w-100 btn btn-sm btn-success" id="addProduct" ><i class="fas fa-plus fa-xs" ></i></button>
             </div>
+            <div class="col-1 m-1">
+                <button class=" w-100 btn btn-sm btn-success" id="serchFilter" ><i class="fas fa-search fa-xs" ></i></button>
+            </div>  
         {/if}
          
         <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light agregarcliente"> 
@@ -59,6 +62,23 @@
 
             </form>           
         </div>
+
+        <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light m-1 inputFilter">
+            <div class="form-group  mb-3">
+                <div class="form-floating col ">
+                    <input class="form-control" type="text" id="filterEmpresa" placeholder="Busqueda por Empresa">
+                    <label ><p>Busqueda por Empresa</p></label>
+                </div>
+                <div class="form-floating col ">
+                    <input class="form-control" type="text" id="filterCliente" placeholder="Busqueda por Cliente"> 
+                    <label><p>Busqueda por Cliente</p></label>   
+                </div>
+                <div class="form-floating col ">
+                    <input class="form-control" type="text" id="filterMail" placeholder="Busqueda por E-mail">
+                    <label><p>Busqueda por E-mail</p></label> 
+                </div>
+            </div>
+        </div> 
                
     </div>
 
@@ -123,14 +143,19 @@
                     {/foreach}
                 {/if}
                 </tbody>
-            </table>          
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">                
-                    {for $i=0 to $cantProducts}
-                        <li class="page-item"><a class="page-link" href="showProducts?page={$i+1}">{$i+1}</a></li>
-                    {/for}   
-                </ul>
-            </nav>
+            </table>    
+
+            {if (isset($cantProducts))}       
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                                    
+                        {for $i=0 to $cantProducts}
+                            <li class="page-item"><a class="page-link" href="showProducts?page={$i+1}">{$i+1}</a></li>
+                        {/for}   
+                    
+                    </ul>
+                </nav>
+            {/if}
         </div>
     </div>
 </body>

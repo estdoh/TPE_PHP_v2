@@ -22,12 +22,12 @@ class ProductsController {
 
     function showProducts() {
         AuthHelper::start();        
-        if(empty($_GET['page'])){
+        if(!isset($_GET['page'])){
             $pagination = 1;        
         } else {
             $pagination = $_GET['page'];            
         }       
-        if (ctype_digit($pagination)) {
+        if (($pagination)) {
             $page = ($pagination - 1) * 5;
             $products = $this->model->getProducts($page);  
             $cantProducts = intval(count($products)/5)+1;        
@@ -48,9 +48,9 @@ class ProductsController {
     }
 
     function searchProducts($params = null) {
-        $products = $this->model->getProducts();
+        $products = $this->model->getProductsByCategory();
         $ProductsByCategory = $this->modelCategories->getProductsByCategory($params);
-        $this->view->viewProducts( $ProductsByCategory);
+        $this->view->viewSearch($ProductsByCategory);
     }
 
     function addProduct() {        
