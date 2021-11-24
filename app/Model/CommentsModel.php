@@ -58,5 +58,11 @@ class CommentsModel {
         $query = $this->db->prepare('DELETE FROM comments WHERE id_user=?');
         $query->execute(array($id_user));
         return $query->rowCount();
-    }    
+    } 
+    
+    function deleteCommentsByProduct($id_product) {
+        $query = $this->db->prepare('DELETE FROM comments WHERE product_id=?');
+        $query->execute(array($id_product));
+        return $query->rowCount();
+    }  
 }

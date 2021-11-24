@@ -29,6 +29,7 @@ class ProductsController {
 
     function delProducts($params = null) {     
         if (AuthHelper::checkLoggedInAdmin()){
+            $this->modelComments->deleteCommentsByProduct($params);
             $this->model->deleteProducts($params);
             header("Location: ".BASE_URL."showProducts");
         }
