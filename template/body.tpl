@@ -21,7 +21,7 @@
             <form id="form-products" action="InsertProduct" method="POST" autocomplete="on" enctype="multipart/form-data">                
                 <div class="form-group  mb-3">
                     <div class="form-floating col">
-                        <input name="input_name" id="input_name" type="text" class="form-control" placeholder="Nombre">
+                        <input name="input_name" id="input_name" type="text" class="form-control" placeholder="Nombre" required>
                         <label for="name"><p>Producto</p></label>
                     </div>
                     <div class="form-floating col">
@@ -33,7 +33,7 @@
                         <input type="file" name="input_image" id="input_image" class="form-control" multiple>
                         <label for="image"><p>Imagen</p></label>
                     </div>
-                    <select name="input_category" class="form-floating col">                    
+                    <select name="input_category" class="form-floating col" required>                    
                         <option selected disabled>Seleccionar categoria</option>  
                             {foreach from=$categories item=$category}                             
                                 <div class="col-2 m-1">

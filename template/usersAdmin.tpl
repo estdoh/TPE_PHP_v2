@@ -7,44 +7,6 @@
         <h3>Carga de usuarios para <b>administrador</b></h3>
     </div>    
 
-    <div class="container"> 
-        {if $email!=""}       
-        <div class="col-1 m-1">
-            <button class=" w-100 btn btn-sm btn-success" id="addProduct" ><i class="fas fa-plus fa-xs" ></i></button>
-        </div>
-        {/if}
-        {* <div class="col-1 m-1">
-            <button class=" w-100 btn btn-sm btn-success" id="serchFilter" ><i class="fas fa-search fa-xs" ></i></button>
-        </div>      *}
-    
-        <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light agregarcliente"> 
-            <form id="form-products" action="addUser" method="POST" autocomplete="on">                
-                <div class="form-group  mb-3">
-                    <div class="form-floating col">
-                        <input name="email" id="input_email" type="text" class="form-control" placeholder="Nombre">
-                        <label for="email"><p>Email</p></label>
-                    </div>
-                    <div class="form-floating col">
-                        <input name="password" id="input_password" type="text" class="form-control" placeholder="Password">
-                        <label for="password"><p>Password</p></label>
-                    </div> 
-                    <select name="rol" class="form-floating col" required>                    
-                        <option selected="selected" >Seleccionar Rol</option>                         
-                        <option value='SUPER-ADMIN'>SUPER-ADMIN</option>
-                        <option value='ADMIN'>ADMIN</option>
-                        <option value='USER'>USER</option>                  
-                        
-                    </select>      
-                </div>  
-         
-                <div class="form-floating mb-2">
-                    <div class="form-floating col ">
-                        <button type="submit" class="w-100 btn btn-lg btn-success" >AGREGAR </button>
-                    </div>
-                </div>
-            </form>            
-        </div>           
-    </div>
 
     <div class="container">
         <div class="col-md-12 mt-sm-5 table-responsive">                   

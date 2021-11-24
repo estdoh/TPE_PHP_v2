@@ -54,20 +54,11 @@ class ProductsView {
         $this->setSmartyVariables();
         $this->smarty->display('template/bodyComments.tpl');
     }
+
+    public function showError($error)
+    {
+        $this->smarty->assign('error', "Error");
+        $this->smarty->assign('subtitle', $error);
+        $this->smarty->display('template/showError.tpl');
+    }
 }
-
-    // function showEditProduct($product){ 
-    //     $this->smarty->assign('product', $product);        
-    //     $this->smarty->display('template/body.tpl');
-    // }  
-
-    // function renderProductsByCategory($products){
-    //     $this->smarty->assign('products', $products);        
-    //     $this->smarty->display('template/search.tpl');
-    // }
-
-    
-    // function renderProductsByCategory($products, $category) {
-    //     echo "<h1>Lista por género: $products</h2>";
-    //     $this->renderProducts($category);
-    // }
