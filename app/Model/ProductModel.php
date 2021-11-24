@@ -48,10 +48,15 @@ class ProductsModel {
 
     function updateProductById($category, $name, $description,$price_a, $price_b, $id,  $pathImg = null){
         $img = null;
-        if ($pathImg)
+        if ($pathImg){
             $img = $this->uploadImage($pathImg);
-        $query = $this->db->prepare('UPDATE products SET category=?, name=?, description=?, img=?, price_a=?, price_b=? WHERE id=?');
-        $query->execute([$category, $name, $description, $img, $price_a, $price_b, $id]);
+            $query = $this->db->prepare('UPDATE products SET category=?, name=?, description=?, img=?, price_a=?, price_b=? WHERE id=?');
+            $query->execute([$category, $name, $description, $img, $price_a, $price_b, $id]);
+        }
+        else{
+            $query = $this->db->prepare('UPDATE products SET category=?, name=?, description=?, price_a=?, price_b=? WHERE id=?');
+            $query->execute([$category, $name, $description, $price_a, $price_b, $id]);
+        }
         $product = $query->fetchAll(PDO::FETCH_OBJ);
         return $product;
     }   

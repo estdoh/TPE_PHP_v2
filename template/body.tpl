@@ -28,11 +28,12 @@
                         <input name="input_description" id="input_description" type="text" class="form-control" placeholder="Descripcion">
                         <label for="description"><p>Descripcion</p></label>
                     </div>
-                
-                    <div class="form-floating col">
-                        <input type="file" name="input_image" id="input_image" class="form-control" multiple>
-                        <label for="image"><p>Imagen</p></label>
-                    </div>
+                    {if $rol=="SUPER-ADMIN" || $rol=="ADMIN"}
+                        <div class="form-floating col">
+                            <input type="file" name="input_image" id="input_image" class="form-control" multiple>
+                            <label for="image"><p>Imagen</p></label>
+                        </div>
+                    {/if}
                     <select name="input_category" class="form-floating col" required>                    
                         <option selected disabled>Seleccionar categoria</option>  
                             {foreach from=$categories item=$category}                             
