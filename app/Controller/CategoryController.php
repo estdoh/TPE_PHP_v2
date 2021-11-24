@@ -78,6 +78,7 @@ class CategoryController {
     }
 
     function showHomeCSR() {
+        $categories = $this->model->getCategories();     
         $this->view->showCategoriesLayout();
     }
 

@@ -51,8 +51,7 @@ class ProductsModel {
             $img = $this->uploadImage($pathImg);
             $query = $this->db->prepare('UPDATE products SET category=?, name=?, description=?, img=?, price_a=?, price_b=? WHERE id=?');
             $query->execute([$category, $name, $description, $img, $price_a, $price_b, $id]);
-        }
-        else{
+        } else {
             $query = $this->db->prepare('UPDATE products SET category=?, name=?, description=?, price_a=?, price_b=? WHERE id=?');
             $query->execute([$category, $name, $description, $price_a, $price_b, $id]);
         }

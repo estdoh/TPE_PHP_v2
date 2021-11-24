@@ -10,13 +10,14 @@ class CategoryView {
         $this->smarty->assign('email', '');  
     }
 
-    function viewCategories($categories) {        
-        $this->smarty->assign('categories', $categories);
-        $this->setSmartyVariables();
+    function viewCategories($categories) {      
+        $this->setSmartyVariables();  
+        $this->smarty->assign('categories', $categories);        
         $this->smarty->display('template/body-categories.tpl');
     }
     
-    function viewPageCategory($category){         
+    function viewPageCategory($category){      
+        $this->setSmartyVariables();   
         $this->smarty->assign('category', $category);
         $this->smarty->display('template/category.tpl');
     }
@@ -24,6 +25,7 @@ class CategoryView {
     function renderError(){echo "error";}
     
     function showCategoriesLayout() {
+        $this->setSmartyVariables();
         $this->smarty->display('template/body-categoriesCSR.tpl');
     }
 

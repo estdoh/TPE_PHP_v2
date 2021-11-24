@@ -104,7 +104,6 @@ function agregarComentario(comentario, puntaje) {
             obtenerComentarios();
         })
         .catch(exception => console.log(exception));
-
 }
 
 

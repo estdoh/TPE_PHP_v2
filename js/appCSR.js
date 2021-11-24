@@ -8,8 +8,32 @@ let app = new Vue({
     data: {
         titulo: "Lista de Categorias CSR",
         subtitulo: "Esta lista de Categorias se renderiza desde JS usando Vue",
-
         categories: [] // this->smarty->assign("Categories",  $Categories)
+    },
+    methods: {
+        delete(index)
+        {
+            if(confirm('desea eliminar la categoria?')) return;
+            this.categories.splice(index, 1);
+
+
+        }
+
+        // delete_category: function(id) {
+        //     fetch('api/categories/' + id, {
+        //             "method": "DELETE",
+        //             "mode": 'cors',
+        //     })
+        //     .then(respuesta => {
+        //         if (respuesta.ok)
+        //             getCategories();
+        //         else
+        //             console.log("error al eliminar");
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
+        // }
     }
 })
 
@@ -25,11 +49,16 @@ async function getCategories() {
     }
 };
 
+
+
 // async function addCategory(e) {
 //     console.log("as");
 //     e.preventDefault();
 //     alert("Si te animás hace el POST via fetch ;)");
 // }
+
+
+
 
 getCategories();
 

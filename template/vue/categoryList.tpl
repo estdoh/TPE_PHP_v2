@@ -16,11 +16,11 @@
                                     
             <tbody id="listadoTD">
 
-                <tr v-for="category in categories" >
+                <tr v-for="(category, index) in categories" >
                     <td> {{ category.name }}</td>                            
                     <td> {{ category.description }}</td>                           
-                    <td> <a href="delCategories/{{category.id_category}}" class='w-100 btn btn-sm btn-danger' data-id='buttonSupr'><i class='fa fa-trash fa-sm' aria-hidden='true'></i> </a> </td> 
-                    <td> <a href="viewCategoryCRS/{{category.id_category}}" class='w-100 btn btn-sm btn-primary edicionproducto' data-id='buttonEdit'><i class='fa fa-pencil fa-sm' aria-hidden='true'></i> </button> </td>                         
+                    <td> <a v-on:click='delete(index)' class='w-100 btn btn-sm btn-danger' data-id='buttonSupr'><i class='fa fa-trash fa-sm' aria-hidden='true'></i> </a> </td> 
+                    <td> <a href='viewCategoryCRS/{{ category.id_category }}' class='w-100 btn btn-sm btn-primary edicionproducto' data-id='buttonEdit'><i class='fa fa-pencil fa-sm' aria-hidden='true'></i> </button> </td>                         
                 </tr>
             </tbody>
         </table>
