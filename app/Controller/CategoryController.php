@@ -6,12 +6,10 @@ require_once './app/Model/CategoryModel.php';
 class CategoryController {
     private $model;
     private $view;
-    private $authHelper;
 
     public function __construct() {
         $this->model = new CategoryModel();
         $this->view = new CategoryView();
-        $this->authHelper = new AuthHelper();
     }
 
     function showCategories() {
@@ -66,8 +64,7 @@ class CategoryController {
     }
 
     function editCategory($id_category){
-        if (AuthHelper::checkLoggedInAdmin()){
-            $this->authHelper->checkLoggedIn();        
+        if (AuthHelper::checkLoggedInAdmin()){      
             $name = $_POST['input_name'];
             $description = $_POST['input_description'];
             $this->model->updateCategoryById($name, $description, $id_category);

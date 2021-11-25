@@ -96,17 +96,7 @@ switch ($params[0]) {
     case 'Search':
         $ProductsController->searchProducts($params[1]);
         break;
-    case 'filter':
-        $ProductsController->filter();
-        break;
-    // case 'viewCategoryCRS':
-    //     $CategoryController->viewCategoryCSR($params[1]);
-    //     break;
-
-    // case 'Presupuestar':
-    //     $ProductsController->presupuestar();
-    //     break;
-
+        
     default:
         echo('404 Page not found aca estoy?');
         break;

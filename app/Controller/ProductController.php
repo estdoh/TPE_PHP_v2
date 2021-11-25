@@ -11,7 +11,6 @@ class ProductsController {
     private $modelCategories;
     private $modelComments;
     private $view;
-    private $authHelper;
 
     public function __construct() {
         $this->model = new ProductsModel();
@@ -55,16 +54,6 @@ class ProductsController {
         $categories = $this->modelCategories->getCategories();
         $ProductsByCategory = $this->modelCategories->getProductsByCategory($params);
         $this->view->viewSearch($ProductsByCategory,$categories);
-    }
-    
-
-    function filter($params = null) {
-        if(isset($_GET['input_search'])){
-            $search = $_GET['input_search'];
-            $products = $this->model->getProductsByFilter($search);
-            $ProductsByCategory = $this->modelCategories->getProductsByCategory($params);
-            $this->view->viewSearch($products, $ProductsByCategory);
-        }
     }
 
     function addProduct() {        

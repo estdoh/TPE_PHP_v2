@@ -1,12 +1,9 @@
 <?php
 require_once './libs/smarty/Smarty.class.php';
-require_once './app/Helpers/AuthHelper.php';
 
 class CategoryView {  
     private $smarty; 
     function __construct() {
-        $authHelper = new AuthHelper();
-        $userName = $authHelper->start();
         $this->smarty = new Smarty();   
         $this->smarty->assign('titulo', 'Carga de productos');     
         $this->smarty->assign('email', '');  

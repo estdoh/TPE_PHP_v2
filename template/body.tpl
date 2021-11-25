@@ -12,9 +12,6 @@
             <div class="col-1 m-1">
                 <button class=" w-100 btn btn-sm btn-success" id="addProduct" ><i class="fas fa-plus fa-xs" ></i></button>
             </div>
-            <div class="col-1 m-1">
-                <button class=" w-100 btn btn-sm btn-success" id="serchFilter" ><i class="fas fa-search fa-xs" ></i></button>
-            </div>  
         {/if}
          
         <div class="col-md-12 col-sm-12 p-4 border rounded-3 bg-light agregarcliente"> 
