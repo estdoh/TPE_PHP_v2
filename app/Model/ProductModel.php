@@ -17,6 +17,12 @@ class ProductsModel {
         return $products;
     }
 
+    function countProducts() {        
+        $query = $this->db->prepare("SELECT COUNT(*) as cantidad from products");                                    
+        $query->execute();
+        return $query->fetch(PDO::FETCH_OBJ)->cantidad;
+    }
+
     function getProductsByCategory() {        
         $query = $this->db->prepare("SELECT products.*,category.name as name_category 
                                     FROM products 

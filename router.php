@@ -96,9 +96,9 @@ switch ($params[0]) {
     case 'Search':
         $ProductsController->searchProducts($params[1]);
         break;
-        case 'filter':
-            $ProductsController->filter();
-            break;
+    case 'filter':
+        $ProductsController->filter();
+        break;
     // case 'viewCategoryCRS':
     //     $CategoryController->viewCategoryCSR($params[1]);
     //     break;

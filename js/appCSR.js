@@ -41,7 +41,7 @@ function obtenerId_producto() {
 }
 
 async function getCategories() {
-    setRol();
+    //setRol();
     // fetch para traer todas las Categories
     try {
         let response = await fetch(API_URL);
@@ -52,6 +52,7 @@ async function getCategories() {
         console.log(e);
     }
 };
+
 getCategories();
 
 

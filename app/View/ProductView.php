@@ -12,14 +12,14 @@ class ProductsView {
         $this->smarty->assign('email', $userName);
     }
 
-    function viewProducts($cantProducts = [] ,$products, $categories = null){
+    function viewProducts($cantProducts,$products, $categories = null){
         $this->smarty->assign('products', $products);        
         if (isset($categories)){
             $this->smarty->assign('categories', $categories);
         }        
         if (isset($cantProducts)) {
             $this->smarty->assign('cantProducts', $cantProducts);
-        }        
+        }          
         $this->setSmartyVariables();
         $this->smarty->display('template/body.tpl');
     } 

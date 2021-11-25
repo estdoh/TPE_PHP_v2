@@ -23,16 +23,20 @@ class ProductsController {
     function showProducts() {
         AuthHelper::start();        
         if(!isset($_GET['page'])){
-            $pagination = 1;        
+            $pagination = "1";        
         } else {
             $pagination = $_GET['page'];            
         }       
-        if (($pagination)) {
+        if (ctype_digit($pagination)) {
             $page = ($pagination - 1) * 5;
             $products = $this->model->getProducts($page);  
-            $cantProducts = intval(count($products)/5)+1;        
+            $cantProducts = $this->model->countProducts();
+            $pages = ceil($cantProducts /5);         
             $categories = $this->modelCategories->getCategories();
-            $this->view->viewProducts($cantProducts, $products, $categories);
+            $this->view->viewProducts($pages, $products, $categories);
+        }
+        else{
+            $this->showError("Valor no permitido");
         }
     }
 
@@ -48,17 +52,18 @@ class ProductsController {
     }
 
     function searchProducts($params = null) {
-        $products = $this->model->getProductsByCategory();
+        $categories = $this->modelCategories->getCategories();
         $ProductsByCategory = $this->modelCategories->getProductsByCategory($params);
-        $this->view->viewSearch($ProductsByCategory);
+        $this->view->viewSearch($ProductsByCategory,$categories);
     }
+    
 
     function filter($params = null) {
         if(isset($_GET['input_search'])){
             $search = $_GET['input_search'];
             $products = $this->model->getProductsByFilter($search);
             $ProductsByCategory = $this->modelCategories->getProductsByCategory($params);
-            $this->view->viewProducts($products, $ProductsByCategory);
+            $this->view->viewSearch($products, $ProductsByCategory);
         }
     }
 

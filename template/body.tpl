@@ -40,8 +40,7 @@
                                 <div class="col-2 m-1">
                                     <option value='{$category->id_category}'>{$category->name}</option>
                                 </div>
-                            {/foreach}   
-                        <option value='addNew' placeholder="agregarnuevo"></option>                        
+                            {/foreach}                           
                     </select>                    
                 
                     <div class="form-floating col">
@@ -82,9 +81,9 @@
         </div> 
     </div>
 
-    {if (isset($category))}
+    
     {include file="template/categorybuttons.tpl"}
-    {/if}
+    
 
     <div class="container">
         <div class="col-md-12 mt-sm-5 table-responsive">                   
@@ -149,9 +148,8 @@
 
             {if (isset($cantProducts))}       
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                                    
-                        {for $i=0 to $cantProducts}
+                    <ul class="pagination">              
+                        {for $i=0 to $cantProducts-1}
                             <li class="page-item"><a class="page-link" href="showProducts?page={$i+1}">{$i+1}</a></li>
                         {/for}   
                     

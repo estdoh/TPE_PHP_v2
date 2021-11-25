@@ -27,7 +27,7 @@ class CategoryView {
     function renderError(){echo "error";}
     
     function showCategoriesLayout() {
-        $this->setSmartyVariables();
+            $this->setSmartyVariables();
         $this->smarty->display('template/body-categoriesCSR.tpl');
     }
 
